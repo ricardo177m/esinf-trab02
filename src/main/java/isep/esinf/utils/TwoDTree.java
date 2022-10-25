@@ -12,6 +12,7 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
       return Double.compare(p1.getX(), p2.getX());
     }
   };
+
   private final Comparator<Point2D.Double> cmpY = new Comparator<Point2D.Double>() {
     @Override
     public int compare(Point2D.Double p1, Point2D.Double p2) {
@@ -27,20 +28,19 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
   }
 
   private TwoDNode<E> insert(TwoDNode<E> node, E element, Point2D.Double coords, boolean divX) {
+    if (node == null)
+      return new TwoDNode<E>(element, null, null, coords);
+
     if (node.getCoords().equals(coords)) // Don't allow duplicates
       return null;
 
     int cmpResult = (divX ? cmpX : cmpY).compare(node.getCoords(), coords);
-    if (cmpResult == -1)
-      if (node.getLeft() == null)
-        node.setLeft(node);
-      else
-        return insert(node.getLeft(), element, coords, !divX);
-    else if (node.getRight() == null)
-      node.setRight(node);
-    else
-      return insert(node.getRight(), element, coords, !divX);
 
-    return null;
+    if (cmpResult == -1)
+      node.setLeft(insert(node.getLeft(), element, coords, !divX));
+    else
+      node.setRight(insert(node.getRight(), element, coords, !divX));
+
+    return node;
   }
 }
