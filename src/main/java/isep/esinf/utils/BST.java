@@ -120,22 +120,13 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   }
 
   private Node<E> insert(E element, Node<E> node) {
-    if (element.compareTo(node.getElement()) > 0) {
-      if (node.getRight() == null) {
-        Node<E> n = new Node<>(element, null, null);
-        node.setRight(n);
-        return n;
-      }
-      insert(element, node.getRight());
-    }
-    if (element.compareTo(node.getElement()) < 0) {
-      if (node.getLeft() == null) {
-        Node<E> n = new Node<>(element, null, null);
-        node.setLeft(n);
-        return n;
-      }
-      insert(element, node.getLeft());
-    }
+    if (node == null)
+      node = new Node<E>(element, null, null);
+
+    if (element.compareTo(node.getElement()) > 0)
+      node.setRight(insert(element, node.getRight()));
+    if (element.compareTo(node.getElement()) < 0)
+      node.setLeft(insert(element, node.getLeft()));
 
     return node;
   }
