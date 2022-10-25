@@ -46,7 +46,15 @@ public class TwoDTreeTest {
 		assertEquals(tree.find(tree.root, 30.40).getElement(), 30.40);
 		assertEquals(tree.find(tree.root, 30.40).getLeft().getElement(), 5.25);
 		assertEquals(tree.find(tree.root, 30.40).getRight().getElement(), 70.70);
+	}
 
+	@Test
+	public void testRemoveTwoDTree() {
+		tree.remove(30.40);
+		Iterable<Double> expected = List.of(10.12, 5.25, 35.45, 50.30, 70.70);
+		Iterable<Double> actual = tree.inOrder();
+
+		assertEquals(expected, actual);
 	}
 
 }
