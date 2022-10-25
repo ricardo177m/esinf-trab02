@@ -13,12 +13,6 @@ import isep.esinf.utils.BST.Node;
 public interface AVLInterface<E extends Comparable<E>> extends BSTInterface<E> {
   public int balanceFactor(Node<E> node);
 
-  public Node<E> rightRotation(Node<E> node);
-
-  public Node<E> leftRotation(Node<E> node);
-
-  public Node<E> twoRotations(Node<E> node);
-
   public Node<E> balanceNode(Node<E> node);
 
   public void insert(E element);
