@@ -57,4 +57,18 @@ public class TwoDTreeTest {
 		assertEquals(expected, actual);
 	}
 
+	// remove test
+	@Test
+	public void testRemoveTwoDTree2() {
+		tree.remove(30.40);
+		tree.remove(5.25);
+		tree.remove(10.12);
+		tree.remove(70.70);
+		tree.remove(35.45);
+		Iterable<Double> expected = List.of(50.30);
+		Iterable<Double> actual = tree.inOrder();
+
+		assertEquals(expected, actual);
+	}
+
 }
