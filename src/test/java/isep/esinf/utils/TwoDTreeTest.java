@@ -71,4 +71,9 @@ public class TwoDTreeTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void testSizeTwoDTree() {
+		assertEquals(tree.size(), 6);
+	}
+
 }
