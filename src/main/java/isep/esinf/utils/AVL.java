@@ -9,8 +9,18 @@ package isep.esinf.utils;
  * @param <E>
  */
 public class AVL<E extends Comparable<E>> extends BST<E> implements AVLInterface<E> {
+  /**
+   * Returns the balance factor of the given node.
+   * 
+   * @param node a valid Node within the tree
+   * 
+   * @return balance factor of the given node
+   */
   public int balanceFactor(Node<E> node) {
-    return 0;
+    if (node == null)
+      return 0;
+
+    return height(node.getRight()) - height(node.getLeft());
   }
 
   public Node<E> rightRotation(Node<E> node) {
