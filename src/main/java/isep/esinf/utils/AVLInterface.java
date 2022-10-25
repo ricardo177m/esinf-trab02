@@ -1,7 +1,5 @@
 package isep.esinf.utils;
 
-import isep.esinf.utils.BST.Node;
-
 /**
  * AVL interface.
  * 

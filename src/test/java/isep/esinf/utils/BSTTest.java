@@ -15,8 +15,6 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import isep.esinf.utils.BST.Node;
-
 /**
  *
  * @author DEI-ESINF
@@ -35,7 +33,7 @@ public class BSTTest {
 
   @BeforeEach
   public void setUp() {
-    instance = new BST();
+    instance = new BST<>();
     for (int i : arr)
       instance.insert(i);
   }
@@ -48,7 +46,7 @@ public class BSTTest {
     System.out.println("size");
     assertEquals(instance.size(), arr.length);
 
-    BST<String> sInstance = new BST();
+    BST<String> sInstance = new BST<>();
     assertEquals(sInstance.size(), 0);
     sInstance.insert("A");
     assertEquals(sInstance.size(), 1);
@@ -89,7 +87,7 @@ public class BSTTest {
   public void testInsert() {
     System.out.println("insert");
     int arr[] = { 20, 15, 10, 13, 8, 17, 40, 50, 30, 20, 15, 10 };
-    BST<Integer> instance = new BST();
+    BST<Integer> instance = new BST<>();
     for (int i = 0; i < 9; i++) { // new elements
       instance.insert(arr[i]);
       assertEquals((i + 1), instance.size(), i + 1);
@@ -129,7 +127,7 @@ public class BSTTest {
     System.out.println("isempty");
 
     assertFalse(instance.isEmpty());
-    instance = new BST();
+    instance = new BST<>();
     assertTrue(instance.isEmpty());
 
     instance.insert(11);
@@ -146,13 +144,13 @@ public class BSTTest {
   public void testHeight() {
     System.out.println("height");
 
-    instance = new BST();
+    instance = new BST<>();
     assertEquals(instance.height(), -1);
     for (int idx = 0; idx < arr.length; idx++) {
       instance.insert(arr[idx]);
       assertEquals(instance.height(), height[idx]);
     }
-    instance = new BST();
+    instance = new BST<>();
     assertEquals(instance.height(), -1);
   }
 
@@ -162,11 +160,11 @@ public class BSTTest {
   @Test
   public void testSmallestElement() {
     System.out.println("smallestElement");
-    assertEquals(new Integer(7), instance.smallestElement());
+    assertEquals(7, instance.smallestElement());
     instance.remove(7);
-    assertEquals(new Integer(8), instance.smallestElement());
+    assertEquals(8, instance.smallestElement());
     instance.remove(8);
-    assertEquals(new Integer(10), instance.smallestElement());
+    assertEquals(10, instance.smallestElement());
   }
 
   /**
