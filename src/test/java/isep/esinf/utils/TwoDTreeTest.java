@@ -76,4 +76,14 @@ public class TwoDTreeTest {
 		assertEquals(tree.size(), 6);
 	}
 
+	@Test
+	public void testHeightTwoDTree() {
+		assertEquals(tree.height(), 3);
+	}
+
+	@Test
+	public void testSmallestElementTwoDTree() {
+		assertEquals(tree.smallestElement(), 10.12);
+	}
+
 }
