@@ -73,7 +73,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
 
   private Node<E> insert(E element, Node<E> node) {
     if (node == null)
-      node = new Node<E>(element, null, null);
+      return new Node<E>(element, null, null);
 
     if (element.compareTo(node.getElement()) > 0)
       node.setRight(insert(element, node.getRight()));
