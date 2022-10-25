@@ -23,15 +23,15 @@ public class AVL<E extends Comparable<E>> extends BST<E> implements AVLInterface
     return height(node.getRight()) - height(node.getLeft());
   }
 
-  public Node<E> rightRotation(Node<E> node) {
+  private Node<E> rightRotation(Node<E> node) {
     return null;
   }
 
-  public Node<E> leftRotation(Node<E> node) {
+  private Node<E> leftRotation(Node<E> node) {
     return null;
   }
 
-  public Node<E> twoRotations(Node<E> node) {
+  private Node<E> twoRotations(Node<E> node) {
     return null;
   }
 
