@@ -42,4 +42,28 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
 
     return node;
   }
+
+  public E findNearestNeighbor(TwoDNode<E> node, double x, double y, TwoDNode<E> closestNode, boolean divX) {
+    if (node == null)
+      return null;
+
+    double d = Point2D.distanceSq(node.getCoords().getX(), node.getCoords().getY(), x, y);
+    double closestDist = Point2D.distanceSq(closestNode.getCoords().getX(), closestNode.getCoords().getY(), x, y);
+
+    if (closestDist > d) {
+      closestNode = node;
+
+      double delta = divX ? x - node.getCoords().getX() : y - node.getCoords().getY();
+      double delta2 = delta * delta;
+
+      TwoDNode<E> node1 = delta < 0 ? node.getLeft() : node.getRight();
+      TwoDNode<E> node2 = delta < 0 ? node.getRight() : node.getLeft();
+
+      findNearestNeighbor(node1, x, y, closestNode, !divX);
+      if (delta2 < closestDist)
+        findNearestNeighbor(node2, x, y, closestNode, !divX);
+    }
+
+    return closestNode.getElement();
+  }
 }
