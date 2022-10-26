@@ -31,4 +31,8 @@ public class TwoDNode<E> extends Node<E> {
   public Double getY() {
     return coords.y;
   }
+
+  public TwoDNode<E> clone() {
+    return new TwoDNode<E>(getElement(), getLeft(), getRight(), new Point2D.Double(coords.x, coords.y));
+  }
 }

@@ -43,27 +43,40 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     return node;
   }
 
-  public E findNearestNeighbor(TwoDNode<E> node, double x, double y, TwoDNode<E> closestNode, boolean divX) {
+  private double distanceToAxis(TwoDNode<E> node, double x, double y, boolean divX) {
+    if (divX)
+      return x - node.getCoords().getX();
+    else
+      return y - node.getCoords().getY();
+  }
+
+  private TwoDNode<E> closest; // needs to be global to make the reference changing easier
+
+  public E findNearestNeighbor(double x, double y) {
+    closest = ((TwoDNode<E>) root).clone();
+    return findNearestNeighbor((TwoDNode<E>) root, x, y, true);
+  }
+
+  public E findNearestNeighbor(TwoDNode<E> node, double x, double y, boolean divX) {
     if (node == null)
       return null;
 
-    double d = Point2D.distanceSq(node.getCoords().getX(), node.getCoords().getY(), x, y);
-    double closestDist = Point2D.distanceSq(closestNode.getCoords().getX(), closestNode.getCoords().getY(), x, y);
+    double d = Point2D.distanceSq(node.getCoords().x, node.getCoords().y, x, y);
+    double closestDist = Point2D.distanceSq(closest.getCoords().x, closest.getCoords().y, x, y);
 
-    if (closestDist > d) {
-      closestNode = node;
+    if (d < closestDist)
+      closest = node;
 
-      double delta = divX ? x - node.getCoords().getX() : y - node.getCoords().getY();
-      double delta2 = delta * delta;
+    double delta = distanceToAxis(node, x, y, divX);
+    double delta2 = delta * delta;
 
-      TwoDNode<E> node1 = delta < 0 ? node.getLeft() : node.getRight();
-      TwoDNode<E> node2 = delta < 0 ? node.getRight() : node.getLeft();
+    TwoDNode<E> node1 = delta < 0 ? node.getLeft() : node.getRight();
+    TwoDNode<E> node2 = delta < 0 ? node.getRight() : node.getLeft();
 
-      findNearestNeighbor(node1, x, y, closestNode, !divX);
-      if (delta2 < closestDist)
-        findNearestNeighbor(node2, x, y, closestNode, !divX);
-    }
+    findNearestNeighbor(node1, x, y, !divX);
+    if (delta2 < closestDist)
+      findNearestNeighbor(node2, x, y, !divX);
 
-    return closestNode.getElement();
+    return closest.getElement();
   }
 }
