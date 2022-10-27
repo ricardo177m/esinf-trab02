@@ -2,7 +2,7 @@ package isep.esinf.utils;
 
 /**
  * AVL interface.
- * 
+ *
  * @author Carlos Lopes <XX@isep.ipp.pt>
  * @author Ricardo Moreira <XX@isep.ipp.pt>
  * @author Tomás Russo <1211288@isep.ipp.pt>
@@ -16,4 +16,6 @@ public interface AVLInterface<E extends Comparable<E>> extends BSTInterface<E> {
   public void insert(E element);
 
   public void remove(E element);
+
+  public boolean equals(Object other);
 }
