@@ -168,28 +168,6 @@ public class BSTTest {
   }
 
   /**
-   * Test of processBstByLevel method, of class TREE.
-   */
-  @Test
-  public void testProcessBstByLevel() {
-    System.out.println("processbstbylevel");
-    Map<Integer, List<Integer>> expResult = new HashMap();
-    expResult.put(0, Arrays.asList(new Integer[] { 20 }));
-    expResult.put(1, Arrays.asList(new Integer[] { 15, 40 }));
-    expResult.put(2, Arrays.asList(new Integer[] { 10, 17, 30, 50 }));
-    expResult.put(3, Arrays.asList(new Integer[] { 8, 13 }));
-    expResult.put(4, Arrays.asList(new Integer[] { 7 }));
-
-    Map<Integer, List<Integer>> result = instance.nodesByLevel();
-
-    for (Map.Entry<Integer, List<Integer>> e : result.entrySet()) {
-      System.out.println("expected = " + expResult.get(e.getKey()));
-      System.out.println("result = " + e.getValue());
-      assertEquals(expResult.get(e.getKey()), e.getValue());
-    }
-  }
-
-  /**
    * Test of inOrder method, of class BST.
    */
   @Test
