@@ -41,13 +41,20 @@ public class TwoDTreeTest {
     assertEquals(expected, actual);
   }
 
+  /*
+   * Test the search method of the TwoDTree class
+   */
   @Test
   public void testFindTwoDTree() {
     assertEquals(tree.find(tree.root, 30.40).getElement(), 30.40);
     assertEquals(tree.find(tree.root, 30.40).getLeft().getElement(), 5.25);
     assertEquals(tree.find(tree.root, 30.40).getRight().getElement(), 70.70);
+    assertEquals(tree.find(tree.root, 80.80), null);
   }
 
+  /*
+   * Test the remove method of the TwoDtTree class (remove the root)
+   */
   @Test
   public void testRemoveTwoDTree() {
     tree.remove(30.40);
@@ -57,8 +64,9 @@ public class TwoDTreeTest {
     assertEquals(expected, actual);
   }
 
-  // remove test
-  @Test
+  /*
+   * Test the remove method of the TwoDtTree class (remove several leafs)
+   */
   public void testRemoveTwoDTree2() {
     tree.remove(30.40);
     tree.remove(5.25);
@@ -71,21 +79,33 @@ public class TwoDTreeTest {
     assertEquals(expected, actual);
   }
 
+  /*
+   * Test the size method
+   */
   @Test
   public void testSizeTwoDTree() {
     assertEquals(tree.size(), 6);
   }
 
+  /*
+   * Test the height method
+   */
   @Test
   public void testHeightTwoDTree() {
     assertEquals(tree.height(), 3);
   }
 
+  /*
+   * Test the smallest element method
+   */
   @Test
   public void testSmallestElementTwoDTree() {
     assertEquals(tree.smallestElement(), 10.12);
   }
 
+  /*
+   * Test the nearest element method
+   */
   @Test
   public void testNearestNeighbour() {
     tree = new TwoDTree<>();
