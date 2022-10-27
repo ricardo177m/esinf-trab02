@@ -196,4 +196,16 @@ public class BSTTest {
     List<Integer> lExpected = Arrays.asList(posorderT);
     assertEquals(lExpected, instance.posOrder());
   }
+
+  /**
+   * Test of isLeaf method, of class TREE.
+   */
+  @Test
+  public void testIsLeaf() {
+    System.out.println("isLeaf");
+    assertFalse(instance.isLeaf(instance.root));
+    assertFalse(instance.isLeaf(instance.root.getLeft()));
+    assertFalse(instance.isLeaf(instance.root.getRight()));
+    assertTrue(instance.isLeaf(instance.root.getLeft().getLeft().getLeft().getLeft()));
+  }
 }
