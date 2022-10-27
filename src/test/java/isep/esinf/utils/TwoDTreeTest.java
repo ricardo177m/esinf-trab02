@@ -320,4 +320,15 @@ public class TwoDTreeTest {
     assertEquals(expected, actual);
 
   }
+
+  /*
+   * Test getX and getY of TwoDNode
+   */
+  @Test
+  public void testGetXAndGetYTwoDNodeClass() {
+    System.out.println("getXAndGetYTwoDNodeClass");
+    TwoDNode<Double> node = new TwoDNode<Double>(3.9, null, null, new Point2D.Double(3, 9));
+    assertEquals(3, node.getX());
+    assertEquals(9, node.getY());
+  }
 }
