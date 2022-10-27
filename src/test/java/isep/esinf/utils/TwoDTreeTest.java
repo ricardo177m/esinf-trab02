@@ -229,4 +229,80 @@ public class TwoDTreeTest {
     assertEquals(expected, actual);
 
   }
+
+  /*
+   * Test search range area with two points where x1=x2 & y1=y2
+   */
+  @Test
+  public void testSearchRangeAreaWithTwoPointsMakingItASinglePoint() {
+    tree = new TwoDTree<>();
+    tree.insert(3.9, 3, 9);
+    tree.insert(1.7, 1, 7);
+    tree.insert(7.9, 7, 9);
+    tree.insert(2.1, 2, 1);
+    tree.insert(9.6, 9, 6);
+    tree.insert(5.9, 5, 9);
+    tree.insert(1.4, 1, 4);
+    tree.insert(7.3, 7, 3);
+    tree.insert(11.6, 11, 6);
+    tree.insert(6.1, 6, 1);
+    tree.insert(8.2, 8, 2);
+
+    List<Double> expected = List.of();
+    List<Double> actual = tree.searchRangeArea(3, 3, 3, 3);
+
+    assertEquals(expected, actual);
+
+  }
+
+  /*
+   * Test search range area with two points out of range
+   */
+  @Test
+  public void testSearchRangeAreaWithTwoPointsOutOfRange() {
+    tree = new TwoDTree<>();
+    tree.insert(3.9, 3, 9);
+    tree.insert(1.7, 1, 7);
+    tree.insert(7.9, 7, 9);
+    tree.insert(2.1, 2, 1);
+    tree.insert(9.6, 9, 6);
+    tree.insert(5.9, 5, 9);
+    tree.insert(1.4, 1, 4);
+    tree.insert(7.3, 7, 3);
+    tree.insert(11.6, 11, 6);
+    tree.insert(6.1, 6, 1);
+    tree.insert(8.2, 8, 2);
+
+    List<Double> expected = List.of();
+    List<Double> actual = tree.searchRangeArea(-1000, -2000, -500, -300);
+
+    assertEquals(expected, actual);
+
+  }
+
+  /*
+   * Test search range area with two points inside the tree area but do not
+   * contains any points
+   */
+  @Test
+  public void testSearchRangeAreaWithTwoPointsOutOfRangeInsideTreeArea() {
+    tree = new TwoDTree<>();
+    tree.insert(3.9, 3, 9);
+    tree.insert(1.7, 1, 7);
+    tree.insert(7.9, 7, 9);
+    tree.insert(2.1, 2, 1);
+    tree.insert(9.6, 9, 6);
+    tree.insert(5.9, 5, 9);
+    tree.insert(1.4, 1, 4);
+    tree.insert(7.3, 7, 3);
+    tree.insert(11.6, 11, 6);
+    tree.insert(6.1, 6, 1);
+    tree.insert(8.2, 8, 2);
+
+    List<Double> expected = List.of();
+    List<Double> actual = tree.searchRangeArea(5, 5, 7, 7);
+
+    assertEquals(expected, actual);
+
+  }
 }
