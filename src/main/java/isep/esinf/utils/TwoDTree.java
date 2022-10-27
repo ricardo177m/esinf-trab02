@@ -43,8 +43,9 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     return node;
   }
 
-  private double distanceToAxis(TwoDNode<E> node, double x, double y, boolean divX) {
-    if (divX)
+  private double distanceToAxis(TwoDNode<E> node, double x, double y, int depth) {
+    boolean isXAxis = depth % 2 == 0;
+    if (isXAxis)
       return x - node.getCoords().getX();
     else
       return y - node.getCoords().getY();
@@ -54,10 +55,10 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
 
   public E findNearestNeighbor(double x, double y) {
     closest = ((TwoDNode<E>) root).clone();
-    return findNearestNeighbor((TwoDNode<E>) root, x, y, true);
+    return findNearestNeighbor((TwoDNode<E>) root, x, y, 0);
   }
 
-  public E findNearestNeighbor(TwoDNode<E> node, double x, double y, boolean divX) {
+  public E findNearestNeighbor(TwoDNode<E> node, double x, double y, int depth) {
     if (node == null)
       return null;
 
@@ -67,15 +68,15 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     if (d < closestDist)
       closest = node;
 
-    double delta = distanceToAxis(node, x, y, divX);
-    double delta2 = delta * delta;
+    double delta = distanceToAxis(node, x, y, depth);
+    double deltaSq = delta * delta;
 
     TwoDNode<E> node1 = delta < 0 ? node.getLeft() : node.getRight();
     TwoDNode<E> node2 = delta < 0 ? node.getRight() : node.getLeft();
 
-    findNearestNeighbor(node1, x, y, !divX);
-    if (delta2 < closestDist)
-      findNearestNeighbor(node2, x, y, !divX);
+    findNearestNeighbor(node1, x, y, depth + 1);
+    if (deltaSq < closestDist)
+      findNearestNeighbor(node2, x, y, depth + 1);
 
     return closest.getElement();
   }
