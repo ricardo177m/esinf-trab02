@@ -228,4 +228,14 @@ public class BSTTest {
 
     assertEquals(expected, instance.toString());
   }
+
+  /*
+   * Test smallestElement method, of class BST, returning null.
+   */
+  @Test
+  public void testSmallestElementEmpty() {
+    System.out.println("smallestElementEmpty");
+    BST<Integer> instance = new BST<>();
+    assertNull(instance.smallestElement());
+  }
 }
