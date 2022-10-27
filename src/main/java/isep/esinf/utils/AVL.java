@@ -49,14 +49,75 @@ public class AVL<E extends Comparable<E>> extends BST<E> implements AVLInterface
   }
 
   public Node<E> balanceNode(Node<E> node) {
-    return null;
+    if (balanceFactor(node) < -1) { // left subtree is higher
+      if (balanceFactor(node.getLeft()) > 0) // signals differ -> double rotation
+        node = twoRotations(node);
+      else // same signal -> single rotation
+        node = rightRotation(node);
+    } else if (balanceFactor(node) > 1) { // right subtree is higher
+      if (balanceFactor(node.getRight()) < 0) // signals differ -> double rotation
+        node = twoRotations(node);
+      else // same signal -> single rotation
+        node = leftRotation(node);
+    }
+    return node;
   }
 
   public void insert(E element) {
+    root = insert(element, root);
+  }
 
+  private Node<E> insert(E element, Node<E> node) {
+    if (node == null)
+      return new Node<>(element, null, null);
+
+    int cmp = element.compareTo(node.getElement());
+    if (cmp < 0)
+      node.setLeft(insert(element, node.getLeft()));
+    else if (cmp > 0)
+      node.setRight(insert(element, node.getRight()));
+    else
+      return node;
+
+    // after setting the nodes, balance the tree
+    return balanceNode(node);
   }
 
   public void remove(E element) {
-
+    root = remove(element, root());
   }
+
+  private Node<E> remove(E element, Node<E> node) {
+    if (node == null)
+      return null;
+
+    int cmp = element.compareTo(node.getElement());
+    if (cmp < 0)
+      node.setLeft(remove(element, node.getLeft()));
+    else if (cmp > 0)
+      node.setRight(remove(element, node.getRight()));
+    else {
+      // this is the node to be removed
+      // check if the node is a leaf
+      if (node.getLeft() == null && node.getRight() == null)
+        return null;
+      // check if the node has only one child
+      else if (node.getLeft() == null)
+        return node.getRight();
+      else if (node.getRight() == null)
+        return node.getLeft();
+      // the node has two children
+      else {
+        // choose the greatest element in the left subtree or the smallest in the right to replace
+        // the node
+        E min = super.smallestElement(node.getRight());
+        node.setElement(min);
+        node.setRight(remove(min, node.getRight()));
+      }
+    }
+    // after removing the node, balance the tree
+    return balanceNode(node);
+  }
+
+
 }
