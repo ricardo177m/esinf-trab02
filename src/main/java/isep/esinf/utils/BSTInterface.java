@@ -4,9 +4,6 @@
  */
 package isep.esinf.utils;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  *
  * @author DEI-ESINF
@@ -30,7 +27,5 @@ public interface BSTInterface<E> {
   public Iterable<E> preOrder();
 
   public Iterable<E> posOrder();
-
-  public Map<Integer, List<E>> nodesByLevel();
 
 }
