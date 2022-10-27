@@ -35,6 +35,7 @@ public class TwoDTreeTest {
 
   @Test
   public void testInsertionTwoDTree() {
+    System.out.println("insertionTwoDTree");
     Iterable<Double> expected = List.of(10.12, 5.25, 30.40, 35.45, 50.30, 70.70);
     Iterable<Double> actual = tree.inOrder();
 
@@ -46,6 +47,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testFindTwoDTree() {
+    System.out.println("findTwoDTree");
     assertEquals(tree.find(tree.root, 30.40).getElement(), 30.40);
     assertEquals(tree.find(tree.root, 30.40).getLeft().getElement(), 5.25);
     assertEquals(tree.find(tree.root, 30.40).getRight().getElement(), 70.70);
@@ -57,6 +59,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testRemoveTwoDTree() {
+    System.out.println("removeTwoDTree");
     tree.remove(30.40);
     Iterable<Double> expected = List.of(10.12, 5.25, 35.45, 50.30, 70.70);
     Iterable<Double> actual = tree.inOrder();
@@ -68,6 +71,7 @@ public class TwoDTreeTest {
    * Test the remove method of the TwoDtTree class (remove several leafs)
    */
   public void testRemoveTwoDTree2() {
+    System.out.println("removeTwoDTree2");
     tree.remove(30.40);
     tree.remove(5.25);
     tree.remove(10.12);
@@ -84,6 +88,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testSizeTwoDTree() {
+    System.out.println("sizeTwoDTree");
     assertEquals(tree.size(), 6);
   }
 
@@ -92,6 +97,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testHeightTwoDTree() {
+    System.out.println("heightTwoDTree");
     assertEquals(tree.height(), 3);
   }
 
@@ -100,6 +106,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testSmallestElementTwoDTree() {
+    System.out.println("smallestElementTwoDTree");
     assertEquals(tree.smallestElement(), 10.12);
   }
 
@@ -108,6 +115,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testNearestNeighbour() {
+    System.out.println("nearestNeighbour");
     tree = new TwoDTree<>();
     tree.insert(3.9, 3, 9);
     tree.insert(1.7, 1, 7);
@@ -134,6 +142,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testSearchRangeAreaWithTwoPoints() {
+    System.out.println("searchRangeAreaWithTwoPoints");
     tree = new TwoDTree<>();
     tree.insert(3.9, 3, 9);
     tree.insert(1.7, 1, 7);
@@ -159,6 +168,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testSearchRangeAreaWithTwoPointsMakingAHorizontalLine() {
+    System.out.println("searchRangeAreaWithTwoPointsMakingAHorizontalLine");
     tree = new TwoDTree<>();
     tree.insert(3.9, 3, 9);
     tree.insert(1.7, 1, 7);
@@ -184,6 +194,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testSearchRangeAreaWithTwoPointsWhereFirstCoordsAreHigherThanTheSecond() {
+    System.out.println("searchRangeAreaWithTwoPointsWhereFirstCoordsAreHigherThanTheSecond");
     tree = new TwoDTree<>();
     tree.insert(3.9, 3, 9);
     tree.insert(1.7, 1, 7);
@@ -210,6 +221,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testSearchRangeAreaWithTwoPointsMakingAVerticalLine() {
+    System.out.println("searchRangeAreaWithTwoPointsMakingAVerticalLine");
     tree = new TwoDTree<>();
     tree.insert(3.9, 3, 9);
     tree.insert(1.7, 1, 7);
@@ -235,6 +247,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testSearchRangeAreaWithTwoPointsMakingItASinglePoint() {
+    System.out.println("searchRangeAreaWithTwoPointsMakingItASinglePoint");
     tree = new TwoDTree<>();
     tree.insert(3.9, 3, 9);
     tree.insert(1.7, 1, 7);
@@ -260,6 +273,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testSearchRangeAreaWithTwoPointsOutOfRange() {
+    System.out.println("searchRangeAreaWithTwoPointsOutOfRange");
     tree = new TwoDTree<>();
     tree.insert(3.9, 3, 9);
     tree.insert(1.7, 1, 7);
@@ -286,6 +300,7 @@ public class TwoDTreeTest {
    */
   @Test
   public void testSearchRangeAreaWithTwoPointsOutOfRangeInsideTreeArea() {
+    System.out.println("searchRangeAreaWithTwoPointsOutOfRangeInsideTreeArea");
     tree = new TwoDTree<>();
     tree.insert(3.9, 3, 9);
     tree.insert(1.7, 1, 7);
