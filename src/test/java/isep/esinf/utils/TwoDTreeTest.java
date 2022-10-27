@@ -102,5 +102,10 @@ public class TwoDTreeTest {
     tree.insert(8.2, 8, 2);
 
     assertEquals(1.4, tree.findNearestNeighbor(4, 5));
+    assertEquals(1.4, tree.findNearestNeighbor(2, 3));
+    assertEquals(1.7, tree.findNearestNeighbor(1, 8));
+    assertEquals(2.1, tree.findNearestNeighbor(2, 2));
+    assertEquals(11.6, tree.findNearestNeighbor(15, 6.5));
+    assertEquals(2.1, tree.findNearestNeighbor(3.5, 1));
   }
 }
