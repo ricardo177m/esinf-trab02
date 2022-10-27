@@ -208,4 +208,24 @@ public class BSTTest {
     assertFalse(instance.isLeaf(instance.root.getRight()));
     assertTrue(instance.isLeaf(instance.root.getLeft().getLeft().getLeft().getLeft()));
   }
+
+  /*
+   * Test toString method, of class BST.
+   */
+  @Test
+  public void testToStringBST() {
+    System.out.println("toStringBST");
+    String expected = ("|	|-------50\n" +
+        "|-------40\n" +
+        "|	|-------30\n" +
+        "20\n" +
+        "|	|-------17\n" +
+        "|-------15\n" +
+        "|	|	|-------13\n" +
+        "|	|-------10\n" +
+        "|	|	|-------8\n" +
+        "|	|	|	|-------7\n");
+
+    assertEquals(expected, instance.toString());
+  }
 }
