@@ -128,4 +128,105 @@ public class TwoDTreeTest {
     assertEquals(11.6, tree.findNearestNeighbor(15, 6.5));
     assertEquals(2.1, tree.findNearestNeighbor(3.5, 1));
   }
+
+  /*
+   * Test the search range area with two points
+   */
+  @Test
+  public void testSearchRangeAreaWithTwoPoints() {
+    tree = new TwoDTree<>();
+    tree.insert(3.9, 3, 9);
+    tree.insert(1.7, 1, 7);
+    tree.insert(7.9, 7, 9);
+    tree.insert(2.1, 2, 1);
+    tree.insert(9.6, 9, 6);
+    tree.insert(5.9, 5, 9);
+    tree.insert(1.4, 1, 4);
+    tree.insert(7.3, 7, 3);
+    tree.insert(11.6, 11, 6);
+    tree.insert(6.1, 6, 1);
+    tree.insert(8.2, 8, 2);
+
+    List<Double> expected = List.of(3.9, 7.9, 5.9, 9.6, 7.3, 6.1, 8.2);
+    List<Double> actual = tree.searchRangeArea(3, 0, 9, 9);
+
+    assertEquals(expected, actual);
+
+  }
+
+  /*
+   * Test search range area with two points that makes it a horizontal line
+   */
+  @Test
+  public void testSearchRangeAreaWithTwoPointsMakingAHorizontalLine() {
+    tree = new TwoDTree<>();
+    tree.insert(3.9, 3, 9);
+    tree.insert(1.7, 1, 7);
+    tree.insert(7.9, 7, 9);
+    tree.insert(2.1, 2, 1);
+    tree.insert(9.6, 9, 6);
+    tree.insert(5.9, 5, 9);
+    tree.insert(1.4, 1, 4);
+    tree.insert(7.3, 7, 3);
+    tree.insert(11.6, 11, 6);
+    tree.insert(6.1, 6, 1);
+    tree.insert(8.2, 8, 2);
+
+    List<Double> expected = List.of(3.9, 7.9, 5.9);
+    List<Double> actual = tree.searchRangeArea(3, 9, 9, 9);
+
+    assertEquals(expected, actual);
+
+  }
+
+  /*
+   * Test search range area with two points where x1>x2 & y1>y2
+   */
+  @Test
+  public void testSearchRangeAreaWithTwoPointsWhereFirstCoordsAreHigherThanTheSecond() {
+    tree = new TwoDTree<>();
+    tree.insert(3.9, 3, 9);
+    tree.insert(1.7, 1, 7);
+    tree.insert(7.9, 7, 9);
+    tree.insert(2.1, 2, 1);
+    tree.insert(9.6, 9, 6);
+    tree.insert(5.9, 5, 9);
+    tree.insert(1.4, 1, 4);
+    tree.insert(7.3, 7, 3);
+    tree.insert(11.6, 11, 6);
+    tree.insert(6.1, 6, 1);
+    tree.insert(8.2, 8, 2);
+
+    List<Double> expected = List.of(3.9, 7.9, 5.9, 9.6, 7.3);
+    List<Double> actual = tree.searchRangeArea(9, 9, 3, 3);
+
+    assertEquals(expected, actual);
+
+  }
+
+  /*
+   * Test search range area with two points where x1=x2 & y1<y2 making it a
+   * vertical line
+   */
+  @Test
+  public void testSearchRangeAreaWithTwoPointsMakingAVerticalLine() {
+    tree = new TwoDTree<>();
+    tree.insert(3.9, 3, 9);
+    tree.insert(1.7, 1, 7);
+    tree.insert(7.9, 7, 9);
+    tree.insert(2.1, 2, 1);
+    tree.insert(9.6, 9, 6);
+    tree.insert(5.9, 5, 9);
+    tree.insert(1.4, 1, 4);
+    tree.insert(7.3, 7, 3);
+    tree.insert(11.6, 11, 6);
+    tree.insert(6.1, 6, 1);
+    tree.insert(8.2, 8, 2);
+
+    List<Double> expected = List.of(3.9);
+    List<Double> actual = tree.searchRangeArea(3, 3, 3, 9);
+
+    assertEquals(expected, actual);
+
+  }
 }
