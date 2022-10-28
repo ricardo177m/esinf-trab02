@@ -2,6 +2,8 @@ package isep.esinf.usecase;
 
 import java.util.List;
 import java.util.Map;
+
+import isep.esinf.model.Container;
 import isep.esinf.utils.AVL;
 import isep.esinf.utils.CSVReader;
 
@@ -13,7 +15,7 @@ import isep.esinf.utils.CSVReader;
 public class LoadData {
   public static void execute(List<? extends Map<String, String>> data) {
     // import data from a csv file into an AVL
-    AVL<> avl = new AVL<>();
+    Container container = new Container();
 
   }
 }
