@@ -14,7 +14,7 @@ public class Container {
     areas.insert(area);
   }
 
-  public BST<Area> getAreas() {
-    return areas;
+  public Iterable<Area> getAreas() {
+    return areas.inOrder();
   }
 }
