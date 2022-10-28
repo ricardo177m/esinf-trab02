@@ -1,9 +1,7 @@
 package isep.esinf.utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -62,6 +60,13 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   }
 
   /*
+   * Check if it is a leaf node
+   */
+  public boolean isLeaf(Node<E> node) {
+    return node != null && node.getLeft() == null && node.getRight() == null;
+  }
+
+  /*
    * Inserts an element in the tree.
    */
   public void insert(E element) {
@@ -73,7 +78,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
 
   private Node<E> insert(E element, Node<E> node) {
     if (node == null)
-      node = new Node<E>(element, null, null);
+      return new Node<E>(element, null, null);
 
     if (element.compareTo(node.getElement()) > 0)
       node.setRight(insert(element, node.getRight()));
@@ -260,32 +265,6 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
     posOrderSubtree(node.getLeft(), snapshot);
     posOrderSubtree(node.getRight(), snapshot);
     snapshot.add(node.getElement());
-  }
-
-  /*
-   * Returns a map with a list of nodes by each tree level.
-   * 
-   * @return a map with a list of nodes by each tree level
-   */
-  public Map<Integer, List<E>> nodesByLevel() {
-    Map<Integer, List<E>> m = new HashMap<>();
-    processBstByLevel(root, m, 0);
-
-    return m;
-  }
-
-  private void processBstByLevel(Node<E> node, Map<Integer, List<E>> result, int level) {
-    if (node == null || node.getLeft() != null || node.getRight() != null)
-      return;
-
-    List<E> l = result.get(level);
-    if (l == null)
-      l = new ArrayList<E>();
-    l.add(node.getElement());
-    result.put(level, l);
-
-    processBstByLevel(node.getLeft(), result, height(node.getLeft()));
-    processBstByLevel(node.getRight(), result, height(node.getRight()));
   }
 
   // #########################################################################

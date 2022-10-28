@@ -10,11 +10,29 @@ public class TwoDNode<E> extends Node<E> {
     this.coords = coords;
   }
 
+  @Override
+  public TwoDNode<E> getLeft() {
+    return (TwoDNode<E>) super.getLeft();
+  }
+
+  @Override
+  public TwoDNode<E> getRight() {
+    return (TwoDNode<E>) super.getRight();
+  }
+
+  public Point2D.Double getCoords() {
+    return coords;
+  }
+
   public Double getX() {
     return coords.x;
   }
 
   public Double getY() {
     return coords.y;
+  }
+
+  public TwoDNode<E> clone() {
+    return new TwoDNode<E>(getElement(), getLeft(), getRight(), new Point2D.Double(coords.x, coords.y));
   }
 }
