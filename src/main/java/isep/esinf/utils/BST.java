@@ -24,19 +24,27 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
 
   /*
    * Verifies if the tree is empty
-   * 
+   *
    * @return true if the tree is empty, false otherwise
    */
   public boolean isEmpty() {
     return root == null;
   }
 
+  public E find(E element) {
+    Node<E> node = find(root,element);
+
+    if (node == null)
+      return null;
+
+    return node.getElement();
+  }
   /**
    * Returns the Node containing a specific Element, or null otherwise.
    *
    * @param element the element to find
    * @return the Node that contains the Element, or null otherwise
-   * 
+   *
    *         This method despite not being essential is very useful. It is written
    *         here in order to
    *         be used by this class and its subclasses avoiding recoding. So its
@@ -125,7 +133,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
 
   /*
    * Returns the number of nodes in the tree.
-   * 
+   *
    * @return number of nodes in the tree
    */
   public int size() {
@@ -140,7 +148,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
 
   /*
    * Returns the height of the tree
-   * 
+   *
    * @return height
    */
   public int height() {
@@ -151,9 +159,9 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
 
   /*
    * Returns the height of the subtree rooted at Node node.
-   * 
+   *
    * @param node A valid Node within the tree
-   * 
+   *
    * @return height
    */
   protected int height(Node<E> node) {
@@ -165,7 +173,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
 
   /**
    * Returns the smallest element within the tree.
-   * 
+   *
    * @return the smallest element within the tree
    */
   public E smallestElement() {
@@ -183,7 +191,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
 
   /*
    * Returns an iterable collection of elements of the tree, reported in in-order.
-   * 
+   *
    * @return iterable collection of the tree's elements reported in in-order
    */
   public Iterable<E> inOrder() {
@@ -197,7 +205,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
    * Adds elements of the subtree rooted at Node node to the given snapshot using
    * an in-order
    * traversal
-   * 
+   *
    * @param node     Node serving as the root of a subtree
    * @param snapshot a list to which results are appended
    */
@@ -212,7 +220,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   /**
    * Returns an iterable collection of elements of the tree, reported in
    * pre-order.
-   * 
+   *
    * @return iterable collection of the tree's elements reported in pre-order
    */
   public Iterable<E> preOrder() {
@@ -226,7 +234,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
    * Adds elements of the subtree rooted at Node node to the given snapshot using
    * an pre-order
    * traversal
-   * 
+   *
    * @param node     Node serving as the root of a subtree
    * @param snapshot a list to which results are appended
    */
@@ -241,7 +249,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   /**
    * Returns an iterable collection of elements of the tree, reported in
    * post-order.
-   * 
+   *
    * @return iterable collection of the tree's elements reported in post-order
    */
   public Iterable<E> posOrder() {
@@ -255,7 +263,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
    * Adds positions of the subtree rooted at Node node to the given snapshot using
    * an post-order
    * traversal
-   * 
+   *
    * @param node     Node serving as the root of a subtree
    * @param snapshot a list to which results are appended
    */
