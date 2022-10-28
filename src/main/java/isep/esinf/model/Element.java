@@ -1,24 +1,33 @@
 package isep.esinf.model;
 
-public class Element {
-  private int code;
-  private String designation;
+import isep.esinf.utils.BST;
 
-  public Element(int code, String designation) {
+public abstract class Element implements Comparable<Element> {
+  private int code;
+  private String element;
+  private BST<ProductionData> productionData;
+
+  public Element(int code, String element) {
     this.code = code;
-    this.designation = designation;
+    this.element = element;
   }
 
   public int getCode() {
     return code;
   }
 
-  public String getDesignation() {
-    return designation;
+  public String getElement() {
+    return element;
   }
+
+  public void addProductionData(ProductionData data) {
+    productionData.insert(data);
+  }
+
+  public abstract int compareTo(Element o);
 
   @Override
   public String toString() {
-    return String.format("Element %s w/ code %d\n", designation, code);
+    return "Element{" + "code=" + code + ", element=" + element + '}';
   }
 }

@@ -1,30 +1,41 @@
 package isep.esinf.model;
 
-public class Item {
-  private int code;
-  private String codeCPC;
-  private String designation;
+import isep.esinf.utils.AVL;
+import isep.esinf.utils.BST;
 
-  public Item(int code, String codeCPC, String designation) {
+public abstract class Item implements Comparable<Item> {
+  private int code;
+  private int cpr;
+  private String item;
+  private BST<Element> elements;
+
+  public Item(int code, int cpr, String item) {
     this.code = code;
-    this.codeCPC = codeCPC;
-    this.designation = designation;
+    this.cpr = cpr;
+    this.item = item;
+    this.elements = new AVL<>();
   }
 
   public int getCode() {
     return code;
   }
 
-  public String getCodeCPC() {
-    return codeCPC;
+  public int getCpr() {
+    return cpr;
   }
 
-  public String getDesignation() {
-    return designation;
+  public String getItem() {
+    return item;
   }
+
+  public void addElement(Element element) {
+    elements.insert(element);
+  }
+
+  public abstract int compareTo(Item o);
 
   @Override
   public String toString() {
-    return String.format("Item %s w/ code %d & code CPC %d\n", designation, code, codeCPC);
+    return "Item{" + "code=" + code + ", cpr=" + cpr + ", item=" + item + '}';
   }
 }

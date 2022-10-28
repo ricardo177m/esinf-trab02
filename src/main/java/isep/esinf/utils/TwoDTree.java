@@ -1,7 +1,9 @@
 package isep.esinf.utils;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class TwoDTree<E extends Comparable<E>> extends BST<E> {
   private final Comparator<Point2D.Double> cmpX = new Comparator<Point2D.Double>() {
@@ -79,5 +81,52 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
       findNearestNeighbor(node2, x, y, depth + 1);
 
     return closest.getElement();
+  }
+
+  private List<E> contained = new ArrayList<>();
+
+  public List<E> searchRangeArea(double x1, double y1, double x2, double y2) {
+
+    Point2D.Double lowCoords = generateLowCoords(x1, y1, x2, y2);
+    Point2D.Double maxCoords = generateHighCoords(x1, y1, x2, y2);
+
+    searchRangeArea((TwoDNode<E>) root, lowCoords, maxCoords, 0);
+
+    return contained;
+  }
+
+  private Point2D.Double generateLowCoords(double x1, double y1, double x2, double y2) {
+    return new Point2D.Double(Math.min(x1, x2), Math.min(y1, y2));
+  }
+
+  private Point2D.Double generateHighCoords(double x1, double y1, double x2, double y2) {
+    return new Point2D.Double(Math.max(x1, x2), Math.max(y1, y2));
+  }
+
+  private boolean isInRange(TwoDNode<E> node, Point2D.Double lowCoords, Point2D.Double highCoords) {
+    return node.getCoords().getX() >= lowCoords.x && node.getCoords().getX() <= highCoords.x
+        && node.getCoords().getY() >= lowCoords.y && node.getCoords().getY() <= highCoords.y;
+  }
+
+  public void searchRangeArea(TwoDNode<E> node, Point2D.Double lowCoords, Point2D.Double highCoords, int depth) {
+    if (node == null)
+      return;
+
+    boolean isXAxis = depth % 2 == 0;
+
+    int cmpLowResult = (isXAxis ? cmpX : cmpY).compare(lowCoords, node.getCoords());
+    int cmpHighResult = (isXAxis ? cmpX : cmpY).compare(highCoords, node.getCoords());
+
+    if (isInRange(node, lowCoords, highCoords)) {
+      contained.add(node.getElement());
+      searchRangeArea(node.getRight(), lowCoords, highCoords, depth + 1);
+      searchRangeArea(node.getLeft(), lowCoords, highCoords, depth + 1);
+    } else {
+      if (cmpLowResult < 0)
+        searchRangeArea(node.getRight(), lowCoords, highCoords, depth + 1);
+      if (cmpHighResult > 0)
+        searchRangeArea(node.getLeft(), lowCoords, highCoords, depth + 1);
+    }
+
   }
 }
