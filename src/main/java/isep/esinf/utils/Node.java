@@ -43,4 +43,9 @@ public class Node<E> {
   public void setRight(Node<E> rightChild) {
     right = rightChild;
   }
+
+  @Override
+  public String toString() {
+    return String.format(element.toString());
+  }
 }
