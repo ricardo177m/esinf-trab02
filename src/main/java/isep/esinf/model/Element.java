@@ -24,6 +24,10 @@ public abstract class Element implements Comparable<Element> {
     productionData.insert(data);
   }
 
+  public ProductionData getProductionData(int year) {
+    return productionData.find(new ProductionData(year));
+  }
+
   public abstract int compareTo(Element o);
 
   @Override

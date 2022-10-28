@@ -32,6 +32,10 @@ public abstract class Item implements Comparable<Item> {
     elements.insert(element);
   }
 
+  public Element getElement(Element element) {
+    return elements.find(element);
+  }
+
   public abstract int compareTo(Item o);
 
   @Override

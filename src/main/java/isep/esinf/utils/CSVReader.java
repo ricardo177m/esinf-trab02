@@ -22,7 +22,7 @@ public class CSVReader {
     return scanner.nextLine().split(",");
   }
 
-  public List<? extends Map<String, String>> read() {
+  public List<Map<String, String>> read() {
     String[] header = readHeader();
     List<Map<String, String>> list = new ArrayList<>();
 

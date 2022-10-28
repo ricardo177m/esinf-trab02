@@ -7,13 +7,13 @@ public abstract class Area implements Comparable<Area> {
   private String area;
   private int code;
   private int m49Code;
-  private BST<Item> productions;
+  private BST<Item> items;
 
   public Area(String name, int code, int m49Code) {
     this.area = name;
     this.code = code;
     this.m49Code = m49Code;
-    this.productions = new AVL<>();
+    this.items = new AVL<>();
   }
 
   public String getArea() {
@@ -28,12 +28,12 @@ public abstract class Area implements Comparable<Area> {
     return m49Code;
   }
 
-  public BST<Item> getProductions() {
-    return productions;
+  public void addItem(Item item) {
+    items.insert(item);
   }
 
-  public void addProduction(Item production) {
-    productions.insert(production);
+  public Item getItem(Item item) {
+    return items.find(item);
   }
 
   public abstract int compareTo(Area o);
