@@ -15,6 +15,10 @@ public class Container {
     areas.insert(area);
   }
 
+  public Iterable<Area> getAreas() {
+    return areas.inOrder();
+  }
+
   public Container getAreasWithConditions(Item item, Element element, int year) {
     Container areasWithItem = new Container();
 
