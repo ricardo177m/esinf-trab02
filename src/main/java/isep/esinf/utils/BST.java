@@ -63,7 +63,7 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
    * Check if it is a leaf node
    */
   public boolean isLeaf(Node<E> node) {
-    return node.getLeft() == null && node.getRight() == null;
+    return node != null && node.getLeft() == null && node.getRight() == null;
   }
 
   /*
