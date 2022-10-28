@@ -1,43 +1,45 @@
 package isep.esinf.model;
 
-public class Area implements Comparable<Area> {
-  private String country;
-  private int code;
-  private int codeM49;
+import isep.esinf.utils.AVL;
+import isep.esinf.utils.BST;
 
-  public Area(String country, int code, int codeM49) {
+public abstract class Area implements Comparable<Area> {
+  private String area;
+  private int code;
+  private int m49Code;
+  private BST<Item> productions;
+
+  public Area(String name, int code, int m49Code) {
+    this.area = name;
     this.code = code;
-    this.codeM49 = codeM49;
-    this.country = country;
+    this.m49Code = m49Code;
+    this.productions = new AVL<>();
   }
 
-  // getters
+  public String getArea() {
+    return area;
+  }
+
   public int getCode() {
     return code;
   }
 
-  public int getCodeM49() {
-    return codeM49;
+  public int getM49Code() {
+    return m49Code;
   }
 
-  public String getCountry() {
-    return country;
+  public BST<Item> getProductions() {
+    return productions;
   }
+
+  public void addProduction(Item production) {
+    productions.insert(production);
+  }
+
+  public abstract int compareTo(Area o);
 
   @Override
   public String toString() {
-    return String.format("Area %s w/ code %d & code M49 %d\n", country, code, codeM49);
-  }
-
-  @Override
-  public int compareTo(Object o) {
-    // TODO
-    return 0;
-  }
-
-  @Override
-  public int compareTo(Area a) {
-    // TODO
-    return 0;
+    return "Area{" + "name=" + area + ", code=" + code + ", m49Code=" + m49Code + '}';
   }
 }

@@ -7,10 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,9 +21,9 @@ import org.junit.jupiter.api.Test;
 public class BSTTest {
   Integer[] arr = { 20, 15, 10, 13, 8, 17, 40, 50, 30, 7 };
   int[] height = { 0, 1, 2, 3, 3, 3, 3, 3, 3, 4 };
-  Integer[] inorderT = { 7, 8, 10, 13, 15, 17, 20, 30, 40, 50 };
-  Integer[] preorderT = { 20, 15, 10, 8, 7, 13, 17, 40, 30, 50 };
-  Integer[] posorderT = { 7, 8, 13, 10, 17, 15, 30, 50, 40, 20 };
+  Integer[] inOrderT = { 7, 8, 10, 13, 15, 17, 20, 30, 40, 50 };
+  Integer[] preOrderT = { 20, 15, 10, 8, 7, 13, 17, 40, 30, 50 };
+  Integer[] posOrderT = { 7, 8, 13, 10, 17, 15, 30, 50, 40, 20 };
 
   BST<Integer> instance;
 
@@ -155,7 +154,7 @@ public class BSTTest {
   }
 
   /**
-   * Test of smallestelement method, of class TREE.
+   * Test of smallest element method, of class TREE.
    */
   @Test
   public void testSmallestElement() {
@@ -168,54 +167,134 @@ public class BSTTest {
   }
 
   /**
-   * Test of processBstByLevel method, of class TREE.
+   * Test of inOrder method, of class BST.
    */
   @Test
-  public void testProcessBstByLevel() {
-    System.out.println("processbstbylevel");
-    Map<Integer, List<Integer>> expResult = new HashMap();
-    expResult.put(0, Arrays.asList(new Integer[] { 20 }));
-    expResult.put(1, Arrays.asList(new Integer[] { 15, 40 }));
-    expResult.put(2, Arrays.asList(new Integer[] { 10, 17, 30, 50 }));
-    expResult.put(3, Arrays.asList(new Integer[] { 8, 13 }));
-    expResult.put(4, Arrays.asList(new Integer[] { 7 }));
-
-    Map<Integer, List<Integer>> result = instance.nodesByLevel();
-
-    for (Map.Entry<Integer, List<Integer>> e : result.entrySet()) {
-      System.out.println("expected = " + expResult.get(e.getKey()));
-      System.out.println("result = " + e.getValue());
-      assertEquals(expResult.get(e.getKey()), e.getValue());
-    }
+  public void testInOrder() {
+    System.out.println("inOrder");
+    List<Integer> lExpected = Arrays.asList(inOrderT);
+    assertEquals(lExpected, instance.inOrder());
   }
 
   /**
    * Test of inOrder method, of class BST.
    */
   @Test
-  public void testInOrder() {
+  public void testInOrderWithNullTree() {
     System.out.println("inOrder");
-    List<Integer> lExpected = Arrays.asList(inorderT);
-    assertEquals(lExpected, instance.inOrder());
+    List<Integer> lExpected = new ArrayList<>();
+    assertEquals(lExpected, new BST<>().inOrder());
   }
 
   /**
    * Test of preOrder method, of class BST.
    */
   @Test
-  public void testpreOrder() {
+  public void testPreOrder() {
     System.out.println("preOrder");
-    List<Integer> lExpected = Arrays.asList(preorderT);
+    List<Integer> lExpected = Arrays.asList(preOrderT);
     assertEquals(lExpected, instance.preOrder());
+  }
+
+  /**
+   * Test of preOrder method, of class BST.
+   */
+  @Test
+  public void testPreOrderWithNullTree() {
+    System.out.println("preOrder");
+    List<Integer> lExpected = new ArrayList<>();
+    assertEquals(lExpected, new BST<>().preOrder());
   }
 
   /**
    * Test of posOrder method, of class BST.
    */
   @Test
-  public void testposOrder() {
+  public void testPosOrder() {
     System.out.println("posOrder");
-    List<Integer> lExpected = Arrays.asList(posorderT);
+    List<Integer> lExpected = Arrays.asList(posOrderT);
     assertEquals(lExpected, instance.posOrder());
+  }
+
+  /**
+   * Test of posOrder method, of class BST.
+   */
+  @Test
+  public void testPosOrderWithNullTree() {
+    System.out.println("posOrder");
+    List<Integer> lExpected = new ArrayList<>();
+    assertEquals(lExpected, new BST<>().posOrder());
+  }
+
+  /**
+   * Test of isLeaf method, of class TREE.
+   */
+  @Test
+  public void testIsLeaf() {
+    System.out.println("isLeaf");
+    assertFalse(instance.isLeaf(instance.root));
+    assertFalse(instance.isLeaf(instance.root.getLeft()));
+    assertFalse(instance.isLeaf(instance.root.getRight()));
+    assertTrue(instance.isLeaf(instance.root.getLeft().getLeft().getLeft().getLeft()));
+  }
+
+  /**
+   * Test of isLeaf method, of class TREE.
+   */
+  @Test
+  public void testIsLeafWithNullNode() {
+    System.out.println("isLeaf");
+    assertFalse(instance.isLeaf(null));
+  }
+
+  /**
+   * Test of isLeaf method, of class TREE.
+   */
+  @Test
+  public void testIsLeafWithOnlyOneChild() {
+    System.out.println("isLeaf");
+    Node<Integer> n = new Node<>(2, new Node<>(1, null, null), null);
+    assertFalse(instance.isLeaf(n));
+    n = new Node<>(2, null, new Node<>(1, null, null));
+  }
+
+  /*
+   * Test toString method, of class BST.
+   */
+  @Test
+  public void testToStringBST() {
+    System.out.println("toStringBST");
+    String expected = ("|	|-------50\n" +
+        "|-------40\n" +
+        "|	|-------30\n" +
+        "20\n" +
+        "|	|-------17\n" +
+        "|-------15\n" +
+        "|	|	|-------13\n" +
+        "|	|-------10\n" +
+        "|	|	|-------8\n" +
+        "|	|	|	|-------7\n");
+
+    assertEquals(expected, instance.toString());
+  }
+
+  /*
+   * Test toString method, of class Node
+   */
+  @Test
+  public void testToStringNode() {
+    Node<Integer> n = new Node<>(2, new Node<>(1, null, null), new Node<>(3, null, null));
+    String expected = ("2");
+    assertEquals(expected, n.toString());
+  }
+
+  /*
+   * Test smallestElement method, of class BST, returning null.
+   */
+  @Test
+  public void testSmallestElementEmpty() {
+    System.out.println("smallestElementEmpty");
+    BST<Integer> instance = new BST<>();
+    assertNull(instance.smallestElement());
   }
 }
