@@ -43,10 +43,20 @@ class CSVReaderTest {
 
   @Test
   public void testWithEmptyFile() throws FileNotFoundException {
-    CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/EmptyFile.csv");;
-    List<? extends Map<String, String>> l = new ArrayList<HashMap<String, String>>();
+    CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/EmptyFile.csv");
+    List<? extends Map<String, String>> l = r.read();
 
     assertEquals(new ArrayList<>(), l);
+  }
+
+  @Test
+  public void testWithOneLineFile() throws FileNotFoundException {
+    CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/EmptyFile.csv");
+    List<? extends Map<String, String>> l = r.read();
+
+    List<HashMap<String, String>> expected = new ArrayList<HashMap<String, String>>();
+
+    assertEquals(expected, l);
   }
 
   @Test

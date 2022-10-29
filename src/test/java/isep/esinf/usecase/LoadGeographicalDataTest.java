@@ -119,4 +119,53 @@ public class LoadGeographicalDataTest {
 
   }
 
+  // test loadGeographicalData with file TestLoadGeoData_Small.csv
+  @Test
+  public void testLoadGeographicalDataWithSmallFile() throws FileNotFoundException {
+    System.out.println("testLoadGeographicalDataWithSmallFile");
+    CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/TestLoadGeoData_Small.csv");
+
+    Container c = new Container();
+    TwoDTree<Area> tree = new TwoDTree<>();
+
+    Area burundi = new AreaByName("Burundi", 13, 100);
+    Area israel = new AreaByName("Israel", 14, 101);
+    Area tuvalu = new AreaByName("Tuvalu", 0, 102);
+    Area mozambique = new AreaByName("Mozambique", 13, 103);
+    Area faroeIslands = new AreaByName("Faroe Islands", 14, 104);
+    Area pitcairnIslands = new AreaByName("Pitcairn Islands", 0, 105);
+    Area niue = new AreaByName("Niue", 13, 106);
+    Area eswatini = new AreaByName("Eswatini", 14, 107);
+
+    c.addArea(burundi);
+    c.addArea(israel);
+    c.addArea(tuvalu);
+    c.addArea(mozambique);
+    c.addArea(faroeIslands);
+    c.addArea(pitcairnIslands);
+    c.addArea(niue);
+    c.addArea(eswatini);
+
+    List<Map<String, String>> geoData = r.read();
+
+    TwoDTree<Area> result = loadGeographicalData.execute(c, geoData);
+
+    tree.insert(burundi, -3.3731, 29.9189);
+    tree.insert(faroeIslands, 61.892635, -6.911806);
+    tree.insert(israel, 31.046051, 34.851612);
+    tree.insert(eswatini, -26.522503, 31.465866);
+    tree.insert(niue, -19.054445, -169.867233);
+    tree.insert(mozambique, -18.665695, 35.529562);
+    tree.insert(pitcairnIslands, -24.703615, -127.439308);
+    tree.insert(tuvalu, -7.109535, 177.64933);
+
+    assertEquals(result.toString(), tree.toString());
+
+  }
+
+  @Test
+  public void testLoadGeographicalDataCrossingFiles() throws FileNotFoundException {
+    // TO DO (waiting for implementation of the method)
+  }
+
 }
