@@ -1,10 +1,17 @@
 package isep.esinf.usecase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 public class LoadData {
-  public static void execute(String[] args) {
-    // TODO
-    assertEquals(1, 1);
+  @BeforeAll
+  public static void setup() {
+    // create a container with elements to sanitize
+  }
+
+  @Test
+  public void test() {
+    assertEquals(1,1);
   }
 }
