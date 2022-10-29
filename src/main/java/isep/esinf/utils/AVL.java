@@ -2,15 +2,9 @@ package isep.esinf.utils;
 
 /**
  * AVL class.
-<<<<<<< HEAD
- * 
+ *
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
-=======
- *
- * @author Carlos Lopes <XX@isep.ipp.pt>
- * @author Ricardo Moreira <XX@isep.ipp.pt>
->>>>>>> 505f6b76caaed3e89a574a5bd3bfaaa160e1ed93
  * @author Tomás Russo <1211288@isep.ipp.pt>
  * @param <E>
  */
