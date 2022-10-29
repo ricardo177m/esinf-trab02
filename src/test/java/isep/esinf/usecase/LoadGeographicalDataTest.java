@@ -20,7 +20,7 @@ public class LoadGeographicalDataTest {
   // test loadGeographicalData
   // its giving the correct output but the toString is not correct
 
-  //@Test
+  @Test
   public void testLoadGeographicalData() {
     Container c = new Container();
     TwoDTree<Area> tree = new TwoDTree<>();
@@ -47,7 +47,6 @@ public class LoadGeographicalDataTest {
     TwoDTree<Area> result = loadGeographicalData.execute(c, geoData);
 
     assertEquals(result, tree);
-
   }
 
   // test loadGeographicalData with empty data
