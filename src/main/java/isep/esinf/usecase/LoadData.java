@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import isep.esinf.model.Container;
-import isep.esinf.utils.AVL;
-import isep.esinf.utils.CSVReader;
 
 /**
  * Alínea 1.
