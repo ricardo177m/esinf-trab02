@@ -18,6 +18,10 @@ public class Container {
     return areas.inOrder();
   }
 
+  public int getNOfAreas() {
+    return areas.size();
+  }
+
   public Container getAreasWithConditions(Item item, Element element, int year) {
     Container areasWithItem = new Container();
 
@@ -41,5 +45,21 @@ public class Container {
     }
 
     return areasWithItem;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+
+    Container container = (Container) o;
+
+    if (areas == null && container.areas == null)
+      return true;
+
+    boolean result = areas.equals(container.areas);
+    return result;
   }
 }

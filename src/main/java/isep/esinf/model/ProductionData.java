@@ -22,6 +22,18 @@ public class ProductionData implements Comparable<ProductionData> {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+
+    ProductionData that = (ProductionData) o;
+
+    return year == that.year;
+  }
+
+  @Override
   public int compareTo(ProductionData o) {
     return this.getYear() - o.getYear();
   }

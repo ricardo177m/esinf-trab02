@@ -1,5 +1,6 @@
 package isep.esinf.model;
 
+import isep.esinf.utils.AVL;
 import isep.esinf.utils.BST;
 
 public abstract class Element implements Comparable<Element> {
@@ -10,6 +11,7 @@ public abstract class Element implements Comparable<Element> {
   public Element(int code, String element) {
     this.code = code;
     this.element = element;
+    this.productionData = new AVL<>();
   }
 
   public int getCode() {

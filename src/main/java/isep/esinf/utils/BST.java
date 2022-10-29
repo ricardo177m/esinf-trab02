@@ -32,13 +32,14 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   }
 
   public E find(E element) {
-    Node<E> node = find(root,element);
+    Node<E> node = find(root, element);
 
     if (node == null)
       return null;
 
     return node.getElement();
   }
+
   /**
    * Returns the Node containing a specific Element, or null otherwise.
    *
@@ -273,6 +274,21 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
     posOrderSubtree(node.getLeft(), snapshot);
     posOrderSubtree(node.getRight(), snapshot);
     snapshot.add(node.getElement());
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (!(o instanceof BST))
+      return false;
+
+    try {
+      BST<E> that = (BST<E>) o;
+      return root.equals(that.root);
+    } catch (ClassCastException e) {
+      return false;
+    }
   }
 
   // #########################################################################

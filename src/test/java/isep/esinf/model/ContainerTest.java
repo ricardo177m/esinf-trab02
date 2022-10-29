@@ -1,5 +1,8 @@
 package isep.esinf.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -8,26 +11,32 @@ import isep.esinf.model.comparators.ElementByCode;
 import isep.esinf.model.comparators.ItemByName;
 
 public class ContainerTest {
+  private static Container container;
+  private static Area firstArea;
+  private static Area secondArea;
+  private static Item firstItem;
+  private static Element secondElement;
+  private static final int YEAR = 1980;
+
   @BeforeAll
   public static void setup() {
-    // create a container with elements to sanitize
-    Container container = new Container();
+    // create a container with elements to filter
+    container = new Container();
 
-    Area firstArea = new AreaByCode("Portugal", 100, 200);
-    Area secondArea = new AreaByCode("Spain", 200, 300);
+    firstArea = new AreaByCode("Portugal", 100, 200);
+    secondArea = new AreaByCode("Spain", 200, 300);
     Area thirdArea = new AreaByCode("France", 300, 400);
 
-    Item firstItem = new ItemByName(1, 2, "Item 1");
+    firstItem = new ItemByName(1, 2, "Item 1");
     Item secondItem = new ItemByName(2, 3, "Item 2");
     Item thirdItem = new ItemByName(3, 4, "Item 3");
     Item fourthItem = new ItemByName(4, 5, "Item 4");
     Item fifthItem = new ItemByName(5, 6, "Item 5");
     Item sixthItem = new ItemByName(6, 7, "Item 6");
     Item seventhItem = new ItemByName(7, 8, "Item 7");
-    Item eighthItem = new ItemByName(8, 9, "Item 8");
 
     Element firstElement = new ElementByCode(1, "Element 1");
-    Element secondElement = new ElementByCode(2, "Element 2");
+    secondElement = new ElementByCode(2, "Element 2");
     Element thirdElement = new ElementByCode(3, "Element 3");
     Element fourthElement = new ElementByCode(4, "Element 4");
 
@@ -42,20 +51,34 @@ public class ContainerTest {
     firstElement.addProductionData(firstProductionData);
     firstElement.addProductionData(secondProductionData);
     firstElement.addProductionData(thirdProductionData);
+    secondElement.addProductionData(firstProductionData);
     secondElement.addProductionData(fourthProductionData);
     secondElement.addProductionData(fifthProductionData);
     thirdElement.addProductionData(sixthProductionData);
     thirdElement.addProductionData(seventhProductionData);
+    fourthElement.addProductionData(firstProductionData);
 
     firstItem.addElement(firstElement);
     firstItem.addElement(secondElement);
     secondItem.addElement(thirdElement);
     secondItem.addElement(fourthElement);
+    thirdItem.addElement(firstElement);
+    thirdItem.addElement(secondElement);
+    fourthItem.addElement(thirdElement);
+    fourthItem.addElement(fourthElement);
+    fifthItem.addElement(firstElement);
+    fifthItem.addElement(secondElement);
+    sixthItem.addElement(thirdElement);
+    seventhItem.addElement(firstElement);
+    seventhItem.addElement(secondElement);
 
     firstArea.addItem(firstItem);
     firstArea.addItem(secondItem);
+    firstArea.addItem(thirdItem);
+    secondArea.addItem(firstItem);
     secondArea.addItem(thirdItem);
     secondArea.addItem(fourthItem);
+    secondArea.addItem(fifthItem);
     thirdArea.addItem(fifthItem);
     thirdArea.addItem(sixthItem);
     thirdArea.addItem(seventhItem);
@@ -68,6 +91,19 @@ public class ContainerTest {
 
   @Test
   public void testGetAreasWithCondition() {
+    Container expected = new Container();
+    expected.addArea(firstArea);
+    expected.addArea(secondArea);
 
+    Container actual = container.getAreasWithConditions(firstItem, secondElement, YEAR);
+
+    assertTrue(expected.equals(actual));
+  }
+
+  @Test
+  public void testGetAreasWithNull() {
+    Container actual = container.getAreasWithConditions(null, null, YEAR);
+
+    assertEquals(0, actual.getNOfAreas());
   }
 }
