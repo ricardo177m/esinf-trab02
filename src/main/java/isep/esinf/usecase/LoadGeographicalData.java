@@ -3,10 +3,15 @@ package isep.esinf.usecase;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.utils.TwoDTree;
 
+/**
+ * @author André Barros
+ * @author Tomás Lopes
+ */
 public class LoadGeographicalData {
   private Map<String, Map<String, String>> mapListToMap(List<Map<String, String>> list) {
     Map<String, Map<String, String>> map = new HashMap<>();
@@ -16,6 +21,11 @@ public class LoadGeographicalData {
     return map;
   }
 
+  /**
+   * Helper method to load data from a csv file into a TwoDTree.
+   * This method gets an already loaded Container and adds the coordinates of
+   * countries to it.
+   */
   public TwoDTree<Area> execute(Container container, List<Map<String, String>> geoData) {
     Map<String, Map<String, String>> map = mapListToMap(geoData);
     TwoDTree<Area> tree = new TwoDTree<>();
