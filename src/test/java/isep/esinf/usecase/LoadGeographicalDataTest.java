@@ -24,9 +24,9 @@ public class LoadGeographicalDataTest {
   public void testLoadGeographicalData() {
     Container c = new Container();
     TwoDTree<Area> tree = new TwoDTree<>();
-    Area portugal = new AreaByName("Portugal", 13, 100);
-    Area spain = new AreaByName("Spain", 14, 50);
-    Area italy = new AreaByName("Italy", 11, 90);
+    Area portugal = new AreaByName(13, 100, "Portugal");
+    Area spain = new AreaByName(14, 50, "Spain");
+    Area italy = new AreaByName(11, 90, "Italy");
 
     c.addArea(portugal);
     c.addArea(spain);
@@ -55,9 +55,9 @@ public class LoadGeographicalDataTest {
   public void testLoadGeographicalDataEmptyData() {
     Container c = new Container();
     TwoDTree<Area> tree = new TwoDTree<>();
-    Area portugal = new AreaByName("Portugal", 13, 100);
-    Area spain = new AreaByName("Spain", 14, 50);
-    Area italy = new AreaByName("Italy", 11, 90);
+    Area portugal = new AreaByName(13, 100, "Portugal");
+    Area spain = new AreaByName(14, 50, "Spain");
+    Area italy = new AreaByName(11, 90, "Italy");
 
     c.addArea(portugal);
     c.addArea(spain);
