@@ -128,4 +128,32 @@ class CSVReaderTest {
 
     assertEquals(expected, l);
   }
+
+  @Test
+  public void testReadWorksWithCommasBetweenQuotesAndEmptyValues() throws FileNotFoundException {
+    List<? extends Map<String, String>> l = new ArrayList<HashMap<String, String>>();
+    CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/emptyFields.csv");
+
+    l = r.read();
+
+    HashMap<String, String> map = new HashMap<String, String>();
+    List<HashMap<String, String>> expected = new ArrayList<HashMap<String, String>>();
+
+    map.put("Area Code", "68");
+    map.put("Item", "Pro,du,ction");
+    map.put("AaAA", "");
+    map.put("\"gaagda\"", "");
+    map.put("f", "A");
+    expected.add(map);
+
+    map = new HashMap<String, String>();
+    map.put("Area Code", "1");
+    map.put("Item", "'3");
+    map.put("AaAA", "Italy");
+    map.put("\"gaagda\"", "1");
+    map.put("f", "'2");
+    expected.add(map);
+
+    assertEquals(expected, l);
+  }
 }
