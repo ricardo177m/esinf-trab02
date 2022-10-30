@@ -27,7 +27,7 @@ public class AccumulatedProductionInArea {
     TwoDTree<Area> tree;
 
     try {
-      tree = getData(data, "fileName.csv");
+      tree = getData(data, "./src/test/java/isep/esinf/data/TestLoadGeoData_Small.csv");
     } catch (FileNotFoundException e) {
       System.out.println("File not found");
       return null;
