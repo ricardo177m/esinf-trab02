@@ -1,0 +1,83 @@
+package isep.esinf.mock;
+
+import isep.esinf.model.Area;
+import isep.esinf.model.Container;
+import isep.esinf.model.Element;
+import isep.esinf.model.Item;
+import isep.esinf.model.ProductionData;
+import isep.esinf.model.comparators.AreaByCode;
+import isep.esinf.model.comparators.ElementByCode;
+import isep.esinf.model.comparators.ItemByName;
+
+public class MockContainer {
+  public Container mock() {
+    Container container = new Container();
+
+    Area firstArea = new AreaByCode(100, 200, "Portugal");
+    Area secondArea = new AreaByCode(200, 300, "Spain");
+    Area thirdArea = new AreaByCode(300, 400, "France");
+
+    Item firstItem = new ItemByName(1, 2, "Item 1");
+    Item secondItem = new ItemByName(2, 3, "Item 2");
+    Item thirdItem = new ItemByName(3, 4, "Item 3");
+    Item fourthItem = new ItemByName(4, 5, "Item 4");
+    Item fifthItem = new ItemByName(5, 6, "Item 5");
+    Item sixthItem = new ItemByName(6, 7, "Item 6");
+    Item seventhItem = new ItemByName(7, 8, "Item 7");
+
+    Element firstElement = new ElementByCode(1, "Element 1");
+    Element secondElement = new ElementByCode(2, "Element 2");
+    Element thirdElement = new ElementByCode(3, "Element 3");
+    Element fourthElement = new ElementByCode(4, "Element 4");
+
+    ProductionData firstProductionData = new ProductionData(1980, 200);
+    ProductionData secondProductionData = new ProductionData(1981, 300);
+    ProductionData thirdProductionData = new ProductionData(1982, 400);
+    ProductionData fourthProductionData = new ProductionData(1983, 500);
+    ProductionData fifthProductionData = new ProductionData(1984, 600);
+    ProductionData sixthProductionData = new ProductionData(1985, 700);
+    ProductionData seventhProductionData = new ProductionData(1986, 800);
+
+    firstElement.addProductionData(firstProductionData);
+    firstElement.addProductionData(secondProductionData);
+    firstElement.addProductionData(thirdProductionData);
+    secondElement.addProductionData(firstProductionData);
+    secondElement.addProductionData(fourthProductionData);
+    secondElement.addProductionData(fifthProductionData);
+    thirdElement.addProductionData(sixthProductionData);
+    thirdElement.addProductionData(seventhProductionData);
+    fourthElement.addProductionData(firstProductionData);
+
+    firstItem.addElement(firstElement);
+    firstItem.addElement(secondElement);
+    secondItem.addElement(thirdElement);
+    secondItem.addElement(fourthElement);
+    thirdItem.addElement(firstElement);
+    thirdItem.addElement(secondElement);
+    fourthItem.addElement(thirdElement);
+    fourthItem.addElement(fourthElement);
+    fifthItem.addElement(firstElement);
+    fifthItem.addElement(secondElement);
+    sixthItem.addElement(thirdElement);
+    seventhItem.addElement(firstElement);
+    seventhItem.addElement(secondElement);
+
+    firstArea.addItem(firstItem);
+    firstArea.addItem(secondItem);
+    firstArea.addItem(thirdItem);
+    secondArea.addItem(firstItem);
+    secondArea.addItem(thirdItem);
+    secondArea.addItem(fourthItem);
+    secondArea.addItem(fifthItem);
+    thirdArea.addItem(fifthItem);
+    thirdArea.addItem(sixthItem);
+    thirdArea.addItem(seventhItem);
+    firstArea.addItem(fifthItem);
+
+    container.addArea(firstArea);
+    container.addArea(secondArea);
+    container.addArea(thirdArea);
+
+    return container;
+  }
+}
