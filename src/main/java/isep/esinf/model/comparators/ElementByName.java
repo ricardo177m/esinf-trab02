@@ -9,6 +9,18 @@ public class ElementByName extends Element {
 
   @Override
   public int compareTo(Element o) {
-    return this.getElement().compareTo(o.getElement());
+    if (this.getElement().compareTo(o.getElement()) == 0) {
+      return 0;
+    }
+
+    if (this.getElement().compareTo(o.getElement()) < 0) {
+      return -1;
+    }
+
+    if (this.getElement().compareTo(o.getElement()) > 0) {
+      return 1;
+    }
+
+    return 0;
   }
 }
