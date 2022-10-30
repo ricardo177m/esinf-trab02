@@ -1,12 +1,9 @@
 package isep.esinf.usecase;
 
 import org.junit.jupiter.api.Test;
-import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.comparators.AreaByCode;
-import isep.esinf.model.comparators.AreaByM49;
 import isep.esinf.model.comparators.ElementByCode;
-import isep.esinf.model.comparators.ItemByCPC;
 import isep.esinf.model.comparators.ItemByCode;
 import isep.esinf.utils.CSVReader;
 import java.io.FileNotFoundException;

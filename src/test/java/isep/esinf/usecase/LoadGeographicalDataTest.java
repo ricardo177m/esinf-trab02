@@ -104,8 +104,8 @@ public class LoadGeographicalDataTest {
 
     Container c = new Container();
     Area portugal = new AreaByName(13, 100, "Portugal");
-    Area spain = new AreaByName(14, 50, "Spain");
     Area italy = new AreaByName(11, 90, "Italy");
+    Area spain = new AreaByName(14, 50, "Spain");
 
     c.addArea(portugal);
     c.addArea(spain);
