@@ -13,9 +13,9 @@ public class ContainerTest {
     // create a container with elements to sanitize
     Container container = new Container();
 
-    Area firstArea = new AreaByCode("Portugal", 100, 200);
-    Area secondArea = new AreaByCode("Spain", 200, 300);
-    Area thirdArea = new AreaByCode("France", 300, 400);
+    Area firstArea = new AreaByCode(100, 200, "Portugal");
+    Area secondArea = new AreaByCode(200, 300, "Spain");
+    Area thirdArea = new AreaByCode(300, 400, "France");
 
     Item firstItem = new ItemByName(1, 2, "Item 1");
     Item secondItem = new ItemByName(2, 3, "Item 2");

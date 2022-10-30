@@ -3,8 +3,8 @@ package isep.esinf.model.comparators;
 import isep.esinf.model.Area;
 
 public class AreaByCode extends Area {
-  public AreaByCode(String name, int code, int m49Code) {
-    super(name, code, m49Code);
+  public AreaByCode(int code, int m49Code, String name) {
+    super(code, m49Code, name);
   }
 
   @Override

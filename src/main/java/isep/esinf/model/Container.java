@@ -14,6 +14,10 @@ public class Container {
     areas.insert(area);
   }
 
+  public Area getArea(Area area) {
+    return areas.find(area);
+  }
+
   public Iterable<Area> getAreas() {
     return areas.inOrder();
   }

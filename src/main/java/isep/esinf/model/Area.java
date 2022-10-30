@@ -9,7 +9,7 @@ public abstract class Area implements Comparable<Area> {
   private int m49Code;
   private BST<Item> items;
 
-  public Area(String name, int code, int m49Code) {
+  public Area(int code, int m49Code, String name) {
     this.area = name;
     this.code = code;
     this.m49Code = m49Code;
