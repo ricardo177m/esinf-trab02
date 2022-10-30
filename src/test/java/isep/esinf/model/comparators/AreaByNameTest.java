@@ -68,4 +68,13 @@ public class AreaByNameTest {
     assertEquals(1, area2.compareTo(area));
   }
 
+  /*
+   * Test area by name toString
+   */
+  @Test
+  public void testAreaByNameToString() {
+    System.out.println("testAreaByNameToString");
+    AreaByName area = new AreaByName("Portugal", 1, 1);
+    assertEquals("Area{" + "name=" + "Portugal" + ", code=" + 1 + ", m49Code=" + 1 + '}', area.toString());
+  }
 }
