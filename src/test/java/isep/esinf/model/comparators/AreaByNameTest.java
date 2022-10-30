@@ -14,7 +14,7 @@ public class AreaByNameTest {
   @Test
   public void testAreaByName() {
     System.out.println("testAreaByName");
-    AreaByName area = new AreaByName("Portugal", 1, 1);
+    AreaByName area = new AreaByName(1, 1, "Portugal");
     assertEquals("Portugal", area.getArea());
     assertEquals(1, area.getCode());
     assertEquals(1, area.getM49Code());
@@ -26,7 +26,7 @@ public class AreaByNameTest {
   @Test
   public void testAreaByNameWithItem() {
     System.out.println("testAreaByNameWithItem");
-    AreaByName area = new AreaByName("Portugal", 1, 1);
+    AreaByName area = new AreaByName(1, 1, "Portugal");
     Item item = new ItemByName(1, 1, "Item");
     area.addItem(item);
     assertEquals("Portugal", area.getArea());
@@ -41,8 +41,8 @@ public class AreaByNameTest {
   @Test
   public void testAreaByNameCompareNotEqualLess() {
     System.out.println("testAreaByNameCompareNotEqualLess");
-    AreaByName area = new AreaByName("Portugal", 1, 1);
-    AreaByName area2 = new AreaByName("Spain", 2, 3);
+    AreaByName area = new AreaByName(1, 1, "Portugal");
+    AreaByName area2 = new AreaByName(3, 2, "Spain");
     assertEquals(-1, area.compareTo(area2));
   }
 
@@ -52,8 +52,8 @@ public class AreaByNameTest {
   @Test
   public void testAreaByNameCompareEqual() {
     System.out.println("testAreaByNameCompareEqual");
-    AreaByName area = new AreaByName("Portugal", 3, 2);
-    AreaByName area2 = new AreaByName("Portugal", 1, 1);
+    AreaByName area = new AreaByName(2, 3, "Portugal");
+    AreaByName area2 = new AreaByName(1, 1, "Portugal");
     assertEquals(0, area.compareTo(area2));
   }
 
@@ -63,8 +63,8 @@ public class AreaByNameTest {
   @Test
   public void testAreaByNameCompareNotEqualGreater() {
     System.out.println("testAreaByNameCompareNotEqualGreater");
-    AreaByName area = new AreaByName("Portugal", 1, 1);
-    AreaByName area2 = new AreaByName("Spain", 2, 3);
+    AreaByName area = new AreaByName(1, 1, "Portugal");
+    AreaByName area2 = new AreaByName(3, 2, "Spain");
     assertEquals(1, area2.compareTo(area));
   }
 
@@ -74,7 +74,7 @@ public class AreaByNameTest {
   @Test
   public void testAreaByNameToString() {
     System.out.println("testAreaByNameToString");
-    AreaByName area = new AreaByName("Portugal", 1, 1);
+    AreaByName area = new AreaByName(1, 1, "Portugal");
     assertEquals("Area{" + "name=" + "Portugal" + ", code=" + 1 + ", m49Code=" + 1 + '}', area.toString());
   }
 }
