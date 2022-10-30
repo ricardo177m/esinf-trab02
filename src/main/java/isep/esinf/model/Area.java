@@ -39,6 +39,31 @@ public abstract class Area implements Comparable<Area> {
   public abstract int compareTo(Area o);
 
   @Override
+  public boolean equals(Object obj) {
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Area other = (Area) obj;
+
+    if (this.area == null || other.area == null)
+      return false;
+
+    if (!this.area.equals(other.area))
+      return false;
+
+    if (this.code != other.code)
+      return false;
+
+    if (this.m49Code != other.m49Code)
+      return false;
+
+    return true;
+  }
+
+  @Override
   public String toString() {
     return "Area{" + "name=" + area + ", code=" + code + ", m49Code=" + m49Code + '}';
   }

@@ -33,6 +33,28 @@ public abstract class Element implements Comparable<Element> {
   public abstract int compareTo(Element o);
 
   @Override
+  public boolean equals(Object obj) {
+    if (obj == null)
+      return false;
+
+    if (getClass() != obj.getClass())
+      return false;
+
+    final Element other = (Element) obj;
+
+    if (this.code != other.code)
+      return false;
+
+    if (this.element == null || other.element == null)
+      return false;
+
+    if (!this.element.equals(other.element))
+      return false;
+
+    return true;
+  }
+
+  @Override
   public String toString() {
     return "Element{" + "code=" + code + ", element=" + element + '}';
   }
