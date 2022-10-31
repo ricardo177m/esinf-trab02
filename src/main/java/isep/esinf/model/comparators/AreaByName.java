@@ -9,18 +9,13 @@ public class AreaByName extends Area {
 
   @Override
   public int compareTo(Area o) {
-    if (this.getArea().compareTo(o.getArea()) == 0) {
+    if (this.getArea().compareTo(o.getArea()) < 0) {
+      return -1;
+    } else if (this.getArea().compareTo(o.getArea()) > 0) {
+      return 1;
+    } else {
       return 0;
     }
 
-    if (this.getArea().compareTo(o.getArea()) < 0) {
-      return -1;
-    }
-
-    if (this.getArea().compareTo(o.getArea()) > 0) {
-      return 1;
-    }
-
-    return 0;
   }
 }
