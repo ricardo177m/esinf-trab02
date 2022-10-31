@@ -9,12 +9,6 @@ public class ItemByName extends Item {
 
   @Override
   public int compareTo(Item o) {
-    if (this.getItem().compareTo(o.getItem()) < 0) {
-      return -1;
-    } else if (this.getItem().compareTo(o.getItem()) > 0) {
-      return 1;
-    } else {
-      return 0;
-    }
+    return this.getItem().compareTo(o.getItem());
   }
 }

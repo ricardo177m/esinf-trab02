@@ -1,6 +1,7 @@
 package isep.esinf.model.comparators;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +44,18 @@ public class AreaByNameTest {
     System.out.println("testAreaByNameCompareNotEqualLess");
     AreaByName area = new AreaByName(1, 1, "Portugal");
     AreaByName area2 = new AreaByName(3, 2, "Spain");
-    assertEquals(-1, area.compareTo(area2));
+    assertTrue(area.compareTo(area2) < 0);
+  }
+
+  /*
+   * Test area by name compare not equal, first letter the same
+   */
+  @Test
+  public void testAreaByNameCompareNotEqualLessWithSameFirstLetter() {
+    System.out.println("testAreaByNameCompareNotEqualLessWithSameFirstLetter");
+    AreaByName area = new AreaByName(1, 1, "Portugal");
+    AreaByName area2 = new AreaByName(3, 2, "Porto Rico");
+    assertTrue(area.compareTo(area2) > 0);
   }
 
   /*
@@ -65,7 +77,7 @@ public class AreaByNameTest {
     System.out.println("testAreaByNameCompareNotEqualGreater");
     AreaByName area = new AreaByName(1, 1, "Portugal");
     AreaByName area2 = new AreaByName(3, 2, "Spain");
-    assertEquals(1, area2.compareTo(area));
+    assertTrue(area2.compareTo(area) > 0);
   }
 
   /*

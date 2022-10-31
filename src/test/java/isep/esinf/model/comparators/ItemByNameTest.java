@@ -1,8 +1,11 @@
 package isep.esinf.model.comparators;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import isep.esinf.model.Item;
 
 public class ItemByNameTest {
 
@@ -26,7 +29,18 @@ public class ItemByNameTest {
     System.out.println("testItemByNameCompareNotEqualLess");
     ItemByName item = new ItemByName(1, 1, "Portugal");
     ItemByName item2 = new ItemByName(2, 2, "Spain");
-    assertEquals(-1, item.compareTo(item2));
+    assertTrue(item.compareTo(item2) < 0);
+  }
+
+  /*
+   * Test itemByName compare not equal, first letter equal
+   */
+  @Test
+  public void testItemByNameCompareNotEqualFirstLetterEqual() {
+    System.out.println("testItemByNameCompareNotEqualFirstLetterEqual");
+    Item item = new ItemByName(1, 1, "Figs");
+    Item item2 = new ItemByName(1, 1, "Fags");
+    assertTrue(item.compareTo(item2) > 0);
   }
 
   /*
@@ -48,7 +62,7 @@ public class ItemByNameTest {
     System.out.println("testItemByNameCompareNotEqualGreater");
     ItemByName item = new ItemByName(2, 2, "Spain");
     ItemByName item2 = new ItemByName(1, 1, "Portugal");
-    assertEquals(1, item.compareTo(item2));
+    assertTrue(item.compareTo(item2) > 0);
   }
 
   /*

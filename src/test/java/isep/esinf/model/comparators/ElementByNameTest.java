@@ -1,6 +1,7 @@
 package isep.esinf.model.comparators;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,7 @@ public class ElementByNameTest {
     System.out.println("testElementByNameCompareNotEqualLess");
     ElementByName element = new ElementByName(1, "Portugal");
     ElementByName element2 = new ElementByName(2, "Spain");
-    assertEquals(-1, element.compareTo(element2));
+    assertTrue(element.compareTo(element2) < 0);
   }
 
   /*
@@ -47,7 +48,7 @@ public class ElementByNameTest {
     System.out.println("testElementByNameCompareNotEqualGreater");
     ElementByName element = new ElementByName(2, "Spain");
     ElementByName element2 = new ElementByName(1, "Portugal");
-    assertEquals(1, element.compareTo(element2));
+    assertTrue(element.compareTo(element2) > 0);
   }
 
   /*
