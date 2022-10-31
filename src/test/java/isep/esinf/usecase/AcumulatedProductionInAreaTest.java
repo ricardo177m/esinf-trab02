@@ -5,12 +5,15 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import isep.esinf.mock.MockContainer;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.Element;
 import isep.esinf.model.Item;
 import isep.esinf.model.comparators.AreaByName;
+import isep.esinf.model.comparators.ElementByCode;
 import isep.esinf.model.comparators.ElementByName;
+import isep.esinf.model.comparators.ItemByCode;
 import isep.esinf.model.comparators.ItemByName;
 
 public class AcumulatedProductionInAreaTest {
@@ -18,20 +21,13 @@ public class AcumulatedProductionInAreaTest {
 
   @Test
   public void testAccumulatedProductionInArea() throws FileNotFoundException {
-    Container c = new Container();
+    MockContainer mockContainer = new MockContainer();
 
-    Area portugal = new AreaByName(13, 100, "Portugal");
-    Area spain = new AreaByName(14, 50, "Spain");
-    Area italy = new AreaByName(11, 90, "Italy");
+    ItemByCode item = new ItemByCode(10, 12, "Wheat");
+    ElementByCode element = new ElementByCode(10, "Test");
 
-    c.addArea(portugal);
-    c.addArea(spain);
-    c.addArea(italy);
-
-    Item item = new ItemByName(10, 12, "Wheat");
-    Element element = new ElementByName(10, "Test");
-
-    List<Area> list = aInArea.execute(3, 3, 9, 9, item, 2010, element, c);
+    // Double sum = aInArea.execute(3.0, 3.0, 9.0, 9.0, item, 2010, element,
+    // mockContainer);
 
   }
 }

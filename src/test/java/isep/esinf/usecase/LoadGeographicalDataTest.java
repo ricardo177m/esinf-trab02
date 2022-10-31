@@ -163,6 +163,9 @@ public class LoadGeographicalDataTest {
 
   }
 
+  /*
+   *
+   */
   @Test
   public void testLoadGeographicalDataCrossingFiles() throws FileNotFoundException {
     // TO DO (waiting for implementation of the method)
