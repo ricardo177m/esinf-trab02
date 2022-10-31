@@ -40,6 +40,7 @@ public class CSVReader {
           if (line.charAt(i) == '"') insideString = !insideString;
           if (line.charAt(i) == ',' && !insideString) line = line.substring(0, i) + TEMP_SEPARATOR + line.substring(i + 1);
         }
+        line = line.replaceAll("\"", ""); // removes double quotas
       }
 
       // if (line.charAt(0) == '"') {

@@ -297,4 +297,18 @@ public class BSTTest {
     BST<Integer> instance = new BST<>();
     assertNull(instance.smallestElement());
   }
+
+  /**
+   * Test equals.
+   */
+  @Test
+  public void testEquals() {
+    // System.out.println(instance.toString());
+    BST<Integer> instance2 = new BST<>();
+    for (int i : arr)
+      instance2.insert(i);
+    assertTrue(instance.equals(instance2));
+    instance2.insert(1);
+    assertFalse(instance.equals(instance2));
+  }
 }

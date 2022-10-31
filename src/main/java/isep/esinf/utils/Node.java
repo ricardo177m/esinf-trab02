@@ -48,4 +48,31 @@ public class Node<E> {
   public String toString() {
     return String.format(element.toString());
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null)
+      return false;
+    if (!(obj instanceof Node))
+      return false;
+
+    Node<E> node = (Node<E>) obj;
+    // check own element
+    if (!element.equals(node.getElement()))
+      return false;
+
+    // check children
+    // this left null xor node left null -> false
+    if ((left == null) ^ (node.getLeft() == null))
+      return false;
+    if (left != null && !left.equals(node.getLeft()))
+      return false;
+    // this right null xor node right null -> false
+    if ((right == null) ^ (node.getRight() == null))
+      return false;
+    if (right != null && !right.equals(node.getRight()))
+      return false;
+
+    return true;
+  }
 }
