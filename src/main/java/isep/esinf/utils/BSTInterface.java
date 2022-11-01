@@ -22,6 +22,8 @@ public interface BSTInterface<E> {
 
   public E smallestElement();
 
+  public E biggestElement();
+
   public Iterable<E> inOrder();
 
   public Iterable<E> preOrder();
