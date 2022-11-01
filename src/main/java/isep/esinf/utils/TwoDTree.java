@@ -151,9 +151,9 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
       searchRangeArea(node.getRight(), lowCoords, highCoords, depth + 1);
       searchRangeArea(node.getLeft(), lowCoords, highCoords, depth + 1);
     } else {
-      if (cmpLowResult < 0)
+      if (cmpLowResult <= 0)
         searchRangeArea(node.getRight(), lowCoords, highCoords, depth + 1);
-      if (cmpHighResult > 0)
+      if (cmpHighResult >= 0)
         searchRangeArea(node.getLeft(), lowCoords, highCoords, depth + 1);
     }
 
