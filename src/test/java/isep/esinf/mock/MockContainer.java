@@ -7,6 +7,7 @@ import isep.esinf.model.Item;
 import isep.esinf.model.ProductionData;
 import isep.esinf.model.comparators.AreaByCode;
 import isep.esinf.model.comparators.ElementByCode;
+import isep.esinf.model.comparators.ItemByCode;
 import isep.esinf.model.comparators.ItemByName;
 
 public class MockContainer {
@@ -16,6 +17,7 @@ public class MockContainer {
     Area firstArea = new AreaByCode(100, 200, "Portugal");
     Area secondArea = new AreaByCode(200, 300, "Spain");
     Area thirdArea = new AreaByCode(300, 400, "France");
+    Area fourthArea = new AreaByCode(400, 500, "Burundi");
 
     Item firstItem = new ItemByName(1, 2, "Item 1");
     Item secondItem = new ItemByName(2, 3, "Item 2");
@@ -24,6 +26,8 @@ public class MockContainer {
     Item fifthItem = new ItemByName(5, 6, "Item 5");
     Item sixthItem = new ItemByName(6, 7, "Item 6");
     Item seventhItem = new ItemByName(7, 8, "Item 7");
+
+    Item itemCode = new ItemByCode(8, 9, "Item 8");
 
     Element firstElement = new ElementByCode(1, "Element 1");
     Element secondElement = new ElementByCode(2, "Element 2");
@@ -61,6 +65,7 @@ public class MockContainer {
     sixthItem.addElement(thirdElement);
     seventhItem.addElement(firstElement);
     seventhItem.addElement(secondElement);
+    itemCode.addElement(fourthElement);
 
     firstArea.addItem(firstItem);
     firstArea.addItem(secondItem);
@@ -73,10 +78,13 @@ public class MockContainer {
     thirdArea.addItem(sixthItem);
     thirdArea.addItem(seventhItem);
     firstArea.addItem(fifthItem);
+    fourthArea.addItem(seventhItem);
+    fourthArea.addItem(itemCode);
 
     container.addArea(firstArea);
     container.addArea(secondArea);
     container.addArea(thirdArea);
+    container.addArea(fourthArea);
 
     return container;
   }

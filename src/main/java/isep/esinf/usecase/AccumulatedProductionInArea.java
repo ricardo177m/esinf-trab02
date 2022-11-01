@@ -54,6 +54,9 @@ public class AccumulatedProductionInArea {
     return loadGeographicalData.execute(container, data);
   }
 
+  /*
+   * Returns the sum of the production of an item in a list of areas
+   */
   private double getSumProduction(List<Area> areas, ItemByCode item, ElementByCode element, int year) {
     double sum_production = 0;
 
