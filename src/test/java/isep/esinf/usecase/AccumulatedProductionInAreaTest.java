@@ -185,4 +185,85 @@ public class AccumulatedProductionInAreaTest {
     assertEquals(null, sum);
   }
 
+  /*
+   * Test sum production with multiple values
+   */
+  @Test
+  public void testSumProductionWithMultipleValues() {
+    System.out.println("testSumProductionWithMultipleValues");
+
+    int itemCode = 1;
+    int elementCode = 1;
+
+    Double sum = aInArea.execute(-100.0, -100.0, 100.0, 100.0, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(400, sum);
+  }
+
+  /*
+   * Test the sum of production with the same x axis coords
+   */
+  @Test
+  public void testSumProductionSameXAxis() {
+    System.out.println("testSumProductionSameXAxis");
+
+    int itemCode = 8;
+    int elementCode = 1;
+
+    Double sum = aInArea.execute(-3.373056, -3.373056, 200, 200, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(400, sum);
+  }
+
+  /*
+   * Test sum production with multiple values
+   */
+  @Test
+  public void testSumProductionWithMultipleValues2() {
+    System.out.println("testSumProductionWithMultipleValues2");
+
+    int itemCode = 9;
+    int elementCode = 6;
+
+    Double sum = aInArea.execute(-100.0, -100.0, 200.0, 200.0, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(1442.04, sum);
+  }
+
+  /*
+   * Test sum production with coords that are in the container but do not match
+   * any area
+   */
+  @Test
+  public void testSumProductionWithCoordsNotInArea() {
+    System.out.println("testSumProductionWithCoordsNotInArea");
+
+    int itemCode = 9;
+    int elementCode = 6;
+
+    Double sum = aInArea.execute(50, 50, 60, 60, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(0, sum);
+  }
+
+  /*
+   * Test sum production with coords that are in the container (making it a point)
+   */
+  @Test
+  public void testSumProductionWithCoordsPoint() {
+    System.out.println("testSumProductionWithCoordsPoint");
+
+    int itemCode = 9;
+    int elementCode = 6;
+
+    Double sum = aInArea.execute(0, 0, 0, 0, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(0, sum);
+  }
+
 }
