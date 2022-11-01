@@ -99,13 +99,16 @@ public class MockContainer {
     secondArea.addItem(fourthItem);
     secondArea.addItem(fifthItem);
 
+    thirdArea.addItem(firstItem);
     thirdArea.addItem(fifthItem);
     thirdArea.addItem(sixthItem);
     thirdArea.addItem(seventhItem);
 
+    fourthArea.addItem(firstItem);
     fourthArea.addItem(eigthItem);
     fourthArea.addItem(ninthItem);
 
+    fifthArea.addItem(firstItem);
     fifthArea.addItem(eigthItem);
     fifthArea.addItem(ninthItem);
 
