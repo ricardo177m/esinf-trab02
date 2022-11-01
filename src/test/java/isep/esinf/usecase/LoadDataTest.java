@@ -27,5 +27,8 @@ public class LoadDataTest {
 
     // Area: code;  Item: code;  Element: code
     LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    // print the container
+    System.out.println(container);
   }
 }

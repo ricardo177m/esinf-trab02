@@ -24,10 +24,17 @@ public class LoadData {
 
     data.forEach(row -> {
       try {
+        String tmp;
         // Area
         int areaCode = Integer.parseInt(row.get(Field.AREA_CODE.name));
-        // String tmp = row.get(Field.AREA_M49.name);
-        int areaM49 = Integer.parseInt(row.get(Field.AREA_M49.name));
+
+        // From: https://data.apps.fao.org/catalog/dataset/m49-code-list-global-region-country
+        // The m49 code is an integer number that uniquely identifies each country, region and continent for statistical purposes.
+        tmp = row.get(Field.AREA_M49.name);
+        if (tmp.charAt(0) == '\'')
+          tmp = tmp.substring(1, tmp.length() - 1);
+
+        int areaM49 = Integer.parseInt(tmp);
         String areaName = row.get(Field.AREA.name);
 
         // create instance of area
@@ -43,8 +50,7 @@ public class LoadData {
 
         // Item
         int itemCode = Integer.parseInt(row.get(Field.ITEM_CODE.name));
-        //
-        int itemCpc = Integer.parseInt(row.get(Field.ITEM_CPC.name));
+        String itemCpc = row.get(Field.ITEM_CPC.name);
         String itemName = row.get(Field.ITEM.name);
 
         // create instance of item

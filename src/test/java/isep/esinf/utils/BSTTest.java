@@ -264,7 +264,8 @@ public class BSTTest {
   @Test
   public void testToStringBST() {
     System.out.println("toStringBST");
-    String expected = ("|	|-------50\n" +
+    String expected = (
+        "|	|-------50\n" +
         "|-------40\n" +
         "|	|-------30\n" +
         "20\n" +
