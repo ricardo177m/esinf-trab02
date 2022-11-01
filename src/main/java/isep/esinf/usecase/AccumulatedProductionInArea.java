@@ -3,7 +3,6 @@ package isep.esinf.usecase;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
-
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.comparators.ElementByCode;
@@ -21,8 +20,8 @@ public class AccumulatedProductionInArea {
   /*
    * Returns the accumulated production of an item in a given area
    */
-  public Double execute(double x1, double y1, double x2, double y2, ItemByCode item, int year, ElementByCode element,
-      Container data) {
+  public Double execute(double x1, double y1, double x2, double y2, ItemByCode item, int year,
+      ElementByCode element, Container data) {
 
     Container sanitizedData = data.getAreasWithConditions(item, element, year);
 
@@ -45,7 +44,8 @@ public class AccumulatedProductionInArea {
   /*
    * Returns a TwoDTree with the data from the file
    */
-  private TwoDTree<Area> getData(Container container, String fileName) throws FileNotFoundException {
+  private TwoDTree<Area> getData(Container container, String fileName)
+      throws FileNotFoundException {
     LoadGeographicalData loadGeographicalData = new LoadGeographicalData();
     CSVReader csvReader = new CSVReader(fileName);
 
@@ -57,7 +57,8 @@ public class AccumulatedProductionInArea {
   /*
    * Returns the sum of the production of an item in a list of areas
    */
-  private double getSumProduction(List<Area> areas, ItemByCode item, ElementByCode element, int year) {
+  private double getSumProduction(List<Area> areas, ItemByCode item, ElementByCode element,
+      int year) {
     double sum_production = 0;
 
     for (Area area : areas) {

@@ -1,10 +1,8 @@
 package isep.esinf.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import isep.esinf.mock.MockContainer;
 import isep.esinf.model.comparators.AreaByCode;
 import isep.esinf.model.comparators.ElementByCode;
@@ -21,7 +19,7 @@ public class ContainerTest {
   @BeforeAll
   public static void setup() {
     // create a container with elements to filter
-    container = (new MockContainer()).mock();
+    container = (new MockContainer()).mockByCode();
   }
 
   @Test
