@@ -26,6 +26,27 @@ public class Container {
     return areas.size();
   }
 
+  public Container getAreasWithConditions(Item item, Element element) {
+    Container areasWithItem = new Container();
+
+    Iterable<Area> a = areas.inOrder();
+
+    // TODO optimize this (is starting allways from the root)
+    for (Area area : a) {
+      Item i = area.getItem(item);
+      if (i == null)
+        continue;
+
+      Element e = i.getElement(element);
+      if (e == null)
+        continue;
+
+      areasWithItem.addArea(area);
+    }
+
+    return areasWithItem;
+  }
+
   public Container getAreasWithConditions(Item item, Element element, int year) {
     Container areasWithItem = new Container();
 
