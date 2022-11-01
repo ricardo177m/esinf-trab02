@@ -2,12 +2,12 @@ package isep.esinf.usecase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import isep.esinf.mock.MockContainer;
+import isep.esinf.mock.MockGeoData;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.comparators.AreaByCode;
@@ -20,9 +20,7 @@ public class ClosestProductionAreaTest {
   public static void setup() {
     container = (new MockContainer()).mockByName();
 
-    geoData = new ArrayList<>();
-    geoData.add(Map.of("area", "Portugal", "latitude", "39.3999", "longitude", "-8.2245"));
-    geoData.add(Map.of("area", "Spain", "latitude", "40.4637", "longitude", "-3.7492"));
+    geoData = (new MockGeoData()).mock();
   }
 
   @Test

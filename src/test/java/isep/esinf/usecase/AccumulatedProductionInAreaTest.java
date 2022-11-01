@@ -2,29 +2,40 @@ package isep.esinf.usecase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import isep.esinf.mock.MockContainer;
+import isep.esinf.mock.MockGeoData;
 import isep.esinf.model.Container;
-import isep.esinf.model.comparators.ElementByCode;
-import isep.esinf.model.comparators.ItemByCode;
 
 public class AccumulatedProductionInAreaTest {
   AccumulatedProductionInArea aInArea = new AccumulatedProductionInArea();
+
+  public static Container container;
+  private static List<Map<String, String>> geoData;
+
+
+  @BeforeAll
+  public static void setup() {
+    MockContainer mockContainer = new MockContainer();
+    container = mockContainer.mockByCode();
+    geoData = (new MockGeoData()).mock();
+  }
 
   /*
    * Test if the sum of the production of an item in a list of areas is correct
    */
   @Test
   public void testAccumulatedProductionInArea() throws FileNotFoundException {
-    MockContainer mockContainer = new MockContainer();
-    Container container = mockContainer.mockByCode();
 
-    ItemByCode item = new ItemByCode(8, 9, "Item 8");
-    ElementByCode element = new ElementByCode(4, "Element 4");
+    int itemCode = 8;
+    int elementCode = 4;
 
-    Double sum = aInArea.execute(-100.0, -100.0, 100.0, 100.0, item, 1980, element, container);
+    Double sum = aInArea.execute(-100.0, -100.0, 100.0, 100.0, itemCode, elementCode, 1980,
+        container, geoData);
 
     assertEquals(200, sum);
-
   }
 }
