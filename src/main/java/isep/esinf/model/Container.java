@@ -26,6 +26,10 @@ public class Container {
     return areas.size();
   }
 
+  public boolean isEmpty() {
+    return areas.isEmpty();
+  }
+
   public Container getAreasWithConditions(Item item, Element element) {
     Container areasWithItem = new Container();
 
