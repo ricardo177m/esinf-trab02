@@ -35,10 +35,16 @@ public class AccumulatedProductionInArea {
     ElementByCode e = new ElementByCode(elementCode, "");
     ItemByCode i = new ItemByCode(itemCode, 0, "");
 
+    if (container == null)
+      return null;
+
     Container sanitizedData = container.getAreasWithConditions(i, e, year);
 
     LoadGeographicalData loadGeographicalData = new LoadGeographicalData();
     TwoDTree<Area> tree = loadGeographicalData.execute(sanitizedData, geoData);
+
+    if (tree == null)
+      return null;
 
     List<Area> areas = tree.searchRangeArea(x1, y1, x2, y2);
 
