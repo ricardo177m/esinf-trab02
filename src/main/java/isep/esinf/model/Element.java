@@ -30,7 +30,7 @@ public abstract class Element implements Comparable<Element> {
     return productionData.find(new ProductionData(year));
   }
 
-  public int getLastRegisteredYear() {
+  public int getMostRecentYear() {
     return productionData.biggestElement().getYear();
   }
 
