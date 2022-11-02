@@ -18,7 +18,7 @@ public class ItemByNameTest {
     ItemByName item = new ItemByName(1, "1", "Portugal");
     assertEquals("Portugal", item.getItem());
     assertEquals(1, item.getCode());
-    assertEquals(1, item.getCpc());
+    assertEquals("1", item.getCpc());
   }
 
   /*

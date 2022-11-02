@@ -17,7 +17,7 @@ public class AreaByCodeTest {
     AreaByCode area = new AreaByCode(1, "1", "Portugal");
     assertEquals("Portugal", area.getArea());
     assertEquals(1, area.getCode());
-    assertEquals(1, area.getM49Code());
+    assertEquals("1", area.getM49Code());
   }
 
   /*
@@ -31,7 +31,7 @@ public class AreaByCodeTest {
     area.addItem(item);
     assertEquals("Portugal", area.getArea());
     assertEquals(1, area.getCode());
-    assertEquals(1, area.getM49Code());
+    assertEquals("1", area.getM49Code());
     assertEquals(item, area.getItem(item));
   }
 
