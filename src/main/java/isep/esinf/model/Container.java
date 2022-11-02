@@ -14,10 +14,6 @@ public class Container {
     areas.insert(area);
   }
 
-<<<<<<< HEAD
-  public Iterable<Area> getAreas() {
-    return areas.inOrder();
-=======
   public Area getArea(Area area) {
     return areas.find(area);
   }
@@ -94,6 +90,5 @@ public class Container {
 
     boolean result = areas.equals(container.areas);
     return result;
->>>>>>> c4a658fc2318c3f5ff8c95ab22a005431b0e9b70
   }
 }

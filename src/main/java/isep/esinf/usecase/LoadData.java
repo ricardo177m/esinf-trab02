@@ -2,19 +2,12 @@ package isep.esinf.usecase;
 
 import java.util.List;
 import java.util.Map;
-<<<<<<< HEAD
-
-import isep.esinf.model.Container;
-import isep.esinf.utils.AVL;
-import isep.esinf.utils.CSVReader;
-=======
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.Element;
 import isep.esinf.model.Item;
 import isep.esinf.model.ProductionData;
 import isep.esinf.utils.Field;
->>>>>>> c4a658fc2318c3f5ff8c95ab22a005431b0e9b70
 
 /**
  * Alínea 1 - Load FAOSTAT data from a file into an AVL tree.
@@ -22,12 +15,6 @@ import isep.esinf.utils.Field;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class LoadData {
-<<<<<<< HEAD
-  public static void execute(List<? extends Map<String, String>> data) {
-    // import data from a csv file into an AVL
-    Container container = new Container();
-
-=======
   public static Container execute(List<Map<String, String>> data, Class<? extends Area> areaClass,
       Class<? extends Item> itemClass, Class<? extends Element> elementClass) {
     // import data from a csv file into BSTs
@@ -104,6 +91,5 @@ public class LoadData {
       }
     });
     return container;
->>>>>>> c4a658fc2318c3f5ff8c95ab22a005431b0e9b70
   }
 }
