@@ -22,9 +22,9 @@ public class LoadGeographicalDataTest {
   public void testLoadGeographicalData() {
     Container c = new Container();
     TwoDTree<Area> tree = new TwoDTree<>();
-    Area portugal = new AreaByName(13, 100, "Portugal");
-    Area spain = new AreaByName(14, 50, "Spain");
-    Area italy = new AreaByName(11, 90, "Italy");
+    Area portugal = new AreaByName(13, "100", "Portugal");
+    Area spain = new AreaByName(14, "50", "Spain");
+    Area italy = new AreaByName(11, "90", "Italy");
 
     c.addArea(portugal);
     c.addArea(spain);
@@ -55,9 +55,9 @@ public class LoadGeographicalDataTest {
     System.out.println("testLoadGeographicalDataEmptyDataListEmpty");
     Container c = new Container();
     TwoDTree<Area> tree = new TwoDTree<>();
-    Area portugal = new AreaByName(13, 100, "Portugal");
-    Area spain = new AreaByName(14, 50, "Spain");
-    Area italy = new AreaByName(11, 90, "Italy");
+    Area portugal = new AreaByName(13, "100", "Portugal");
+    Area spain = new AreaByName(14, "50", "Spain");
+    Area italy = new AreaByName(11, "90", "Italy");
 
     c.addArea(portugal);
     c.addArea(spain);
@@ -103,9 +103,9 @@ public class LoadGeographicalDataTest {
     CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/EmptyFile.csv");
 
     Container c = new Container();
-    Area portugal = new AreaByName(13, 100, "Portugal");
-    Area italy = new AreaByName(11, 90, "Italy");
-    Area spain = new AreaByName(14, 50, "Spain");
+    Area portugal = new AreaByName(13, "100", "Portugal");
+    Area italy = new AreaByName(11, "90", "Italy");
+    Area spain = new AreaByName(14, "50", "Spain");
 
     c.addArea(portugal);
     c.addArea(spain);
@@ -128,14 +128,14 @@ public class LoadGeographicalDataTest {
     Container c = new Container();
     TwoDTree<Area> tree = new TwoDTree<>();
 
-    Area burundi = new AreaByName(13, 100, "Burundi");
-    Area israel = new AreaByName(14, 101, "Israel");
-    Area tuvalu = new AreaByName(0, 102, "Tuvalu");
-    Area mozambique = new AreaByName(13, 103, "Mozambique");
-    Area faroeIslands = new AreaByName(14, 104, "Faroe Islands");
-    Area pitcairnIslands = new AreaByName(0, 105, "Pitcairn Islands");
-    Area niue = new AreaByName(13, 106, "Niue");
-    Area eswatini = new AreaByName(14, 107, "Eswatini");
+    Area burundi = new AreaByName(13, "100", "Burundi");
+    Area israel = new AreaByName(14, "101", "Israel");
+    Area tuvalu = new AreaByName(0, "102", "Tuvalu");
+    Area mozambique = new AreaByName(13, "103", "Mozambique");
+    Area faroeIslands = new AreaByName(14, "104", "Faroe Islands");
+    Area pitcairnIslands = new AreaByName(0, "105", "Pitcairn Islands");
+    Area niue = new AreaByName(13, "106", "Niue");
+    Area eswatini = new AreaByName(14, "107", "Eswatini");
 
     c.addArea(burundi);
     c.addArea(israel);

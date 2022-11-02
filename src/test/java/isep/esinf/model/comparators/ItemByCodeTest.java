@@ -12,7 +12,7 @@ public class ItemByCodeTest {
   @Test
   public void testItemByCode() {
     System.out.println("testItemByCode");
-    ItemByCode itemByCode = new ItemByCode(1, 1, "item");
+    ItemByCode itemByCode = new ItemByCode(1, "1", "item");
     assertEquals("item", itemByCode.getItem());
     assertEquals(1, itemByCode.getCode());
   }
@@ -23,8 +23,8 @@ public class ItemByCodeTest {
   @Test
   public void testItemByCodeCompareNotEqualLess() {
     System.out.println("testItemByCodeCompareNotEqualLess");
-    ItemByCode itemByCode = new ItemByCode(1, 1, "item");
-    ItemByCode itemByCode2 = new ItemByCode(2, 2, "item2");
+    ItemByCode itemByCode = new ItemByCode(1, "1", "item");
+    ItemByCode itemByCode2 = new ItemByCode(2, "2", "item2");
     assertEquals(-1, itemByCode.compareTo(itemByCode2));
   }
 
@@ -34,8 +34,8 @@ public class ItemByCodeTest {
   @Test
   public void testItemByCodeCompareEqual() {
     System.out.println("testItemByCodeCompareEqual");
-    ItemByCode itemByCode = new ItemByCode(1, 1, "item");
-    ItemByCode itemByCode2 = new ItemByCode(1, 1, "item");
+    ItemByCode itemByCode = new ItemByCode(1, "1", "item");
+    ItemByCode itemByCode2 = new ItemByCode(1, "1", "item");
     assertEquals(0, itemByCode.compareTo(itemByCode2));
   }
 
@@ -45,8 +45,8 @@ public class ItemByCodeTest {
   @Test
   public void testItemByCodeCompareNotEqualGreater() {
     System.out.println("testItemByCodeCompareNotEqualGreater");
-    ItemByCode itemByCode = new ItemByCode(2, 2, "item2");
-    ItemByCode itemByCode2 = new ItemByCode(1, 1, "item");
+    ItemByCode itemByCode = new ItemByCode(2, "2", "item2");
+    ItemByCode itemByCode2 = new ItemByCode(1, "1", "item");
     assertEquals(1, itemByCode.compareTo(itemByCode2));
   }
 
@@ -56,7 +56,7 @@ public class ItemByCodeTest {
   @Test
   public void testItemByCodeToString() {
     System.out.println("testItemByCodeToString");
-    ItemByCode itemByCode = new ItemByCode(1, 1, "item");
+    ItemByCode itemByCode = new ItemByCode(1, "1", "item");
     assertEquals("Item{" + "code=" + 1 + ", cpc=" + 1 + ", item=" + "item" + '}', itemByCode.toString());
   }
 

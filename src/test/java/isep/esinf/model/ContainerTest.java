@@ -10,9 +10,9 @@ import isep.esinf.model.comparators.ItemByName;
 
 public class ContainerTest {
   private static Container container;
-  private static Area firstArea = new AreaByCode(100, 200, "Portugal");
-  private static Area secondArea = new AreaByCode(200, 300, "Spain");
-  private static Item firstItem = new ItemByName(1, 2, "Item 1");
+  private static Area firstArea = new AreaByCode(100, "200", "Portugal");
+  private static Area secondArea = new AreaByCode(200, "300", "Spain");
+  private static Item firstItem = new ItemByName(1, "2", "Item 1");
   private static Element secondElement = new ElementByCode(2, "Element 2");
   private static final int YEAR = 1980;
 

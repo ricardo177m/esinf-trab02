@@ -16,19 +16,19 @@ public class MockContainer {
   public Container mockByCode() {
     Container container = new Container();
 
-    Area firstArea = new AreaByCode(100, 200, "Portugal");
-    Area secondArea = new AreaByCode(200, 300, "Spain");
-    Area thirdArea = new AreaByCode(300, 400, "France");
-    Area fourthArea = new AreaByCode(400, 500, "Burundi");
+    Area firstArea = new AreaByCode(100, "200", "Portugal");
+    Area secondArea = new AreaByCode(200, "300", "Spain");
+    Area thirdArea = new AreaByCode(300, "400", "France");
+    Area fourthArea = new AreaByCode(400, "500", "Burundi");
 
-    Item firstItem = new ItemByCode(1, 2, "Item 1");
-    Item secondItem = new ItemByCode(2, 3, "Item 2");
-    Item thirdItem = new ItemByCode(3, 4, "Item 3");
-    Item fourthItem = new ItemByCode(4, 5, "Item 4");
-    Item fifthItem = new ItemByCode(5, 6, "Item 5");
-    Item sixthItem = new ItemByCode(6, 7, "Item 6");
-    Item seventhItem = new ItemByCode(7, 8, "Item 7");
-    Item eigthItem = new ItemByCode(8, 9, "Item 8");
+    Item firstItem = new ItemByCode(1, "2", "Item 1");
+    Item secondItem = new ItemByCode(2, "3", "Item 2");
+    Item thirdItem = new ItemByCode(3, "4", "Item 3");
+    Item fourthItem = new ItemByCode(4, "5", "Item 4");
+    Item fifthItem = new ItemByCode(5, "6", "Item 5");
+    Item sixthItem = new ItemByCode(6, "7", "Item 6");
+    Item seventhItem = new ItemByCode(7, "8", "Item 7");
+    Item eigthItem = new ItemByCode(8, "9", "Item 8");
 
     Element firstElement = new ElementByCode(1, "Element 1");
     Element secondElement = new ElementByCode(2, "Element 2");
@@ -103,20 +103,20 @@ public class MockContainer {
   public Container mockByName() {
     Container container = new Container();
 
-    Area firstArea = new AreaByName(100, 200, "Portugal");
-    Area secondArea = new AreaByName(200, 300, "Spain");
-    Area thirdArea = new AreaByName(300, 400, "France");
-    Area fourthArea = new AreaByName(400, 500, "Burundi");
+    Area firstArea = new AreaByName(100, "200", "Portugal");
+    Area secondArea = new AreaByName(200, "300", "Spain");
+    Area thirdArea = new AreaByName(300, "400", "France");
+    Area fourthArea = new AreaByName(400, "500", "Burundi");
 
-    Item firstItem = new ItemByName(1, 2, "Item 1");
-    Item secondItem = new ItemByName(2, 3, "Item 2");
-    Item thirdItem = new ItemByName(3, 4, "Item 3");
-    Item fourthItem = new ItemByName(4, 5, "Item 4");
-    Item fifthItem = new ItemByName(5, 6, "Item 5");
-    Item sixthItem = new ItemByName(6, 7, "Item 6");
-    Item seventhItem = new ItemByName(7, 8, "Item 7");
+    Item firstItem = new ItemByName(1, "2", "Item 1");
+    Item secondItem = new ItemByName(2, "3", "Item 2");
+    Item thirdItem = new ItemByName(3, "4", "Item 3");
+    Item fourthItem = new ItemByName(4, "5", "Item 4");
+    Item fifthItem = new ItemByName(5, "6", "Item 5");
+    Item sixthItem = new ItemByName(6, "7", "Item 6");
+    Item seventhItem = new ItemByName(7, "8", "Item 7");
 
-    Item itemCode = new ItemByName(8, 9, "Item 8");
+    Item itemCode = new ItemByName(8, "9", "Item 8");
 
     Element firstElement = new ElementByName(1, "Element 1");
     Element secondElement = new ElementByName(2, "Element 2");

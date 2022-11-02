@@ -33,7 +33,7 @@ public class AccumulatedProductionInArea {
   public Double execute(double x1, double y1, double x2, double y2, int itemCode, int elementCode,
       int year, Container container, List<Map<String, String>> geoData) {
     ElementByCode e = new ElementByCode(elementCode, "");
-    ItemByCode i = new ItemByCode(itemCode, 0, "");
+    ItemByCode i = new ItemByCode(itemCode, "0", "");
 
     if (container == null)
       return null;
