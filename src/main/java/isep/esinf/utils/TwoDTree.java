@@ -5,7 +5,18 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/*
+ * @author: André Barros
+ * @author: Tomás Lopes
+ *
+ * TwoDTree Class
+ */
+
 public class TwoDTree<E extends Comparable<E>> extends BST<E> {
+
+  /*
+   * Comparator to compare two points by their x coordinate
+   */
   private final Comparator<Point2D.Double> cmpX = new Comparator<Point2D.Double>() {
     @Override
     public int compare(Point2D.Double p1, Point2D.Double p2) {
@@ -13,6 +24,9 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     }
   };
 
+  /*
+   * Comparator to compare two points by their y coordinate
+   */
   private final Comparator<Point2D.Double> cmpY = new Comparator<Point2D.Double>() {
     @Override
     public int compare(Point2D.Double p1, Point2D.Double p2) {
@@ -20,6 +34,9 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     }
   };
 
+  /*
+   * Insert a new element in the tree
+   */
   public void insert(E element, double x, double y) {
     Point2D.Double point = new Point2D.Double(x, y);
 
@@ -45,6 +62,9 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     return node;
   }
 
+  /*
+   * Gets the distance of a point to the axis
+   */
   private double distanceToAxis(TwoDNode<E> node, double x, double y, int depth) {
     boolean isXAxis = depth % 2 == 0;
     if (isXAxis)
@@ -55,6 +75,9 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
 
   private TwoDNode<E> closest; // needs to be global to make the reference changing easier
 
+  /*
+   * Gets the closest element to a point
+   */
   public E findNearestNeighbor(double x, double y) {
     closest = ((TwoDNode<E>) root).clone();
     return findNearestNeighbor((TwoDNode<E>) root, x, y, 0);
@@ -85,6 +108,9 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
 
   private List<E> contained = new ArrayList<>();
 
+  /*
+   * Gets all the elements contained in a rectangle
+   */
   public List<E> searchRangeArea(double x1, double y1, double x2, double y2) {
 
     Point2D.Double lowCoords = generateLowCoords(x1, y1, x2, y2);
@@ -103,6 +129,9 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     return new Point2D.Double(Math.max(x1, x2), Math.max(y1, y2));
   }
 
+  /*
+   * Checks if a point is contained in a rectangle
+   */
   private boolean isInRange(TwoDNode<E> node, Point2D.Double lowCoords, Point2D.Double highCoords) {
     return node.getCoords().getX() >= lowCoords.x && node.getCoords().getX() <= highCoords.x
         && node.getCoords().getY() >= lowCoords.y && node.getCoords().getY() <= highCoords.y;
@@ -122,9 +151,9 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
       searchRangeArea(node.getRight(), lowCoords, highCoords, depth + 1);
       searchRangeArea(node.getLeft(), lowCoords, highCoords, depth + 1);
     } else {
-      if (cmpLowResult < 0)
+      if (cmpLowResult <= 0)
         searchRangeArea(node.getRight(), lowCoords, highCoords, depth + 1);
-      if (cmpHighResult > 0)
+      if (cmpHighResult >= 0)
         searchRangeArea(node.getLeft(), lowCoords, highCoords, depth + 1);
     }
 

@@ -70,6 +70,7 @@ public class TwoDTreeTest {
   /*
    * Test the remove method of the TwoDtTree class (remove several leafs)
    */
+  @Test
   public void testRemoveTwoDTree2() {
     System.out.println("removeTwoDTree2");
     tree.remove(30.40);

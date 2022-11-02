@@ -22,7 +22,7 @@ public class CSVReader {
     return scanner.nextLine().split(",");
   }
 
-  public List<? extends Map<String, String>> read() {
+  public List<Map<String, String>> read() {
     String[] header = readHeader();
     List<Map<String, String>> list = new ArrayList<>();
 
@@ -32,12 +32,22 @@ public class CSVReader {
       String line = scanner.nextLine();
       String separator = ",";
 
-      if (line.charAt(0) == '"') {
-
-        line = line.replaceAll("\",\"", TEMP_SEPARATOR); // removes '","'
-        line = line.substring(1, line.length() - 1); // removes first and last '"'
+      // handle commas inside quotes
+      if (line.contains("\"")) {
+        boolean insideString = false;
         separator = TEMP_SEPARATOR;
+        for (int i = 0; i < line.length(); i++) {
+          if (line.charAt(i) == '"') insideString = !insideString;
+          if (line.charAt(i) == ',' && !insideString) line = line.substring(0, i) + TEMP_SEPARATOR + line.substring(i + 1);
+        }
+        line = line.replaceAll("\"", ""); // removes double quotas
       }
+
+      // if (line.charAt(0) == '"') {
+      //   line = line.replaceAll("\",\"", TEMP_SEPARATOR); // removes '","'
+      //   line = line.substring(1, line.length() - 1); // removes first and last '"'
+      //   separator = TEMP_SEPARATOR;
+      // }
 
       String[] lineFields = line.split(separator);
 

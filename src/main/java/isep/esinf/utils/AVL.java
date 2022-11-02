@@ -2,18 +2,9 @@ package isep.esinf.utils;
 
 /**
  * AVL class.
-<<<<<<< HEAD
- * 
- * @author Carlos Lopes <1211277@isep.ipp.pt>
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
-=======
- *
- * @author Carlos Lopes <XX@isep.ipp.pt>
- * @author Ricardo Moreira <XX@isep.ipp.pt>
->>>>>>> 505f6b76caaed3e89a574a5bd3bfaaa160e1ed93
- * @author Tomás Russo <1211288@isep.ipp.pt>
- * @param <E>
- */
+*/
+
 public class AVL<E extends Comparable<E>> extends BST<E> implements AVLInterface<E> {
   /**
    * Returns the balance factor of the given node.
@@ -114,7 +105,8 @@ public class AVL<E extends Comparable<E>> extends BST<E> implements AVLInterface
         return node.getLeft();
       // the node has two children
       else {
-        // choose the greatest element in the left subtree or the smallest in the right to replace
+        // choose the greatest element in the left subtree or the smallest in the right
+        // to replace
         // the node
         E min = super.smallestElement(node.getRight());
         node.setElement(min);
@@ -136,16 +128,14 @@ public class AVL<E extends Comparable<E>> extends BST<E> implements AVLInterface
     return equals(root, second.root);
   }
 
-  public boolean equals(Node<E> root1, Node<E> root2) {
-    if (root1 == null && root2 == null)
+  public boolean equals(Node<E> node1, Node<E> node2) {
+    if (node1 == null && node2 == null)
       return true;
-    else if (root1 != null && root2 != null) {
-      if (root1.getElement().compareTo(root2.getElement()) == 0)
-        return equals(root1.getLeft(), root2.getLeft())
-            && equals(root1.getRight(), root2.getRight());
-      else
-        return false;
-    } else
+    if (node1 == null || node2 == null)
       return false;
+    if (node1.getElement().compareTo(node2.getElement()) == 0)
+      return equals(node1.getLeft(), node2.getLeft())
+          && equals(node1.getRight(), node2.getRight());
+    return false;
   }
 }

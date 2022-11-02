@@ -6,14 +6,14 @@ import isep.esinf.utils.BST;
 public abstract class Area implements Comparable<Area> {
   private String area;
   private int code;
-  private int m49Code;
-  private BST<Item> productions;
+  private String m49Code;
+  private BST<Item> items;
 
-  public Area(String name, int code, int m49Code) {
+  public Area(int code, String m49Code, String name) {
     this.area = name;
     this.code = code;
     this.m49Code = m49Code;
-    this.productions = new AVL<>();
+    this.items = new AVL<>();
   }
 
   public String getArea() {
@@ -24,19 +24,44 @@ public abstract class Area implements Comparable<Area> {
     return code;
   }
 
-  public int getM49Code() {
+  public String getM49Code() {
     return m49Code;
   }
 
-  public BST<Item> getProductions() {
-    return productions;
+  public void addItem(Item item) {
+    items.insert(item);
   }
 
-  public void addProduction(Item production) {
-    productions.insert(production);
+  public Item getItem(Item item) {
+    return items.find(item);
   }
 
   public abstract int compareTo(Area o);
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null)
+      return false;
+
+    if (getClass() != obj.getClass())
+      return false;
+
+    final Area other = (Area) obj;
+
+    if (this.area == null || other.area == null)
+      return false;
+
+    if (!this.area.equals(other.area))
+      return false;
+
+    if (this.code != other.code)
+      return false;
+
+    if (this.m49Code != other.m49Code)
+      return false;
+
+    return true;
+  }
 
   @Override
   public String toString() {

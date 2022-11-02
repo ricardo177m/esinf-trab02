@@ -3,10 +3,18 @@ package isep.esinf.model;
 public class ProductionData implements Comparable<ProductionData> {
   private int year;
   private double value;
+  private String unit;
+  private String flag;
 
-  public ProductionData(int year, double value) {
+  public ProductionData(int year, double value, String unit, String flag) {
     this.year = year;
     this.value = value;
+    this.unit = unit;
+    this.flag = flag;
+  }
+
+  public ProductionData(int year) {
+    this.year = year;
   }
 
   public int getYear() {
@@ -15,6 +23,26 @@ public class ProductionData implements Comparable<ProductionData> {
 
   public double getValue() {
     return value;
+  }
+
+  public String getUnit() {
+    return unit;
+  }
+
+  public String getFlag() {
+    return flag;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+
+    ProductionData that = (ProductionData) o;
+
+    return year == that.year;
   }
 
   @Override

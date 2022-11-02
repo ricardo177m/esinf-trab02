@@ -2,9 +2,15 @@ package isep.esinf.utils;
 
 import java.awt.geom.Point2D;
 
+/*
+ * @author Tomás Lopes
+ */
 public class TwoDNode<E> extends Node<E> {
   private Point2D.Double coords;
 
+  /*
+   * Constructor for TwoDNode
+   */
   public TwoDNode(E element, TwoDNode<E> left, TwoDNode<E> right, Point2D.Double coords) {
     super(element, left, right);
     this.coords = coords;

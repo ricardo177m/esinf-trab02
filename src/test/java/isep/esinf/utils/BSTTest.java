@@ -167,6 +167,19 @@ public class BSTTest {
   }
 
   /**
+   * Test of biggest element method, of class TREE.
+   */
+  @Test
+  public void testBiggestElement() {
+    System.out.println("biggestElement");
+    assertEquals(50, instance.biggestElement());
+    instance.remove(50);
+    assertEquals(40, instance.biggestElement());
+    instance.remove(40);
+    assertEquals(30, instance.biggestElement());
+  }
+
+  /**
    * Test of inOrder method, of class BST.
    */
   @Test
@@ -264,7 +277,8 @@ public class BSTTest {
   @Test
   public void testToStringBST() {
     System.out.println("toStringBST");
-    String expected = ("|	|-------50\n" +
+    String expected = (
+        "|	|-------50\n" +
         "|-------40\n" +
         "|	|-------30\n" +
         "20\n" +
@@ -296,5 +310,19 @@ public class BSTTest {
     System.out.println("smallestElementEmpty");
     BST<Integer> instance = new BST<>();
     assertNull(instance.smallestElement());
+  }
+
+  /**
+   * Test equals.
+   */
+  @Test
+  public void testEquals() {
+    // System.out.println(instance.toString());
+    BST<Integer> instance2 = new BST<>();
+    for (int i : arr)
+      instance2.insert(i);
+    assertTrue(instance.equals(instance2));
+    instance2.insert(1);
+    assertFalse(instance.equals(instance2));
   }
 }
