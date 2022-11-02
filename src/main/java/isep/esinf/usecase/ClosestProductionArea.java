@@ -18,7 +18,7 @@ import isep.esinf.utils.TwoDTree;
 public class ClosestProductionArea {
   public Area execute(double latitude, double longitude, String item, String element, int year,
       Container data, List<Map<String, String>> geoDataMap) {
-    Item i = new ItemByName(0, 0, item);
+    Item i = new ItemByName(0, "0", item);
     Element e = new ElementByName(0, element);
 
     Container sanitizedData = data.getAreasWithConditions(i, e, year);

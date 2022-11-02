@@ -15,31 +15,25 @@ import isep.esinf.utils.Field;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class LoadData {
-  public static void execute(List<Map<String, String>> data, Class<? extends Area> area,
-      Class<? extends Item> item, Class<? extends Element> element) {
+  public static void execute(List<Map<String, String>> data, Class<? extends Area> areaClass,
+      Class<? extends Item> itemClass, Class<? extends Element> elementClass) {
     // import data from a csv file into BSTs
     Container container = new Container();
 
     // Area > Item > Element > ProductionData
 
+    System.out.println("ok we got data, inserting into the tree...");
     data.forEach(row -> {
       try {
-        String tmp;
         // Area
-        int areaCode = Integer.parseInt(row.get(Field.AREA_CODE.name));
-
-        // From: https://data.apps.fao.org/catalog/dataset/m49-code-list-global-region-country
-        // The m49 code is an integer number that uniquely identifies each country, region and continent for statistical purposes.
-        tmp = row.get(Field.AREA_M49.name);
-        if (tmp.charAt(0) == '\'')
-          tmp = tmp.substring(1, tmp.length() - 1);
-
-        int areaM49 = Integer.parseInt(tmp);
+        int areaCode = row.get(Field.AREA_CODE.name).length() == 0 ? 0
+            : Integer.parseInt(row.get(Field.AREA_CODE.name));
+        String areaM49 = row.get(Field.AREA_M49.name);
         String areaName = row.get(Field.AREA.name);
 
         // create instance of area
-        Area newArea =
-            (Area) area.getDeclaredConstructor().newInstance(areaCode, areaM49, areaName);
+        Area newArea = areaClass.getConstructor(int.class, String.class, String.class)
+            .newInstance(areaCode, areaM49, areaName);
 
         Area found = container.getArea(newArea);
 
@@ -49,13 +43,14 @@ public class LoadData {
         }
 
         // Item
-        int itemCode = Integer.parseInt(row.get(Field.ITEM_CODE.name));
+        int itemCode = row.get(Field.ITEM_CODE.name).length() == 0 ? 0
+            : Integer.parseInt(row.get(Field.ITEM_CODE.name));
         String itemCpc = row.get(Field.ITEM_CPC.name);
         String itemName = row.get(Field.ITEM.name);
 
         // create instance of item
-        Item newItem =
-            (Item) item.getDeclaredConstructor().newInstance(itemCode, itemCpc, itemName);
+        Item newItem = itemClass.getDeclaredConstructor(int.class, String.class, String.class)
+            .newInstance(itemCode, itemCpc, itemName);
 
         Item foundItem = found.getItem(newItem);
 
@@ -65,12 +60,13 @@ public class LoadData {
         }
 
         // Element
-        int elementCode = Integer.parseInt(row.get(Field.ELEMENT_CODE.name));
+        int elementCode = row.get(Field.ELEMENT_CODE.name).length() == 0 ? 0
+            : Integer.parseInt(row.get(Field.ELEMENT_CODE.name));
         String elementName = row.get(Field.ELEMENT.name);
 
         // create instance of element
-        Element newElement =
-            (Element) element.getDeclaredConstructor().newInstance(elementCode, elementName);
+        Element newElement = (Element) elementClass.getDeclaredConstructor(int.class, String.class)
+            .newInstance(elementCode, elementName);
 
         Element foundElement = foundItem.getElement(newElement);
 
@@ -81,7 +77,8 @@ public class LoadData {
 
         // ProductionData
         int year = Integer.parseInt(row.get(Field.YEAR.name));
-        double value = Double.parseDouble(row.get(Field.VALUE.name));
+        double value = row.get(Field.VALUE.name).length() == 0 ? 0
+            : Double.parseDouble(row.get(Field.VALUE.name));
 
         // create instance of production data
         ProductionData production = new ProductionData(year, value);
@@ -91,5 +88,7 @@ public class LoadData {
         e.printStackTrace();
       }
     });
+
+    System.out.println(container.getNOfAreas());
   }
 }

@@ -25,7 +25,7 @@ public class ClosestProductionAreaTest {
 
   @Test
   public void testClosestProductionArea() {
-    Area expected = new AreaByCode(100, 200, "Portugal");
+    Area expected = new AreaByCode(100, "200", "Portugal");
 
     ClosestProductionArea closestProductionArea = new ClosestProductionArea();
 
@@ -37,7 +37,7 @@ public class ClosestProductionAreaTest {
 
   @Test
   public void testClosestProductionAreaSecondExample() {
-    Area expected = new AreaByCode(200, 300, "Spain");
+    Area expected = new AreaByCode(200, "300", "Spain");
 
     ClosestProductionArea closestProductionArea = new ClosestProductionArea();
 

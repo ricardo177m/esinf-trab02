@@ -167,6 +167,19 @@ public class BSTTest {
   }
 
   /**
+   * Test of biggest element method, of class TREE.
+   */
+  @Test
+  public void testBiggestElement() {
+    System.out.println("biggestElement");
+    assertEquals(50, instance.biggestElement());
+    instance.remove(50);
+    assertEquals(40, instance.biggestElement());
+    instance.remove(40);
+    assertEquals(30, instance.biggestElement());
+  }
+
+  /**
    * Test of inOrder method, of class BST.
    */
   @Test

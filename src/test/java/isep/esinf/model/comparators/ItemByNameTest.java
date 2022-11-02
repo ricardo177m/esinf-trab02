@@ -15,10 +15,10 @@ public class ItemByNameTest {
   @Test
   public void testItemByName() {
     System.out.println("testItemByName");
-    ItemByName item = new ItemByName(1, 1, "Portugal");
+    ItemByName item = new ItemByName(1, "1", "Portugal");
     assertEquals("Portugal", item.getItem());
     assertEquals(1, item.getCode());
-    assertEquals(1, item.getCpc());
+    assertEquals("1", item.getCpc());
   }
 
   /*
@@ -27,8 +27,8 @@ public class ItemByNameTest {
   @Test
   public void testItemByNameCompareNotEqualLess() {
     System.out.println("testItemByNameCompareNotEqualLess");
-    ItemByName item = new ItemByName(1, 1, "Portugal");
-    ItemByName item2 = new ItemByName(2, 2, "Spain");
+    ItemByName item = new ItemByName(1, "1", "Portugal");
+    ItemByName item2 = new ItemByName(2, "2", "Spain");
     assertTrue(item.compareTo(item2) < 0);
   }
 
@@ -38,8 +38,8 @@ public class ItemByNameTest {
   @Test
   public void testItemByNameCompareNotEqualFirstLetterEqual() {
     System.out.println("testItemByNameCompareNotEqualFirstLetterEqual");
-    Item item = new ItemByName(1, 1, "Figs");
-    Item item2 = new ItemByName(1, 1, "Fags");
+    Item item = new ItemByName(1, "1", "Figs");
+    Item item2 = new ItemByName(1, "1", "Fags");
     assertTrue(item.compareTo(item2) > 0);
   }
 
@@ -49,8 +49,8 @@ public class ItemByNameTest {
   @Test
   public void testItemByNameCompareEqual() {
     System.out.println("testItemByNameCompareEqual");
-    ItemByName item = new ItemByName(1, 1, "Portugal");
-    ItemByName item2 = new ItemByName(1, 1, "Portugal");
+    ItemByName item = new ItemByName(1, "1", "Portugal");
+    ItemByName item2 = new ItemByName(1, "1", "Portugal");
     assertEquals(0, item.compareTo(item2));
   }
 
@@ -60,8 +60,8 @@ public class ItemByNameTest {
   @Test
   public void testItemByNameCompareNotEqualGreater() {
     System.out.println("testItemByNameCompareNotEqualGreater");
-    ItemByName item = new ItemByName(2, 2, "Spain");
-    ItemByName item2 = new ItemByName(1, 1, "Portugal");
+    ItemByName item = new ItemByName(2, "2", "Spain");
+    ItemByName item2 = new ItemByName(1, "1", "Portugal");
     assertTrue(item.compareTo(item2) > 0);
   }
 
@@ -71,7 +71,7 @@ public class ItemByNameTest {
   @Test
   public void testItemByNameToString() {
     System.out.println("testItemByNameToString");
-    ItemByName item = new ItemByName(1, 1, "Portugal");
+    ItemByName item = new ItemByName(1, "1", "Portugal");
     assertEquals("Item{" + "code=" + 1 + ", cpc=" + 1 + ", item=" + "Portugal" + '}', item.toString());
   }
 

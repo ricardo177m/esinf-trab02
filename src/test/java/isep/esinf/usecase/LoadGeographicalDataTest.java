@@ -9,8 +9,10 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+import isep.esinf.mock.MockContainer;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
+import isep.esinf.model.comparators.AreaByCode;
 import isep.esinf.model.comparators.AreaByName;
 import isep.esinf.utils.CSVReader;
 import isep.esinf.utils.TwoDTree;
@@ -22,9 +24,9 @@ public class LoadGeographicalDataTest {
   public void testLoadGeographicalData() {
     Container c = new Container();
     TwoDTree<Area> tree = new TwoDTree<>();
-    Area portugal = new AreaByName(13, 100, "Portugal");
-    Area spain = new AreaByName(14, 50, "Spain");
-    Area italy = new AreaByName(11, 90, "Italy");
+    Area portugal = new AreaByName(13, "100", "Portugal");
+    Area spain = new AreaByName(14, "50", "Spain");
+    Area italy = new AreaByName(11, "90", "Italy");
 
     c.addArea(portugal);
     c.addArea(spain);
@@ -54,10 +56,10 @@ public class LoadGeographicalDataTest {
   public void testLoadGeographicalDataEmptyDataListEmpty() {
     System.out.println("testLoadGeographicalDataEmptyDataListEmpty");
     Container c = new Container();
-    TwoDTree<Area> tree = new TwoDTree<>();
-    Area portugal = new AreaByName(13, 100, "Portugal");
-    Area spain = new AreaByName(14, 50, "Spain");
-    Area italy = new AreaByName(11, 90, "Italy");
+
+    Area portugal = new AreaByName(13, "100", "Portugal");
+    Area spain = new AreaByName(14, "50", "Spain");
+    Area italy = new AreaByName(11, "90", "Italy");
 
     c.addArea(portugal);
     c.addArea(spain);
@@ -90,12 +92,6 @@ public class LoadGeographicalDataTest {
 
   }
 
-  // test loadGeographicalData with invalid file
-  @Test
-  public void testLoadGeographicalDataWithInvalidFile() {
-
-  }
-
   // test loadGeographicalData with not available data /data/EmptyFile.csv
   @Test
   public void testLoadGeographicalDataWithNotAvailableData() throws FileNotFoundException {
@@ -103,9 +99,9 @@ public class LoadGeographicalDataTest {
     CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/EmptyFile.csv");
 
     Container c = new Container();
-    Area portugal = new AreaByName(13, 100, "Portugal");
-    Area italy = new AreaByName(11, 90, "Italy");
-    Area spain = new AreaByName(14, 50, "Spain");
+    Area portugal = new AreaByName(13, "100", "Portugal");
+    Area italy = new AreaByName(11, "90", "Italy");
+    Area spain = new AreaByName(14, "50", "Spain");
 
     c.addArea(portugal);
     c.addArea(spain);
@@ -128,14 +124,14 @@ public class LoadGeographicalDataTest {
     Container c = new Container();
     TwoDTree<Area> tree = new TwoDTree<>();
 
-    Area burundi = new AreaByName(13, 100, "Burundi");
-    Area israel = new AreaByName(14, 101, "Israel");
-    Area tuvalu = new AreaByName(0, 102, "Tuvalu");
-    Area mozambique = new AreaByName(13, 103, "Mozambique");
-    Area faroeIslands = new AreaByName(14, 104, "Faroe Islands");
-    Area pitcairnIslands = new AreaByName(0, 105, "Pitcairn Islands");
-    Area niue = new AreaByName(13, 106, "Niue");
-    Area eswatini = new AreaByName(14, 107, "Eswatini");
+    Area burundi = new AreaByName(13, "100", "Burundi");
+    Area israel = new AreaByName(14, "101", "Israel");
+    Area tuvalu = new AreaByName(0, "102", "Tuvalu");
+    Area mozambique = new AreaByName(13, "103", "Mozambique");
+    Area faroeIslands = new AreaByName(14, "104", "Faroe Islands");
+    Area pitcairnIslands = new AreaByName(0, "105", "Pitcairn Islands");
+    Area niue = new AreaByName(13, "106", "Niue");
+    Area eswatini = new AreaByName(14, "107", "Eswatini");
 
     c.addArea(burundi);
     c.addArea(israel);
@@ -157,18 +153,32 @@ public class LoadGeographicalDataTest {
     tree.insert(niue, -19.054445, -169.867233);
     tree.insert(mozambique, -18.665695, 35.529562);
     tree.insert(pitcairnIslands, -24.703615, -127.439308);
-    tree.insert(tuvalu, -7.109535, 177.64933);
 
     assertEquals(result.toString(), tree.toString());
 
   }
 
   /*
-   *
+   * Test loadGeographicalData with file TestLoadGeoData_Small.csv crossing data
+   * with mock container
    */
   @Test
-  public void testLoadGeographicalDataCrossingFiles() throws FileNotFoundException {
-    // TO DO (waiting for implementation of the method)
+  public void testLoadGeographicalDataWithMockContainer() throws FileNotFoundException {
+    System.out.println("testLoadGeographicalDataWithMockContainer");
+    CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/TestLoadGeoData_Small.csv");
+
+    MockContainer c = new MockContainer();
+    Container container = c.mockByCode();
+    TwoDTree<Area> tree = new TwoDTree<>();
+
+    List<Map<String, String>> geoData = r.read();
+
+    TwoDTree<Area> result = loadGeographicalData.execute(container, geoData);
+
+    tree.insert(new AreaByCode(400, "500", "Burundi"), -3.3731, 29.9189);
+
+    assertEquals(result.toString(), tree.toString());
+
   }
 
 }
