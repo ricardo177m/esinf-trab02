@@ -1,6 +1,7 @@
 package isep.esinf.usecase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -106,7 +107,7 @@ public class AccumulatedProductionInAreaTest {
 
   /*
    * Test if the sum of production is zero when the year is in the container but
-   * the it do not corresponds to the item code
+   * it do not corresponds to item code
    */
   @Test
   public void testSumProductionZeroWhenYearNotInItemCode() {
@@ -166,7 +167,7 @@ public class AccumulatedProductionInAreaTest {
     Double sum = aInArea.execute(-100.0, -100.0, 100.0, 100.0, itemCode, elementCode, 1980,
         container, null);
 
-    assertEquals(null, sum);
+    assertEquals(-1, sum);
   }
 
   /*
@@ -182,7 +183,136 @@ public class AccumulatedProductionInAreaTest {
     Double sum = aInArea.execute(-100.0, -100.0, 100.0, 100.0, itemCode, elementCode, 1980, null,
         geoData);
 
-    assertEquals(null, sum);
+    assertEquals(-1, sum);
+  }
+
+  /*
+   * Test sum production with multiple values
+   */
+  @Test
+  public void testSumProductionWithMultipleValues() {
+    System.out.println("testSumProductionWithMultipleValues");
+
+    int itemCode = 1;
+    int elementCode = 1;
+
+    Double sum = aInArea.execute(-100.0, -100.0, 100.0, 100.0, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(600, sum);
+  }
+
+  /*
+   * Test the sum of production with the same x axis coords
+   */
+  @Test
+  public void testSumProductionSameXAxis() {
+    System.out.println("testSumProductionSameXAxis");
+
+    int itemCode = 8;
+    int elementCode = 1;
+
+    Double sum = aInArea.execute(-3.373056, -3.373056, 200, 200, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(400, sum);
+  }
+
+  /*
+   * Test sum production with multiple values
+   */
+  @Test
+  public void testSumProductionWithMultipleValues2() {
+    System.out.println("testSumProductionWithMultipleValues2");
+
+    int itemCode = 9;
+    int elementCode = 6;
+
+    Double sum = aInArea.execute(-100.0, -100.0, 200.0, 200.0, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(1442.04, sum);
+  }
+
+  /*
+   * Test sum production with coords that are in the container but do not match
+   * any area
+   */
+  @Test
+  public void testSumProductionWithCoordsNotInArea() {
+    System.out.println("testSumProductionWithCoordsNotInArea");
+
+    int itemCode = 9;
+    int elementCode = 6;
+
+    Double sum = aInArea.execute(50, 50, 60, 60, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(0, sum);
+  }
+
+  /*
+   * Test sum production with coords that are in the container (making it a point)
+   */
+  @Test
+  public void testSumProductionWithCoordsPoint() {
+    System.out.println("testSumProductionWithCoordsPoint");
+
+    int itemCode = 9;
+    int elementCode = 6;
+
+    Double sum = aInArea.execute(0, 0, 0, 0, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(0, sum);
+  }
+
+  /*
+   * Test the sum of production with the same Y axis coords
+   */
+  @Test
+  public void testSumProductionSameYAxis() {
+    System.out.println("testSumProductionSameYAxis");
+
+    int itemCode = 8;
+    int elementCode = 1;
+
+    Double sum = aInArea.execute(-3.373056, 177.64933, 1, 177.64933, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(200, sum);
+  }
+
+  /*
+   * Test the sum of production with x2,y2 coords smaller than x1,y1
+   */
+  @Test
+  public void testSumProductionWithCoordsX2Y2SmallerThanX1Y1() {
+    System.out.println("testSumProductionWithCoordsX2Y2SmallerThanX1Y1");
+
+    int itemCode = 9;
+    int elementCode = 6;
+
+    Double sum = aInArea.execute(200, 200, -100, -100, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(1442.04, sum);
+  }
+
+  /*
+   * Test the sum of production with all areas in the container
+   */
+  @Test
+  public void testSumProductionWithAllAreasInContainer() {
+    System.out.println("testSumProductionWithAllAreasInContainer");
+
+    int itemCode = 1;
+    int elementCode = 1;
+
+    Double sum = aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 1980,
+        container, geoData);
+
+    assertEquals(800, sum);
   }
 
 }

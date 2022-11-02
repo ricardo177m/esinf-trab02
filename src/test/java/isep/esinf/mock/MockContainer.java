@@ -20,6 +20,7 @@ public class MockContainer {
     Area secondArea = new AreaByCode(200, "300", "Spain");
     Area thirdArea = new AreaByCode(300, "400", "France");
     Area fourthArea = new AreaByCode(400, "500", "Burundi");
+    Area fifthArea = new AreaByCode(500, "600", "Tuvalu");
 
     Item firstItem = new ItemByCode(1, "2", "Item 1");
     Item secondItem = new ItemByCode(2, "3", "Item 2");
@@ -29,11 +30,15 @@ public class MockContainer {
     Item sixthItem = new ItemByCode(6, "7", "Item 6");
     Item seventhItem = new ItemByCode(7, "8", "Item 7");
     Item eigthItem = new ItemByCode(8, "9", "Item 8");
+    Item ninthItem = new ItemByCode(9, "10", "Item 9");
 
     Element firstElement = new ElementByCode(1, "Element 1");
     Element secondElement = new ElementByCode(2, "Element 2");
     Element thirdElement = new ElementByCode(3, "Element 3");
     Element fourthElement = new ElementByCode(4, "Element 4");
+
+    Element fifthElement = new ElementByCode(5, "Element 5");
+    Element sixthElement = new ElementByCode(6, "Element 6");
 
     ProductionData firstProductionData = new ProductionData(1980, 200);
     ProductionData secondProductionData = new ProductionData(1981, 300);
@@ -59,6 +64,11 @@ public class MockContainer {
 
     fourthElement.addProductionData(firstProductionData);
 
+    fifthElement.addProductionData(firstProductionData);
+    fifthElement.addProductionData(eighthProductionData);
+
+    sixthElement.addProductionData(eighthProductionData);
+
     firstItem.addElement(firstElement);
     firstItem.addElement(secondElement);
     secondItem.addElement(thirdElement);
@@ -75,6 +85,9 @@ public class MockContainer {
 
     eigthItem.addElement(fourthElement);
     eigthItem.addElement(firstElement);
+    eigthItem.addElement(fifthElement);
+
+    ninthItem.addElement(sixthElement);
 
     firstArea.addItem(firstItem);
     firstArea.addItem(secondItem);
@@ -86,16 +99,24 @@ public class MockContainer {
     secondArea.addItem(fourthItem);
     secondArea.addItem(fifthItem);
 
+    thirdArea.addItem(firstItem);
     thirdArea.addItem(fifthItem);
     thirdArea.addItem(sixthItem);
     thirdArea.addItem(seventhItem);
 
+    fourthArea.addItem(firstItem);
     fourthArea.addItem(eigthItem);
+    fourthArea.addItem(ninthItem);
+
+    fifthArea.addItem(firstItem);
+    fifthArea.addItem(eigthItem);
+    fifthArea.addItem(ninthItem);
 
     container.addArea(firstArea);
     container.addArea(secondArea);
     container.addArea(thirdArea);
     container.addArea(fourthArea);
+    container.addArea(fifthArea);
 
     return container;
   }
