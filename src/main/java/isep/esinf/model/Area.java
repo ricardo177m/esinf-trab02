@@ -6,10 +6,10 @@ import isep.esinf.utils.BST;
 public abstract class Area implements Comparable<Area> {
   private String area;
   private int code;
-  private int m49Code;
+  private String m49Code;
   private BST<Item> items;
 
-  public Area(int code, int m49Code, String name) {
+  public Area(int code, String m49Code, String name) {
     this.area = name;
     this.code = code;
     this.m49Code = m49Code;
@@ -24,7 +24,7 @@ public abstract class Area implements Comparable<Area> {
     return code;
   }
 
-  public int getM49Code() {
+  public String getM49Code() {
     return m49Code;
   }
 

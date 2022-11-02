@@ -5,11 +5,11 @@ import isep.esinf.utils.BST;
 
 public abstract class Item implements Comparable<Item> {
   private int code;
-  private int cpc;
+  private String cpc;
   private String item;
   private BST<Element> elements;
 
-  public Item(int code, int cpc, String item) {
+  public Item(int code, String cpc, String item) {
     this.code = code;
     this.cpc = cpc;
     this.item = item;
@@ -20,7 +20,7 @@ public abstract class Item implements Comparable<Item> {
     return code;
   }
 
-  public int getCpc() {
+  public String getCpc() {
     return cpc;
   }
 
