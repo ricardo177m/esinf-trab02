@@ -15,7 +15,7 @@ import isep.esinf.utils.Field;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class LoadData {
-  public static void execute(List<Map<String, String>> data, Class<? extends Area> areaClass,
+  public static Container execute(List<Map<String, String>> data, Class<? extends Area> areaClass,
       Class<? extends Item> itemClass, Class<? extends Element> elementClass) {
     // import data from a csv file into BSTs
     Container container = new Container();
@@ -90,7 +90,6 @@ public class LoadData {
         e.printStackTrace();
       }
     });
-
-    System.out.println(container.getNOfAreas());
+    return container;
   }
 }
