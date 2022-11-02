@@ -40,15 +40,15 @@ public class MockContainer {
     Element fifthElement = new ElementByCode(5, "Element 5");
     Element sixthElement = new ElementByCode(6, "Element 6");
 
-    ProductionData firstProductionData = new ProductionData(1980, 200);
-    ProductionData secondProductionData = new ProductionData(1981, 300);
-    ProductionData thirdProductionData = new ProductionData(1982, 400);
-    ProductionData fourthProductionData = new ProductionData(1983, 500);
-    ProductionData fifthProductionData = new ProductionData(1984, 600);
-    ProductionData sixthProductionData = new ProductionData(1985, 700);
-    ProductionData seventhProductionData = new ProductionData(1986, 800);
+    ProductionData firstProductionData = new ProductionData(1980, 200, "testunit", "testflag");
+    ProductionData secondProductionData = new ProductionData(1981, 300, "testunit", "testflag");
+    ProductionData thirdProductionData = new ProductionData(1982, 400, "testunit", "testflag");
+    ProductionData fourthProductionData = new ProductionData(1983, 500, "testunit", "testflag");
+    ProductionData fifthProductionData = new ProductionData(1984, 600, "testunit", "testflag");
+    ProductionData sixthProductionData = new ProductionData(1985, 700, "testunit", "testflag");
+    ProductionData seventhProductionData = new ProductionData(1986, 800, "testunit", "testflag");
 
-    ProductionData eighthProductionData = new ProductionData(1980, 721.02);
+    ProductionData eighthProductionData = new ProductionData(1980, 721.02, "testunit", "testflag");
 
     firstElement.addProductionData(firstProductionData);
     firstElement.addProductionData(secondProductionData);
@@ -144,13 +144,13 @@ public class MockContainer {
     Element thirdElement = new ElementByName(3, "Element 3");
     Element fourthElement = new ElementByName(4, "Element 4");
 
-    ProductionData firstProductionData = new ProductionData(1980, 200);
-    ProductionData secondProductionData = new ProductionData(1981, 300);
-    ProductionData thirdProductionData = new ProductionData(1982, 400);
-    ProductionData fourthProductionData = new ProductionData(1983, 500);
-    ProductionData fifthProductionData = new ProductionData(1984, 600);
-    ProductionData sixthProductionData = new ProductionData(1985, 700);
-    ProductionData seventhProductionData = new ProductionData(1986, 800);
+    ProductionData firstProductionData = new ProductionData(1980, 200, "testunit", "testflag");
+    ProductionData secondProductionData = new ProductionData(1981, 300, "testunit", "testflag");
+    ProductionData thirdProductionData = new ProductionData(1982, 400, "testunit", "testflag");
+    ProductionData fourthProductionData = new ProductionData(1983, 500, "testunit", "testflag");
+    ProductionData fifthProductionData = new ProductionData(1984, 600, "testunit", "testflag");
+    ProductionData sixthProductionData = new ProductionData(1985, 700, "testunit", "testflag");
+    ProductionData seventhProductionData = new ProductionData(1986, 800, "testunit", "testflag");
 
     firstElement.addProductionData(firstProductionData);
     firstElement.addProductionData(secondProductionData);

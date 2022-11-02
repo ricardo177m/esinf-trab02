@@ -79,9 +79,11 @@ public class LoadData {
         int year = Integer.parseInt(row.get(Field.YEAR.name));
         double value = row.get(Field.VALUE.name).length() == 0 ? 0
             : Double.parseDouble(row.get(Field.VALUE.name));
+        String unit = row.get(Field.UNIT.name);
+        String flag = row.get(Field.FLAG.name);
 
         // create instance of production data
-        ProductionData production = new ProductionData(year, value);
+        ProductionData production = new ProductionData(year, value, unit, flag);
 
         foundElement.addProductionData(production);
       } catch (Exception e) {

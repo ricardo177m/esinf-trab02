@@ -11,7 +11,7 @@ import isep.esinf.model.Item;
  * Alínea 3
  * Given an Item and an Element, get the top N areas with the biggest value
  * in the last year registered in the data file.
- * 
+ *
  * @author Tomás Russo
  */
 public class BestLastYear {
@@ -21,7 +21,7 @@ public class BestLastYear {
 
   /**
    * Constructor for BestLastYear
-   * 
+   *
    * @param item    Item to be used
    * @param element Element to be used
    */
@@ -35,7 +35,7 @@ public class BestLastYear {
   /**
    * Get the top N areas with the biggest value in the last year registered
    * in the data file.
-   * 
+   *
    * @param N Number of areas to be returned
    * @return Top N areas with the biggest value in the last year registered or
    *         null if there are no areas
@@ -73,7 +73,7 @@ public class BestLastYear {
 
       /*
        * If it gets here, it means that there are more valid areas in newAreas than N.
-       * 
+       *
        * So, check if any of the remaining valid areas has a bigger value than any of
        * the areas stored in topN, and if so, replace it.
        */
@@ -94,7 +94,7 @@ public class BestLastYear {
   /**
    * Get the most recent registered year in the data file, for the given Item and
    * Element.
-   * 
+   *
    * @return most recent registered year in the data file
    */
   private int getMostRecentRegisteredYearForItemAndElement() {
