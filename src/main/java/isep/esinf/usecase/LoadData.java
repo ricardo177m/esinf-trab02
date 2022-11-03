@@ -2,7 +2,7 @@ package isep.esinf.usecase;
 
 import java.util.List;
 import java.util.Map;
-
+import java.util.logging.Logger;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.Element;
@@ -23,8 +23,9 @@ public class LoadData {
     Container container = new Container();
 
     // Area > Item > Element > ProductionData
+    Logger.getLogger(LoadData.class.getName())
+        .info(String.format("ok we got data (size=%d), processing it...", data.size()));
 
-    System.out.println("ok we got data, inserting into the tree...");
     data.forEach(row -> {
       try {
         // Area
@@ -86,8 +87,8 @@ public class LoadData {
 
         // create instance of production data
         // TODO add flag description & ignore lines with "data unavailable" flag (!)
-        ProductionData production = new ProductionData(year,
-            new Value(value, unit, flag, "Flag Description placeholder"));
+        ProductionData production =
+            new ProductionData(year, new Value(value, unit, flag, "Flag Description placeholder"));
 
         foundElement.addProductionData(production);
       } catch (Exception e) {
