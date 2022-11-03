@@ -45,4 +45,48 @@ public class Value {
     this.flagDescription = flagDescription;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof Value)) {
+      return false;
+    }
+    Value value = (Value) o;
+
+    if (value.getValue() != this.getValue())
+      return false;
+
+    // different
+    if (value.getUnit() == null ^ this.getUnit() == null)
+      return false;
+
+    // both null
+    if (value.getUnit() == null && this.getUnit() == null)
+      return true;
+
+    if (!value.getUnit().equals(this.getUnit()))
+      return false;
+
+    // different
+    if (value.getFlag() == null ^ this.getFlag() == null)
+      return false;
+
+    // both null
+    if (value.getFlag() == null && this.getFlag() == null)
+      return true;
+
+    if (!value.getFlag().equals(this.getFlag()))
+      return false;
+
+    // different
+    if (value.getFlagDescription() == null ^ this.getFlagDescription() == null)
+      return false;
+
+    // both null
+    if (value.getFlagDescription() == null && this.getFlagDescription() == null)
+      return true;
+
+    return value.getFlagDescription().equals(this.getFlagDescription());
+  }
 }

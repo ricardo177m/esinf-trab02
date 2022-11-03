@@ -39,7 +39,18 @@ public class ProductionData implements Comparable<ProductionData> {
 
     ProductionData that = (ProductionData) o;
 
-    return year == that.year;
+    if (year != that.year)
+      return false;
+
+    // different
+    if (value == null ^ that.value == null)
+      return false;
+
+    // both null
+    if (value == null && that.value == null)
+      return true;
+
+    return value.equals(that.value);
   }
 
   @Override

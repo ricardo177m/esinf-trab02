@@ -60,6 +60,9 @@ public abstract class Item implements Comparable<Item> {
     if (!this.item.equals(other.item))
       return false;
 
+    if (!this.elements.equals(other.elements))
+      return false;
+
     return true;
   }
 

@@ -60,6 +60,9 @@ public abstract class Area implements Comparable<Area> {
     if (this.m49Code != other.m49Code)
       return false;
 
+    if (!this.items.equals(other.items))
+      return false;
+
     return true;
   }
 

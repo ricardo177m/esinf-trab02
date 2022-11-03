@@ -55,6 +55,9 @@ public abstract class Element implements Comparable<Element> {
     if (!this.element.equals(other.element))
       return false;
 
+    if (!this.productionData.equals(other.productionData))
+      return false;
+
     return true;
   }
 
