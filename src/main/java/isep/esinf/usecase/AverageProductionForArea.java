@@ -10,8 +10,8 @@ import isep.esinf.model.Area;
  * @author Carlos Lopes
  */
 public class AverageProductionForArea {
-  Area area;
-  int firstYear, lastYear;
+  private Area area;
+  private int firstYear, lastYear;
 
   public AverageProductionForArea(Area area, int firstYear, int lastYear) throws InvalidTimeIntervalException, NullAreaException{
     setArea(area);
