@@ -85,7 +85,7 @@ public class LoadData {
         String flag = row.get(Field.FLAG.name);
 
         // create instance of production data
-        // TODO CHANGE FLAG DESCRIPTION
+        // TODO add flag description & ignore lines with "data unavailable" flag (!)
         ProductionData production = new ProductionData(year,
             new Value(value, unit, flag, "Flag Description placeholder"));
 

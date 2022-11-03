@@ -8,6 +8,7 @@ import isep.esinf.model.comparators.ElementByCode;
 import isep.esinf.model.comparators.ItemByCode;
 import isep.esinf.utils.CSVReader;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +20,12 @@ public class LoadDataTest {
   @BeforeEach
   public void setup() {
     // create a container with elements to sanitize
-    container = (new MockContainer()).mockByCode();
+    container = (new MockContainer()).mockByCodeExtraMini();
   }
 
   @Test
-  public void test() throws FileNotFoundException {
-    CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/mock.csv");
+  public void testSimillarContainers() throws FileNotFoundException {
+    CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/mock_extramini.csv");
     List<Map<String, String>> data = csvReader.read();
 
     // Area: code;  Item: code;  Element: code
@@ -33,4 +34,28 @@ public class LoadDataTest {
     // TODO check equals for every class
     assertEquals(container, loaded);
   }
+
+  @Test
+  public void testDifferentContainers() throws FileNotFoundException {
+    CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/not_mock_mini.csv");
+    List<Map<String, String>> data = csvReader.read();
+
+    // Area: code;  Item: code;  Element: code
+    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    assertNotEquals(container, loaded);
+  }
+
+  @Test
+  public void testEmpty() throws FileNotFoundException {
+    CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/only_headers.csv");
+    List<Map<String, String>> data = csvReader.read();
+
+    Container c = new Container();
+    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    assertEquals(c, loaded);
+  }
+
+  // TODO test with big files
 }

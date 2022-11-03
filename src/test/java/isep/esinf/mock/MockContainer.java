@@ -346,4 +346,62 @@ public class MockContainer {
 
     return container;
   }
+
+  public Container mockByCodeMini() {
+    Container container = new Container();
+
+    Area a1 = new AreaByCode(100, "200", "Portugal");
+    Area a2 = new AreaByCode(200, "300", "Spain");
+
+    Item i1 = new ItemByCode(1, "2", "Item 1");
+    Item i2 = new ItemByCode(2, "3", "Item 2");
+
+    Element e1 = new ElementByCode(1, "Element 1");
+    Element e2 = new ElementByCode(2, "Element 2");
+
+    ProductionData p1 = new ProductionData(1980, new Value(10, "testunit", "testflag", "Flag Description placeholder"));
+    ProductionData p2 = new ProductionData(1981, new Value(20, "testunit", "testflag", "Flag Description placeholder"));
+    ProductionData p3 = new ProductionData(1982, new Value(30, "testunit", "testflag", "Flag Description placeholder"));
+
+    a1.addItem(i1);
+    a1.addItem(i2);
+    a2.addItem(i1);
+    a2.addItem(i2);
+
+    i1.addElement(e1);
+    i1.addElement(e2);
+    i2.addElement(e1);
+    i2.addElement(e2);
+
+    e1.addProductionData(p1);
+    e1.addProductionData(p2);
+    e1.addProductionData(p3);
+    e2.addProductionData(p1);
+    e2.addProductionData(p2);
+    e2.addProductionData(p3);
+
+    container.addArea(a1);
+    container.addArea(a2);
+
+    return container;
+  }
+
+  public Container mockByCodeExtraMini() {
+    Container container = new Container();
+
+    Area a1 = new AreaByCode(100, "200", "Portugal");
+
+    Item i1 = new ItemByCode(1, "2", "Item 1");
+
+    Element e1 = new ElementByCode(1, "Element 1");
+
+    ProductionData p1 = new ProductionData(1980, new Value(10, "testunit", "testflag", "Flag Description placeholder"));
+
+    a1.addItem(i1);
+    i1.addElement(e1);
+    e1.addProductionData(p1);
+    container.addArea(a1);
+
+    return container;
+  }
 }
