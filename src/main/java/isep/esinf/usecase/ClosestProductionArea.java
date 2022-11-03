@@ -2,6 +2,7 @@ package isep.esinf.usecase;
 
 import java.util.List;
 import java.util.Map;
+
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.Element;
@@ -21,13 +22,19 @@ public class ClosestProductionArea {
     Item i = new ItemByName(0, "0", item);
     Element e = new ElementByName(0, element);
 
-    Container sanitizedData = data.getAreasWithConditions(i, e, year);
+    if (data == null)
+      return null;
 
-    if (sanitizedData.getNOfAreas() == 0)
+    Container filteredData = data.getAreasWithConditions(i, e, year);
+
+    if (filteredData.getNOfAreas() == 0)
       return null;
 
     LoadGeographicalData loadGeographicalData = new LoadGeographicalData();
-    TwoDTree<Area> geoData = loadGeographicalData.execute(sanitizedData, geoDataMap);
+    TwoDTree<Area> geoData = loadGeographicalData.execute(filteredData, geoDataMap);
+
+    if (geoData == null)
+      return null;
 
     return geoData.findNearestNeighbor(latitude, longitude);
   }
