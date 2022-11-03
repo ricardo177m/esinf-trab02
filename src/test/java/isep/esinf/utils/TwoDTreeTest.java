@@ -389,4 +389,29 @@ public class TwoDTreeTest {
 
   }
 
+  /*
+   * Test find min method with tree with nodes
+   */
+  @Test
+  public void testFindMinTwoDTree() {
+    System.out.println("findMinTwoDTree");
+
+    TwoDNode<Double> expected = new TwoDNode<>(10.12, null, null, new Point2D.Double(10, 12));
+
+    assertEquals(expected, tree.findMin());
+
+  }
+
+  /*
+   * Test find min method with tree without nodes
+   */
+  @Test
+  public void testFindMinTwoDTreeNull() {
+    System.out.println("findMinTwoDTreeNull");
+    TwoDTree tree = new TwoDTree<>();
+
+    assertEquals(null, tree.findMin());
+
+  }
+
 }

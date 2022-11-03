@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 /*
@@ -29,13 +30,20 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     }
   };
 
+  /*
+   * Build twoDTree balanced
+   */
   public void buildTree(List<TwoDNode<E>> nodes) {
-    root = buildTree(true, nodes);
+    if (!nodes.contains(null)) {
+      root = buildTree(true, nodes);
+    } else {
+      return;
+    }
   }
 
-  TwoDNode<E> buildTree(boolean divX, List<TwoDNode<E>> nodes) {
+  private TwoDNode<E> buildTree(boolean divX, List<TwoDNode<E>> nodes) {
 
-    if (nodes == null || nodes.isEmpty() || nodes.size() == 0 || nodes.contains(null))
+    if (nodes == null || nodes.isEmpty())
       return null;
 
     Collections.sort(nodes, divX ? cmpX : cmpY);
@@ -80,6 +88,38 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
       node.setRight(insert(node.getRight(), element, coords, !divX));
 
     return node;
+  }
+
+  public TwoDNode<E> findMin() {
+    TwoDNode<E> node = findMin((TwoDNode<E>) root, true);
+    if (node != null)
+      return node;
+    return null;
+  }
+
+  private TwoDNode<E> findMin(TwoDNode<E> node, boolean divX) {
+    if (node == null)
+      return null;
+    if (divX) {
+      if (node.getLeft() == null)
+        return node;
+      else
+        return findMin(node.getLeft(), false);
+    } else {
+      List<TwoDNode<E>> list = new LinkedList<>();
+      list.add(findMin(node, true));
+
+      if (node.getLeft() != null)
+        list.add(findMin(node.getLeft(), true));
+
+      if (node.getRight() != null)
+        list.add(findMin(node.getRight(), true));
+
+      Collections.sort(list, cmpY);
+
+      return list.get(0);
+
+    }
   }
 
   /*
