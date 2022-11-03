@@ -1,8 +1,12 @@
 package isep.esinf.usecase;
 
+import javax.swing.text.AbstractDocument.Content;
+
 import isep.esinf.exceptions.InvalidTimeIntervalException;
 import isep.esinf.exceptions.NullAreaException;
 import isep.esinf.model.Area;
+import isep.esinf.model.Container;
+import isep.esinf.model.comparators.AreaByName;
 
 /**
  * Alínea 2
@@ -10,20 +14,17 @@ import isep.esinf.model.Area;
  * @author Carlos Lopes
  */
 public class AverageProductionForArea {
-  private Area area;
   private int firstYear, lastYear;
+  private Area area;
 
-  public AverageProductionForArea(Area area, int firstYear, int lastYear) throws InvalidTimeIntervalException, NullAreaException{
-    setArea(area);
+  public AverageProductionForArea(String area, int firstYear, int lastYear, Container container) throws InvalidTimeIntervalException, NullAreaException{
+    if(area == null || area.equals(""))
+    throw new NullAreaException();
+
+    Area a = new AreaByName(0, "", area);
+    this.area = container.getArea(a);
+
     setTimeInterval(firstYear, lastYear);
-  }
-
-  public void setArea(Area area) throws NullAreaException{
-    if(area != null){
-      this.area = area;
-    }else{
-      throw new NullAreaException();
-    }
   }
 
   public void setTimeInterval(int firstYear, int lastYear) throws InvalidTimeIntervalException{
