@@ -228,4 +228,35 @@ public class LoadGeographicalDataTest {
 
     assertEquals(3, result.height());
   }
+
+  /*
+   * Test loadGeoData with files (asserting result of tree)
+   */
+  @Test
+  public void testLoadGeographicalDataWithFilesTree() throws FileNotFoundException {
+    System.out.println("testLoadGeographicalDataWithFilesTree");
+    CSVReader r = new CSVReader(
+        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+
+    List<Map<String, String>> containerData = r.read();
+
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    r = new CSVReader(
+        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
+
+    List<Map<String, String>> geoData = r.read();
+
+    TwoDTree<Area> result = loadGeographicalData.execute(container, geoData);
+
+    TwoDTree<Area> tree = new TwoDTree<>();
+
+    tree.insert(new AreaByCode(68, "'250", "France"), 46.227638, 2.213749);
+    tree.insert(new AreaByCode(79, "'276", "Germany"), 51.165691, 10.451526);
+    tree.insert(new AreaByCode(106, "'380", "Italy"), 41.87194, 12.56738);
+    tree.insert(new AreaByCode(174, "'620", "Portugal"), 39.399872, -8.224454);
+    tree.insert(new AreaByCode(203, "'724", "Spain"), 40.463667, -3.74922);
+
+    assertEquals(result.toString(), tree.toString());
+  }
 }
