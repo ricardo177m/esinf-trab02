@@ -1,17 +1,17 @@
 package isep.esinf.usecase;
 
 import java.util.ArrayList;
-
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.Element;
 import isep.esinf.model.Item;
+import isep.esinf.utils.AVL;
 
 /**
  * Alínea 3
  * Given an Item and an Element, get the top N areas with the biggest value
  * in the last year registered in the data file.
- *
+ * 
  * @author Tomás Russo
  */
 public class BestLastYear {
@@ -21,11 +21,11 @@ public class BestLastYear {
 
   /**
    * Constructor for BestLastYear
-   *
+   * 
    * @param item    Item to be used
    * @param element Element to be used
    */
-  public BestLastYear(Item item, Element element, Container data) {
+  public BestLastYear(Container data, Item item, Element element) {
     this.item = item;
     this.element = element;
     /* Get only the Areas with the given item and element */
@@ -35,7 +35,7 @@ public class BestLastYear {
   /**
    * Get the top N areas with the biggest value in the last year registered
    * in the data file.
-   *
+   * 
    * @param N Number of areas to be returned
    * @return Top N areas with the biggest value in the last year registered or
    *         null if there are no areas
@@ -63,28 +63,13 @@ public class BestLastYear {
      */
     Container newAreas = data.getAreasWithConditions(item, element, lastYear);
 
-    /* Iterate over all valid Areas */
-    for (Area area : newAreas.getAreas()) {
-      /* Fill the array with the first N Areas in newAreas */
-      if (topN.size() < N) {
-        topN.add(area);
-        continue;
-      }
+    /* Get an ArrayList of areas ordered by value */
+    topN = orderAreasByValueOfYear(newAreas, lastYear);
 
-      /*
-       * If it gets here, it means that there are more valid areas in newAreas than N.
-       *
-       * So, check if any of the remaining valid areas has a bigger value than any of
-       * the areas stored in topN, and if so, replace it.
-       */
-      for (int i = 0; i < topN.size(); i++) {
-        if (area.getItem(item).getElement(element).getProductionData(lastYear).getValue() > topN.get(i).getItem(item)
-            .getElement(element).getProductionData(lastYear).getValue()) {
-          // topN.add(i, area);
-          // topN.remove(topN.size() - 1);
-          topN.set(i, area);
-          break;
-        }
+    if (topN.size() > N) {
+      /* Remove the last N elements from the ArrayList */
+      for (int i = 0; i < topN.size() - N; i++) {
+        topN.remove(topN.size() - 1);
       }
     }
 
@@ -94,12 +79,13 @@ public class BestLastYear {
   /**
    * Get the most recent registered year in the data file, for the given Item and
    * Element.
-   *
+   * 
    * @return most recent registered year in the data file
    */
   private int getMostRecentRegisteredYearForItemAndElement() {
     int max = 0;
 
+    /* Iterate over all areas to find the max year */
     for (Area area : data.getAreas()) {
       Element e = area.getItem(item).getElement(element);
 
@@ -109,5 +95,61 @@ public class BestLastYear {
     }
 
     return max;
+  }
+
+  /**
+   * Get an ArrayList with areas ordered by the value of the given year
+   * 
+   * Complexity: O(n . log n)
+   * 
+   * @param areas A Container with the areas to be ordered
+   * @param year  The year to be used to order the areas
+   * @return An ArrayList with areas ordered by the value of the given year
+   */
+  private ArrayList<Area> orderAreasByValueOfYear(Container areas, int year) {
+    /* Check if areas have any element */
+    if (areas == null || areas.isEmpty())
+      return null;
+
+    /* Inner class to order areas by it's value */
+    class AreaValue implements Comparable<AreaValue> {
+      Area area;
+      double value;
+
+      /* Constructor for AreaValue */
+      public AreaValue(Area area, double value) {
+        this.area = area;
+        this.value = value;
+      }
+
+      /* Compare AreaValues by it's value */
+      @Override
+      public int compareTo(AreaValue o) {
+        if (this.value > o.value)
+          return 1;
+        else if (this.value < o.value)
+          return -1;
+        else
+          return 0;
+      }
+    }
+
+    /* Create an AVL tree to store the areas ordered by it's value */
+    AVL<AreaValue> avl = new AVL<>();
+
+    /* Iterate over all areas to add them to the AVL tree */
+    for (Area area : areas.getAreas()) {
+      avl.insert(new AreaValue(area, area.getItem(item).getElement(element).getProductionData(year).getValue()));
+    }
+
+    /* Create an ArrayList to store the areas ordered by it's value */
+    ArrayList<Area> orderedAreas = new ArrayList<>();
+
+    /* Iterate in order over the AVL tree to add the areas to the ArrayList */
+    for (AreaValue areaValue : avl.inOrder()) {
+      orderedAreas.add(areaValue.area);
+    }
+
+    return orderedAreas;
   }
 }

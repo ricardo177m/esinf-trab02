@@ -36,7 +36,6 @@ public class MockContainer {
     Element secondElement = new ElementByCode(2, "Element 2");
     Element thirdElement = new ElementByCode(3, "Element 3");
     Element fourthElement = new ElementByCode(4, "Element 4");
-
     Element fifthElement = new ElementByCode(5, "Element 5");
     Element sixthElement = new ElementByCode(6, "Element 6");
 
@@ -48,7 +47,12 @@ public class MockContainer {
     ProductionData sixthProductionData = new ProductionData(1985, 700, "testunit", "testflag");
     ProductionData seventhProductionData = new ProductionData(1986, 800, "testunit", "testflag");
 
-    ProductionData eighthProductionData = new ProductionData(1980, 721.02, "testunit", "testflag");
+    ProductionData eighthProductionData = new ProductionData(1987, 900, "testunit", "testflag");
+    ProductionData ninthProductionData = new ProductionData(1987, 1000, "testunit", "testflag");
+    ProductionData tenthProductionData = new ProductionData(1987, 1100, "testunit", "testflag");
+    ProductionData eleventhProductionData = new ProductionData(1987, 1200, "testunit", "testflag");
+    ProductionData twelfthProductionData = new ProductionData(1987, 1300, "testunit", "testflag");
+    ProductionData thirteenthProductionData = new ProductionData(1987, 1400, "testunit", "testflag");
 
     firstElement.addProductionData(firstProductionData);
     firstElement.addProductionData(secondProductionData);
@@ -58,16 +62,21 @@ public class MockContainer {
     secondElement.addProductionData(firstProductionData);
     secondElement.addProductionData(fourthProductionData);
     secondElement.addProductionData(fifthProductionData);
+    secondElement.addProductionData(ninthProductionData);
 
     thirdElement.addProductionData(sixthProductionData);
     thirdElement.addProductionData(seventhProductionData);
+    thirdElement.addProductionData(tenthProductionData);
 
     fourthElement.addProductionData(firstProductionData);
+    fourthElement.addProductionData(eleventhProductionData);
 
     fifthElement.addProductionData(firstProductionData);
     fifthElement.addProductionData(eighthProductionData);
+    fifthElement.addProductionData(twelfthProductionData);
 
     sixthElement.addProductionData(eighthProductionData);
+    sixthElement.addProductionData(thirteenthProductionData);
 
     firstItem.addElement(firstElement);
     firstItem.addElement(secondElement);

@@ -228,10 +228,10 @@ public class AccumulatedProductionInAreaTest {
     int itemCode = 9;
     int elementCode = 6;
 
-    Double sum = aInArea.execute(-100.0, -100.0, 200.0, 200.0, itemCode, elementCode, 1980,
+    Double sum = aInArea.execute(-100.0, -100.0, 200.0, 200.0, itemCode, elementCode, 1987,
         container, geoData);
 
-    assertEquals(1442.04, sum);
+    assertEquals(1800, sum);
   }
 
   /*
@@ -293,10 +293,10 @@ public class AccumulatedProductionInAreaTest {
     int itemCode = 9;
     int elementCode = 6;
 
-    Double sum = aInArea.execute(200, 200, -100, -100, itemCode, elementCode, 1980,
+    Double sum = aInArea.execute(200, 200, -100, -100, itemCode, elementCode, 1987,
         container, geoData);
 
-    assertEquals(1442.04, sum);
+    assertEquals(1800, sum);
   }
 
   /*
