@@ -8,6 +8,7 @@ import isep.esinf.model.Container;
 import isep.esinf.model.Element;
 import isep.esinf.model.Item;
 import isep.esinf.model.ProductionData;
+import isep.esinf.model.Value;
 import isep.esinf.utils.Field;
 
 /**
@@ -84,7 +85,9 @@ public class LoadData {
         String flag = row.get(Field.FLAG.name);
 
         // create instance of production data
-        ProductionData production = new ProductionData(year, value, unit, flag);
+        // TODO CHANGE FLAG DESCRIPTION
+        ProductionData production = new ProductionData(year,
+            new Value(value, unit, flag, "Flag Description placeholder"));
 
         foundElement.addProductionData(production);
       } catch (Exception e) {
