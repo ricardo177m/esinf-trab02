@@ -3,6 +3,7 @@ package isep.esinf.utils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -321,4 +322,71 @@ public class TwoDTreeTest {
     assertEquals(expected, actual);
 
   }
+
+  /*
+   * Test build tree with a list of points
+   */
+  @Test
+  public void testBuildTreeWithListOfPoints() {
+    System.out.println("buildTreeWithListOfPoints");
+    List<TwoDNode<Double>> points = new ArrayList<>();
+    points.add(new TwoDNode<>(3.1, null, null, new Point2D.Double(3, 9)));
+    points.add(new TwoDNode<>(1.1, null, null, new Point2D.Double(1, 7)));
+    points.add(new TwoDNode<>(7.2, null, null, new Point2D.Double(7, 9)));
+    points.add(new TwoDNode<>(2.2, null, null, new Point2D.Double(2, 1)));
+    points.add(new TwoDNode<>(9.0, null, null, new Point2D.Double(9, 6)));
+    points.add(new TwoDNode<>(5.1, null, null, new Point2D.Double(5, 9)));
+
+    tree = new TwoDTree<>();
+    tree.buildTree(points);
+
+    List<Double> expected = List.of(5.1, 1.1, 2.2, 3.1, 7.2, 9.0);
+
+    assertEquals(expected, tree.preOrder());
+
+  }
+
+  /*
+   * Test build tree with a list of points with null points
+   */
+  @Test
+  public void testBuildTreeWithListOfPointsWithNullPoints() {
+    System.out.println("buildTreeWithListOfPointsWithNullPoints");
+    List<TwoDNode<Double>> points = new ArrayList<>();
+    points.add(null);
+    points.add(null);
+    points.add(null);
+
+    tree = new TwoDTree<>();
+    tree.buildTree(points);
+
+    List<Double> expected = List.of();
+
+    assertEquals(expected, tree.inOrder());
+
+  }
+
+  /*
+   * Test build tree with a list of points
+   */
+  @Test
+  public void testBuildTreeWithListOfPoints2() {
+    System.out.println("buildTreeWithListOfPoints");
+    List<TwoDNode<Double>> points = new ArrayList<>();
+    points.add(new TwoDNode<>(1.1, null, null, new Point2D.Double(1, 1)));
+    points.add(new TwoDNode<>(2.2, null, null, new Point2D.Double(2, 2)));
+    points.add(new TwoDNode<>(3.3, null, null, new Point2D.Double(3, 3)));
+    points.add(new TwoDNode<>(4.4, null, null, new Point2D.Double(4, 4)));
+    points.add(new TwoDNode<>(5.5, null, null, new Point2D.Double(5, 5)));
+    points.add(new TwoDNode<>(6.6, null, null, new Point2D.Double(6, 6)));
+
+    tree = new TwoDTree<>();
+    tree.buildTree(points);
+
+    List<Double> expected = List.of(4.4, 2.2, 1.1, 3.3, 6.6, 5.5);
+
+    assertEquals(expected, tree.preOrder());
+
+  }
+
 }

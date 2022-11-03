@@ -2,6 +2,7 @@ package isep.esinf.utils;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -14,25 +15,44 @@ import java.util.List;
 
 public class TwoDTree<E extends Comparable<E>> extends BST<E> {
 
-  /*
-   * Comparator to compare two points by their x coordinate
-   */
-  private final Comparator<Point2D.Double> cmpX = new Comparator<Point2D.Double>() {
+  private final Comparator<TwoDNode<E>> cmpX = new Comparator<TwoDNode<E>>() {
     @Override
-    public int compare(Point2D.Double p1, Point2D.Double p2) {
-      return Double.compare(p1.getX(), p2.getX());
+    public int compare(TwoDNode<E> o1, TwoDNode<E> o2) {
+      return Double.compare(o1.getX(), o2.getX());
     }
   };
 
-  /*
-   * Comparator to compare two points by their y coordinate
-   */
-  private final Comparator<Point2D.Double> cmpY = new Comparator<Point2D.Double>() {
+  private final Comparator<TwoDNode<E>> cmpY = new Comparator<TwoDNode<E>>() {
     @Override
-    public int compare(Point2D.Double p1, Point2D.Double p2) {
-      return Double.compare(p1.getY(), p2.getY());
+    public int compare(TwoDNode<E> o1, TwoDNode<E> o2) {
+      return Double.compare(o1.getY(), o2.getY());
     }
   };
+
+  public void buildTree(List<TwoDNode<E>> nodes) {
+    root = buildTree(true, nodes);
+  }
+
+  TwoDNode<E> buildTree(boolean divX, List<TwoDNode<E>> nodes) {
+
+    if (nodes == null || nodes.isEmpty() || nodes.size() == 0 || nodes.contains(null))
+      return null;
+
+    Collections.sort(nodes, divX ? cmpX : cmpY);
+
+    int mid = nodes.size() / 2;
+
+    TwoDNode<E> node = new TwoDNode<E>(null, null, null, null);
+
+    node.setCoods(nodes.get(mid).getCoords());
+    node.setElement(nodes.get(mid).getElement());
+    node.setLeft(buildTree(!divX, nodes.subList(0, mid)));
+
+    if (mid + 1 <= nodes.size() - 1)
+      node.setRight(buildTree(!divX, nodes.subList(mid + 1, nodes.size())));
+
+    return node;
+  }
 
   /*
    * Insert a new element in the tree
@@ -52,7 +72,7 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     if (node == null)
       return new TwoDNode<E>(element, null, null, coords);
 
-    int cmpResult = (divX ? cmpX : cmpY).compare(coords, node.getCoords());
+    int cmpResult = (divX ? cmpX : cmpY).compare(new TwoDNode<E>(element, null, null, coords), node);
 
     if (cmpResult < 0)
       node.setLeft(insert(node.getLeft(), element, coords, !divX));
@@ -143,8 +163,8 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
 
     boolean isXAxis = depth % 2 == 0;
 
-    int cmpLowResult = (isXAxis ? cmpX : cmpY).compare(lowCoords, node.getCoords());
-    int cmpHighResult = (isXAxis ? cmpX : cmpY).compare(highCoords, node.getCoords());
+    int cmpLowResult = (isXAxis ? cmpX : cmpY).compare(node, new TwoDNode<E>(null, null, null, lowCoords));
+    int cmpHighResult = (isXAxis ? cmpX : cmpY).compare(node, new TwoDNode<E>(null, null, null, highCoords));
 
     if (isInRange(node, lowCoords, highCoords)) {
       contained.add(node.getElement());

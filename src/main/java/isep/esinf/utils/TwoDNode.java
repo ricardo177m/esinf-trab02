@@ -38,6 +38,18 @@ public class TwoDNode<E> extends Node<E> {
     return coords.y;
   }
 
+  public void setCoods(Point2D.Double coords) {
+    this.coords = coords;
+  }
+
+  public void setRight(TwoDNode<E> right) {
+    super.setRight(right);
+  }
+
+  public void setLeft(TwoDNode<E> left) {
+    super.setLeft(left);
+  }
+
   public TwoDNode<E> clone() {
     return new TwoDNode<E>(getElement(), getLeft(), getRight(), new Point2D.Double(coords.x, coords.y));
   }
