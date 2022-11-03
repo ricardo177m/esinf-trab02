@@ -1,14 +1,12 @@
 package isep.esinf.usecase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Properties;
 import org.junit.jupiter.api.Test;
-
 import isep.esinf.mock.MockContainer;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
@@ -16,11 +14,16 @@ import isep.esinf.model.comparators.AreaByCode;
 import isep.esinf.model.comparators.AreaByName;
 import isep.esinf.model.comparators.ElementByCode;
 import isep.esinf.model.comparators.ItemByCode;
+import isep.esinf.shared.Constants;
 import isep.esinf.utils.CSVReader;
+import isep.esinf.utils.PropertiesUtils;
 import isep.esinf.utils.TwoDTree;
 
 public class LoadGeographicalDataTest {
-  LoadGeographicalData loadGeographicalData = new LoadGeographicalData();
+  private LoadGeographicalData loadGeographicalData = new LoadGeographicalData();
+
+  Properties props = PropertiesUtils.getProperties();
+  private final String BASE_PATH = props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH);
 
   @Test
   public void testLoadGeographicalData() {
@@ -35,12 +38,9 @@ public class LoadGeographicalDataTest {
     c.addArea(italy);
 
     List<Map<String, String>> geoData = new ArrayList<>();
-    geoData.add(Map.of("area", "Portugal", "latitude", "39.3999", "longitude",
-        "-8.2245"));
-    geoData.add(Map.of("area", "Spain", "latitude", "40.4637", "longitude",
-        "-3.7492"));
-    geoData.add(Map.of("area", "Italy", "latitude", "41.8719", "longitude",
-        "12.5674"));
+    geoData.add(Map.of("area", "Portugal", "latitude", "39.3999", "longitude", "-8.2245"));
+    geoData.add(Map.of("area", "Spain", "latitude", "40.4637", "longitude", "-3.7492"));
+    geoData.add(Map.of("area", "Italy", "latitude", "41.8719", "longitude", "12.5674"));
 
     tree.insert(italy, 41.8719, 12.5674);
     tree.insert(portugal, 39.3999, -8.2245);
@@ -84,8 +84,7 @@ public class LoadGeographicalDataTest {
     Container c = new Container();
 
     List<Map<String, String>> geoData = new ArrayList<>();
-    geoData.add(Map.of("area", "Portugal", "latitude", "39.3999", "longitude",
-        "-8.2245"));
+    geoData.add(Map.of("area", "Portugal", "latitude", "39.3999", "longitude", "-8.2245"));
     geoData.add(Map.of("area", "Spain", "latitude", "40.4637", "longitude", "123"));
 
     TwoDTree<Area> result = loadGeographicalData.execute(c, geoData);
@@ -161,8 +160,7 @@ public class LoadGeographicalDataTest {
   }
 
   /*
-   * Test loadGeographicalData with file TestLoadGeoData_Small.csv crossing data
-   * with mock container
+   * Test loadGeographicalData with file TestLoadGeoData_Small.csv crossing data with mock container
    */
   @Test
   public void testLoadGeographicalDataWithMockContainer() throws FileNotFoundException {
@@ -189,15 +187,16 @@ public class LoadGeographicalDataTest {
   @Test
   public void testLoadGeographicalDataWithFilesTreeSize() throws FileNotFoundException {
     System.out.println("testLoadGeographicalDataWithFilesTreeSize");
-    CSVReader r = new CSVReader(
-        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+
+    CSVReader r =
+        new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container container =
+        LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
-    r = new CSVReader(
-        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
+    r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
 
     List<Map<String, String>> geoData = r.read();
 
@@ -212,15 +211,15 @@ public class LoadGeographicalDataTest {
   @Test
   public void testLoadGeographicalDataWithFilesTreeHeight() throws FileNotFoundException {
     System.out.println("testLoadGeographicalDataWithFilesTreeHeight");
-    CSVReader r = new CSVReader(
-        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+    CSVReader r =
+        new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container container =
+        LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
-    r = new CSVReader(
-        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
+    r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
 
     List<Map<String, String>> geoData = r.read();
 
@@ -235,15 +234,15 @@ public class LoadGeographicalDataTest {
   @Test
   public void testLoadGeographicalDataWithFilesTree() throws FileNotFoundException {
     System.out.println("testLoadGeographicalDataWithFilesTree");
-    CSVReader r = new CSVReader(
-        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+    CSVReader r =
+        new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container container =
+        LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
-    r = new CSVReader(
-        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
+    r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
 
     List<Map<String, String>> geoData = r.read();
 
