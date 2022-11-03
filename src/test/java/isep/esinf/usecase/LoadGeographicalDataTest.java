@@ -14,6 +14,8 @@ import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.comparators.AreaByCode;
 import isep.esinf.model.comparators.AreaByName;
+import isep.esinf.model.comparators.ElementByCode;
+import isep.esinf.model.comparators.ItemByCode;
 import isep.esinf.utils.CSVReader;
 import isep.esinf.utils.TwoDTree;
 
@@ -181,4 +183,49 @@ public class LoadGeographicalDataTest {
 
   }
 
+  /*
+   * Test loadGeographicalData with files
+   */
+  @Test
+  public void testLoadGeographicalDataWithFilesTreeSize() throws FileNotFoundException {
+    System.out.println("testLoadGeographicalDataWithFilesTreeSize");
+    CSVReader r = new CSVReader(
+        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+
+    List<Map<String, String>> containerData = r.read();
+
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    r = new CSVReader(
+        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
+
+    List<Map<String, String>> geoData = r.read();
+
+    TwoDTree<Area> result = loadGeographicalData.execute(container, geoData);
+
+    assertEquals(5, result.size());
+  }
+
+  /*
+   * Test loadGeographicalData tree height
+   */
+  @Test
+  public void testLoadGeographicalDataWithFilesTreeHeight() throws FileNotFoundException {
+    System.out.println("testLoadGeographicalDataWithFilesTreeHeight");
+    CSVReader r = new CSVReader(
+        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+
+    List<Map<String, String>> containerData = r.read();
+
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    r = new CSVReader(
+        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
+
+    List<Map<String, String>> geoData = r.read();
+
+    TwoDTree<Area> result = loadGeographicalData.execute(container, geoData);
+
+    assertEquals(3, result.height());
+  }
 }
