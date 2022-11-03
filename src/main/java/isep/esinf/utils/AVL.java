@@ -116,26 +116,4 @@ public class AVL<E extends Comparable<E>> extends BST<E> implements AVLInterface
     // after removing the node, balance the tree
     return balanceNode(node);
   }
-
-  public boolean equals(Object otherObj) {
-    if (this == otherObj)
-      return true;
-
-    if (otherObj == null || this.getClass() != otherObj.getClass())
-      return false;
-
-    AVL<E> second = (AVL<E>) otherObj;
-    return equals(root, second.root);
-  }
-
-  public boolean equals(Node<E> node1, Node<E> node2) {
-    if (node1 == null && node2 == null)
-      return true;
-    if (node1 == null || node2 == null)
-      return false;
-    if (node1.getElement().compareTo(node2.getElement()) == 0)
-      return equals(node1.getLeft(), node2.getLeft())
-          && equals(node1.getRight(), node2.getRight());
-    return false;
-  }
 }
