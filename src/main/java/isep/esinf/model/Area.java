@@ -38,6 +38,20 @@ public abstract class Area implements Comparable<Area> {
 
   public abstract int compareTo(Area o);
 
+  public Area clone() {
+    try {
+      // for some reason getDeclaredConstructor() is not working in class Area
+      // by using getConstructors()[0] instead, it works with the same result
+      Area clonedArea = (Area) getClass().getConstructors()[0].newInstance(code, m49Code, area);
+      clonedArea.items = items.clone();
+
+      return clonedArea;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (obj == null)
