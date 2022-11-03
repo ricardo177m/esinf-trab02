@@ -33,6 +33,10 @@ public class Value {
     this.flagDescription = flagDescription;
   }
 
+  public Value clone() {
+    return new Value(value, unit, flag, flagDescription);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this)

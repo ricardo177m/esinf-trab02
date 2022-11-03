@@ -1,20 +1,15 @@
 package isep.esinf.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
+import isep.esinf.mock.MockArea;
 import isep.esinf.mock.MockContainer;
-import isep.esinf.model.comparators.AreaByCode;
 import isep.esinf.model.comparators.ElementByCode;
 import isep.esinf.model.comparators.ItemByName;
 
 public class ContainerTest {
   private static Container container;
-  private static Area firstArea = new AreaByCode(100, "200", "Portugal");
-  private static Area thirdArea = new AreaByCode(300, "400", "France");
-  private static Area fifthArea = new AreaByCode(500, "600", "Tuvalu");
 
   private static Item firstItem = new ItemByName(1, "2", "Item 1");
   private static Element secondElement = new ElementByCode(2, "Element 2");
@@ -29,9 +24,11 @@ public class ContainerTest {
   @Test
   public void testGetAreasWithCondition() {
     Container expected = new Container();
-    expected.addArea(firstArea);
-    expected.addArea(thirdArea);
-    expected.addArea(fifthArea);
+    MockArea mockArea = new MockArea();
+
+    expected.addArea(mockArea.mockFirstArea());
+    expected.addArea(mockArea.mockThirdArea());
+    expected.addArea(mockArea.mockFifthArea());
 
     Container actual = container.getAreasWithConditions(firstItem, secondElement, YEAR);
 

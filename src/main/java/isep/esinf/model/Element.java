@@ -35,6 +35,18 @@ public abstract class Element implements Comparable<Element> {
     return productionData.biggestElement().getYear();
   }
 
+  public Element clone() {
+    try {
+      Element clonedElement = getClass().getDeclaredConstructor().newInstance(code, element);
+      clonedElement.productionData = productionData.clone();
+
+      return clonedElement;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
   public abstract int compareTo(Element o);
 
   @Override
