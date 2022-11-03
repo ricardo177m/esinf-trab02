@@ -7,34 +7,22 @@ public class Value {
   private String flagDescription;
 
   public Value(double value, String unit, String flag, String flagDescription) {
-    setFlag(flagDescription);
-    setFlagDescription(flagDescription);
-    setUnit(unit);
-    setValue(value);
+    this.value = value;
+    this.unit = unit;
+    this.flag = flag;
+    this.flagDescription = flagDescription;
   }
 
   public double getValue() {
     return this.value;
   }
 
-  public void setValue(double value) {
-    this.value = value;
-  }
-
   public String getUnit() {
     return this.unit;
   }
 
-  public void setUnit(String unit) {
-    this.unit = unit;
-  }
-
   public String getFlag() {
     return this.flag;
-  }
-
-  public void setFlag(String flag) {
-    this.flag = flag;
   }
 
   public String getFlagDescription() {
@@ -54,8 +42,9 @@ public class Value {
     }
     Value value = (Value) o;
 
-    if (value.getValue() != this.getValue())
-      return false;
+    // compare 2 doubles
+    if (Math.abs(this.getValue() - value.getValue()) <= 0.000001)
+      return true;
 
     // different
     if (value.getUnit() == null ^ this.getUnit() == null)

@@ -91,4 +91,9 @@ public class Container {
     boolean result = areas.equals(container.areas);
     return result;
   }
+
+  @Override
+  public String toString() {
+    return String.format("Number of areas: %d", this.getNOfAreas());
+  }
 }
