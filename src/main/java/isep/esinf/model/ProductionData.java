@@ -4,7 +4,6 @@ public class ProductionData implements Comparable<ProductionData> {
   private int year;
   private Value value;
 
-
   public ProductionData(int year, Value value) {
     this.year = year;
     this.value = value;
@@ -28,6 +27,10 @@ public class ProductionData implements Comparable<ProductionData> {
 
   public String getFlag() {
     return value.getFlag();
+  }
+
+  public ProductionData clone() {
+    return new ProductionData(year, value.clone());
   }
 
   @Override

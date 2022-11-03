@@ -66,6 +66,19 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
     return null;
   }
 
+  public BST<E> clone() {
+    BST<E> newTree = new BST<>();
+    newTree.root = clone(root);
+    return newTree;
+  }
+
+  public Node<E> clone(Node<E> node) {
+    if (node == null)
+      return null;
+
+    return new Node<>(node.getElement(), clone(node.getLeft()), clone(node.getRight()));
+  }
+
   /*
    * Check if it is a leaf node
    */
@@ -301,7 +314,8 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
       if (root == null ^ that.root == null)
         return false;
 
-      if (root == null) return true;
+      if (root == null)
+        return true;
 
       return root.equals(that.root);
     } catch (ClassCastException e) {

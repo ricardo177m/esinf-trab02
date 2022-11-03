@@ -38,6 +38,18 @@ public abstract class Item implements Comparable<Item> {
 
   public abstract int compareTo(Item o);
 
+  public Item clone() {
+    try {
+      Item clonedItem = getClass().getDeclaredConstructor().newInstance(code, cpc, item);
+      clonedItem.elements = elements.clone();
+
+      return clonedItem;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (obj == null)
