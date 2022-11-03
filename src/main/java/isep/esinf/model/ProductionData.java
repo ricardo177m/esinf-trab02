@@ -2,15 +2,12 @@ package isep.esinf.model;
 
 public class ProductionData implements Comparable<ProductionData> {
   private int year;
-  private double value;
-  private String unit;
-  private String flag;
+  private Value value;
 
-  public ProductionData(int year, double value, String unit, String flag) {
+
+  public ProductionData(int year, Value value) {
     this.year = year;
     this.value = value;
-    this.unit = unit;
-    this.flag = flag;
   }
 
   public ProductionData(int year) {
@@ -22,15 +19,15 @@ public class ProductionData implements Comparable<ProductionData> {
   }
 
   public double getValue() {
-    return value;
+    return value.getValue();
   }
 
   public String getUnit() {
-    return unit;
+    return value.getUnit();
   }
 
   public String getFlag() {
-    return flag;
+    return value.getFlag();
   }
 
   @Override
