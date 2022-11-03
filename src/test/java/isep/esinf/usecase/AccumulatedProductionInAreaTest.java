@@ -327,6 +327,7 @@ public class AccumulatedProductionInAreaTest {
    */
   @Test
   public void testSumProductionWithFile() throws FileNotFoundException {
+    System.out.println("testSumProductionWithFile");
 
     CSVReader r = new CSVReader(
         "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
@@ -346,6 +347,34 @@ public class AccumulatedProductionInAreaTest {
     Double sum = aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 2009,
         container, geoData);
 
-    assertEquals(0, sum);
+    assertEquals(29820.0, sum);
+  }
+
+  /*
+   * Test the sum of production with data from file
+   */
+  @Test
+  public void testSumProductionWithFile2() throws FileNotFoundException {
+    System.out.println("testSumProductionWithFile2");
+
+    CSVReader r = new CSVReader(
+        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+
+    List<Map<String, String>> containerData = r.read();
+
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    r = new CSVReader(
+        "/home/drew/Downloads/Production_Crops_Livestock/Production_Crops_Livestock/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
+
+    List<Map<String, String>> geoData = r.read();
+
+    int itemCode = 1062;
+    int elementCode = 5313;
+
+    Double sum = aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 1977,
+        container, geoData);
+
+    assertEquals(53000.0, sum);
   }
 }
