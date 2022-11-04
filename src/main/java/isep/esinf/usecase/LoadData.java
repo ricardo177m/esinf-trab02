@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
+
 import isep.esinf.exceptions.MissingValueException;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
@@ -32,12 +33,12 @@ public class LoadData {
     Properties props = PropertiesUtils.getProperties();
 
     // get flags
-    FlagReader flagReader = new FlagReader(props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH) + Constants.DATAFILE_FLAGS);
+    FlagReader flagReader = new FlagReader(
+        props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH) + Constants.DATAFILE_FLAGS);
     flagReader.read();
 
     // Area > Item > Element > ProductionData
-    Logger.getLogger(LoadData.class.getName())
-        .info(String.format("ok we got data (size=%d), processing it...", data.size()));
+    System.out.printf("Loading %d lines of data...%n", data.size());
 
     data.forEach(row -> {
       try {
@@ -53,8 +54,8 @@ public class LoadData {
           throw new MissingValueException();
 
         // create instance of production data
-        ProductionData production =
-            new ProductionData(year, new Value(value, unit, flag, flagReader.getFlagDesc(flag)));
+        ProductionData production = new ProductionData(year,
+            new Value(value, unit, flag, flagReader.getFlagDesc(flag)));
 
         // * Area
         int areaCode = row.get(Field.AREA_CODE.name).length() == 0 ? 0
@@ -114,6 +115,7 @@ public class LoadData {
         e.printStackTrace();
       }
     });
+
     return container;
   }
 }
