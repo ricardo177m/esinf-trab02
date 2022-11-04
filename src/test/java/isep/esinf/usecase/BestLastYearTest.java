@@ -30,7 +30,7 @@ public class BestLastYearTest {
   @BeforeAll
   public static void setup() throws FileNotFoundException {
     CSVReader csvReader = new CSVReader(
-        "./../faodata/TEST_DO_NOT_DELETE.csv");
+        "./../faodata/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
     List<Map<String, String>> dataList = csvReader.read();
 
     // Area: code; Item: code; Element: code
@@ -48,12 +48,12 @@ public class BestLastYearTest {
 
     ArrayList<Area> expected = new ArrayList<>();
     // Area france = new AreaByCode(68, "'250", "France");
-    Area germany = new AreaByCode(79, "'276", "Germany");
+    // Area germany = new AreaByCode(79, "'276", "Germany");
     // Area italy = new AreaByCode(106, "'380", "Italy");
-    // Area spain = new AreaByCode(203, "'724", "Spain");
+    Area spain = new AreaByCode(203, "'724", "Spain");
     // Area portugal = new AreaByCode(174, "'620", "Portugal");
 
-    expected.add(germany);
+    expected.add(spain);
 
     assertEquals(expected.toString(), actual.toString());
   }
