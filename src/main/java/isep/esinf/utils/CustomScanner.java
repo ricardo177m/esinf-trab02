@@ -20,7 +20,7 @@ public class CustomScanner {
   public CustomScanner(String filename) throws FileNotFoundException {
     file = new File(filename);
     if (!file.exists())
-      throw new FileNotFoundException("The file does not exist!");
+      throw new FileNotFoundException(String.format("The file %s does not exist!", filename));
     br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
   }
 

@@ -1,26 +1,39 @@
 package isep.esinf.usecase;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.logging.Logger;
+import isep.esinf.exceptions.MissingValueException;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.Element;
 import isep.esinf.model.Item;
 import isep.esinf.model.ProductionData;
 import isep.esinf.model.Value;
+import isep.esinf.shared.Constants;
 import isep.esinf.utils.Field;
+import isep.esinf.utils.FlagReader;
+import isep.esinf.utils.PropertiesUtils;
 
 /**
- * Alínea 1 - Load FAOSTAT data from a file into an AVL tree.
+ * Alínea 1 - Load FAOSTAT data from a csv file into an AVL tree.
  *
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class LoadData {
   public static Container execute(List<Map<String, String>> data, Class<? extends Area> areaClass,
-      Class<? extends Item> itemClass, Class<? extends Element> elementClass) {
-    // import data from a csv file into BSTs
+      Class<? extends Item> itemClass, Class<? extends Element> elementClass)
+      throws FileNotFoundException {
     Container container = new Container();
+
+    // get properties
+    Properties props = PropertiesUtils.getProperties();
+
+    // get flags
+    FlagReader flagReader = new FlagReader(props.getProperty(Constants.PARAMS_FLAGS_FILEPATH));
+    flagReader.read();
 
     // Area > Item > Element > ProductionData
     Logger.getLogger(LoadData.class.getName())
@@ -28,7 +41,22 @@ public class LoadData {
 
     data.forEach(row -> {
       try {
-        // Area
+        // * ProductionData
+        int year = Integer.parseInt(row.get(Field.YEAR.name));
+        double value = row.get(Field.VALUE.name).length() == 0 ? 0
+            : Double.parseDouble(row.get(Field.VALUE.name));
+        String unit = row.get(Field.UNIT.name);
+        String flag = row.get(Field.FLAG.name);
+
+        // ignore lines with "missing value" flag
+        if (flag.equals(flagReader.getMissingValueFlag()))
+          throw new MissingValueException();
+
+        // create instance of production data
+        ProductionData production =
+            new ProductionData(year, new Value(value, unit, flag, flagReader.getFlagDesc(flag)));
+
+        // * Area
         int areaCode = row.get(Field.AREA_CODE.name).length() == 0 ? 0
             : Integer.parseInt(row.get(Field.AREA_CODE.name));
         String areaM49 = row.get(Field.AREA_M49.name);
@@ -45,7 +73,7 @@ public class LoadData {
           found = newArea;
         }
 
-        // Item
+        // * Item
         int itemCode = row.get(Field.ITEM_CODE.name).length() == 0 ? 0
             : Integer.parseInt(row.get(Field.ITEM_CODE.name));
         String itemCpc = row.get(Field.ITEM_CPC.name);
@@ -62,7 +90,7 @@ public class LoadData {
           foundItem = newItem;
         }
 
-        // Element
+        // * Element
         int elementCode = row.get(Field.ELEMENT_CODE.name).length() == 0 ? 0
             : Integer.parseInt(row.get(Field.ELEMENT_CODE.name));
         String elementName = row.get(Field.ELEMENT.name);
@@ -78,19 +106,10 @@ public class LoadData {
           foundElement = newElement;
         }
 
-        // ProductionData
-        int year = Integer.parseInt(row.get(Field.YEAR.name));
-        double value = row.get(Field.VALUE.name).length() == 0 ? 0
-            : Double.parseDouble(row.get(Field.VALUE.name));
-        String unit = row.get(Field.UNIT.name);
-        String flag = row.get(Field.FLAG.name);
-
-        // create instance of production data
-        // TODO add flag description & ignore lines with "data unavailable" flag (!)
-        ProductionData production =
-            new ProductionData(year, new Value(value, unit, flag, "Flag Description placeholder"));
-
+        // add production data to the element
         foundElement.addProductionData(production);
+      } catch (MissingValueException e) {
+        Logger.getLogger(LoadData.class.getName()).info("Missing value flag, ignoring line...");
       } catch (Exception e) {
         e.printStackTrace();
       }
