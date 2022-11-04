@@ -208,6 +208,12 @@ public class LoadDataTest {
   public void testLoadTonsOfData() throws FileNotFoundException {
     Properties props = PropertiesUtils.getProperties();
     String dataPath = props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH);
+    String checkEnable = props.getProperty(Constants.PARAMS_ENABLE_BIG_TEST);
+
+    if (checkEnable == null || !checkEnable.toLowerCase().equals("yes")) {
+      System.out.println("Skipping big test.");
+      return;
+    }
 
     CSVReader csvReader = new CSVReader(dataPath + Constants.DATAFILE_WORLD_LARGE);
     Instant start = Instant.now();
