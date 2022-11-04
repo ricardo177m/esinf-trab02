@@ -1,5 +1,6 @@
 package isep.esinf.usecase;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,6 @@ import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.utils.TwoDNode;
 import isep.esinf.utils.TwoDTree;
-import java.awt.geom.Point2D;
 
 /**
  * @author André Barros
@@ -17,8 +17,6 @@ import java.awt.geom.Point2D;
  */
 public class LoadGeographicalData {
   private Map<String, Map<String, String>> mapListToMap(List<Map<String, String>> list) {
-    if (list == null)
-      return null;
     Map<String, Map<String, String>> map = new HashMap<>();
     for (Map<String, String> m : list)
       map.put(m.get("area"), m);
