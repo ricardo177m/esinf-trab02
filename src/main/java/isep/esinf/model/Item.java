@@ -82,4 +82,9 @@ public abstract class Item implements Comparable<Item> {
   public String toString() {
     return "Item{" + "code=" + code + ", cpc=" + cpc + ", item=" + item + '}';
   }
+
+  public Iterable<Element> getElements(){
+    return elements.inOrder();
+  }
+
 }
