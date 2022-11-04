@@ -46,7 +46,7 @@ public class AccumulatedProductionInAreaTest {
     Double sum = aInArea.execute(-100.0, -100.0, 100.0, 100.0, itemCode, elementCode, 1980,
         container, geoData);
 
-    assertEquals(200, sum);
+    assertEquals(0, sum);
   }
 
   /*
@@ -66,7 +66,8 @@ public class AccumulatedProductionInAreaTest {
   }
 
   /*
-   * Test if the sum of production is zero when the item code is not in the container
+   * Test if the sum of production is zero when the item code is not in the
+   * container
    */
   @Test
   public void testSumProductionZeroWhenItemCodeNotInContainer() {
@@ -82,7 +83,8 @@ public class AccumulatedProductionInAreaTest {
   }
 
   /*
-   * Test if the sum of production is zero when the element code is not in the container
+   * Test if the sum of production is zero when the element code is not in the
+   * container
    */
   @Test
   public void testSumProductionZeroWhenElementCodeNotInContainer() {
@@ -114,7 +116,8 @@ public class AccumulatedProductionInAreaTest {
   }
 
   /*
-   * Test if the sum of production is zero when the year is in the container but it do not
+   * Test if the sum of production is zero when the year is in the container but
+   * it do not
    * corresponds to item code
    */
   @Test
@@ -172,8 +175,7 @@ public class AccumulatedProductionInAreaTest {
     int itemCode = 8;
     int elementCode = 4;
 
-    Double sum =
-        aInArea.execute(-100.0, -100.0, 100.0, 100.0, itemCode, elementCode, 1980, container, null);
+    Double sum = aInArea.execute(-100.0, -100.0, 100.0, 100.0, itemCode, elementCode, 1980, container, null);
 
     assertEquals(-1, sum);
   }
@@ -188,8 +190,7 @@ public class AccumulatedProductionInAreaTest {
     int itemCode = 8;
     int elementCode = 4;
 
-    Double sum =
-        aInArea.execute(-100.0, -100.0, 100.0, 100.0, itemCode, elementCode, 1980, null, geoData);
+    Double sum = aInArea.execute(-100.0, -100.0, 100.0, 100.0, itemCode, elementCode, 1980, null, geoData);
 
     assertEquals(-1, sum);
   }
@@ -243,7 +244,8 @@ public class AccumulatedProductionInAreaTest {
   }
 
   /*
-   * Test sum production with coords that are in the container but do not match any area
+   * Test sum production with coords that are in the container but do not match
+   * any area
    */
   @Test
   public void testSumProductionWithCoordsNotInArea() {
@@ -298,8 +300,7 @@ public class AccumulatedProductionInAreaTest {
     int itemCode = 9;
     int elementCode = 6;
 
-    Double sum =
-        aInArea.execute(200, 200, -100, -100, itemCode, elementCode, 1987, container, geoData);
+    Double sum = aInArea.execute(200, 200, -100, -100, itemCode, elementCode, 1987, container, geoData);
 
     assertEquals(1800, sum);
   }
@@ -314,8 +315,7 @@ public class AccumulatedProductionInAreaTest {
     int itemCode = 1;
     int elementCode = 1;
 
-    Double sum =
-        aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 1980, container, geoData);
+    Double sum = aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 1980, container, geoData);
 
     assertEquals(800, sum);
   }
@@ -327,13 +327,11 @@ public class AccumulatedProductionInAreaTest {
   public void testSumProductionWithFile() throws FileNotFoundException {
     System.out.println("testSumProductionWithFile");
 
-    CSVReader r =
-        new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+    CSVReader r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container =
-        LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
     r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
 
@@ -342,8 +340,7 @@ public class AccumulatedProductionInAreaTest {
     int itemCode = 689;
     int elementCode = 5419;
 
-    Double sum =
-        aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 2009, container, geoData);
+    Double sum = aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 2009, container, geoData);
 
     assertEquals(29820.0, sum);
   }
@@ -355,13 +352,11 @@ public class AccumulatedProductionInAreaTest {
   public void testSumProductionWithFile2() throws FileNotFoundException {
     System.out.println("testSumProductionWithFile2");
 
-    CSVReader r =
-        new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+    CSVReader r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container =
-        LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
     r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
 
@@ -370,8 +365,7 @@ public class AccumulatedProductionInAreaTest {
     int itemCode = 1062;
     int elementCode = 5313;
 
-    Double sum =
-        aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 1977, container, geoData);
+    Double sum = aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 1977, container, geoData);
 
     assertEquals(53000.0, sum);
   }
