@@ -80,9 +80,7 @@ public abstract class Element implements Comparable<Element> {
   }
 
 
-  private double sum;
   public double valueSumTimeInterval(int min, int max){
-    sum = 0;
     return valueSumTimeInterval(productionData.root(), min,  max);
   }
 
@@ -93,14 +91,12 @@ public abstract class Element implements Comparable<Element> {
     }
 
     if(node.getElement().getYear() >= min && node.getElement().getYear() <= max){
-      sum += node.getElement().getValue();
-      valueSumTimeInterval(node.getLeft(), min,  max);
+      return node.getElement().getValue() + 
+      valueSumTimeInterval(node.getLeft(), min,  max) +
       valueSumTimeInterval(node.getRight(), min,  max);
     }
-    else if(node.getElement().getYear() < min){ valueSumTimeInterval(node.getRight(), min,  max); }
-    else if(node.getElement().getYear() > max){ valueSumTimeInterval(node.getLeft(), min,  max); }
-
-    return sum;
+    else if(node.getElement().getYear() < min){ return valueSumTimeInterval(node.getRight(), min,  max); }
+    else { return valueSumTimeInterval(node.getLeft(), min,  max); }
   }
 
 }
