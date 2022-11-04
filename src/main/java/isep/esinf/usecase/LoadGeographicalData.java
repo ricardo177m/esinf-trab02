@@ -3,6 +3,7 @@ package isep.esinf.usecase;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.utils.TwoDTree;
@@ -30,6 +31,7 @@ public class LoadGeographicalData {
   public TwoDTree<Area> execute(Container container, List<Map<String, String>> geoData) {
     if (container == null || geoData == null)
       return null;
+
     Map<String, Map<String, String>> map = mapListToMap(geoData);
     TwoDTree<Area> tree = new TwoDTree<>();
 
