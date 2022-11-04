@@ -30,7 +30,7 @@ public class BestLastYearTest {
   @BeforeAll
   public static void setup() throws FileNotFoundException {
     CSVReader csvReader = new CSVReader(
-        "./src/test/java/isep/esinf/data/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+        "./../faodata/TEST_DO_NOT_DELETE.csv");
     List<Map<String, String>> dataList = csvReader.read();
 
     // Area: code; Item: code; Element: code
@@ -38,16 +38,23 @@ public class BestLastYearTest {
   }
 
   @Test
-  public void testWithMockByCodeAndN1() {
-    item = new ItemByCode(1, "2", "Item 1");
-    element = new ElementByCode(1, "Element 1");
+  public void testWithRootsAndProduction() {
+    item = new ItemByCode(1720, "F1720", "Roots and Tubers, Total");
+    element = new ElementByCode(5510, "Production");
 
     bestLastYear = new BestLastYear(data, item, element);
 
     ArrayList<Area> actual = bestLastYear.execute(1);
 
     ArrayList<Area> expected = new ArrayList<>();
+    // Area france = new AreaByCode(68, "'250", "France");
+    Area germany = new AreaByCode(79, "'276", "Germany");
+    // Area italy = new AreaByCode(106, "'380", "Italy");
+    // Area spain = new AreaByCode(203, "'724", "Spain");
+    // Area portugal = new AreaByCode(174, "'620", "Portugal");
 
-    assertEquals(expected, actual);
+    expected.add(germany);
+
+    assertEquals(expected.toString(), actual.toString());
   }
 }
