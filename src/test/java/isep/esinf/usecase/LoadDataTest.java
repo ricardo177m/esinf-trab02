@@ -4,14 +4,20 @@ import org.junit.jupiter.api.Test;
 import isep.esinf.mock.MockContainer;
 import isep.esinf.model.Container;
 import isep.esinf.model.comparators.AreaByCode;
+import isep.esinf.model.comparators.AreaByName;
 import isep.esinf.model.comparators.ElementByCode;
+import isep.esinf.model.comparators.ElementByName;
 import isep.esinf.model.comparators.ItemByCode;
+import isep.esinf.model.comparators.ItemByName;
+import isep.esinf.shared.Constants;
 import isep.esinf.utils.CSVReader;
+import isep.esinf.utils.PropertiesUtils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import org.junit.jupiter.api.BeforeEach;
 
 public class LoadDataTest {
@@ -23,6 +29,11 @@ public class LoadDataTest {
     container = (new MockContainer()).mockByCodeMini();
   }
 
+  /**
+   * Test the load of data from a CSV file.
+   *
+   * @throws FileNotFoundException
+   */
   @Test
   public void testSimillarContainersExtraMiniDataset() throws FileNotFoundException {
     CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/mock_extramini.csv");
@@ -36,8 +47,13 @@ public class LoadDataTest {
     assertEquals(container, loaded);
   }
 
+  /**
+   * Test if the data loader is creating the correct container by loading a dataset that represents the mock data.
+   *
+   * @throws FileNotFoundException
+   */
   @Test
-  public void testSimillarContainersMiniDataset() throws FileNotFoundException {
+  public void testMiniDataset() throws FileNotFoundException {
     CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/mock_mini.csv");
     List<Map<String, String>> data = csvReader.read();
 
@@ -47,6 +63,11 @@ public class LoadDataTest {
     assertEquals(container, loaded);
   }
 
+  /**
+   * Test if the loaded data is different from the container with elements to sanitize.
+   *
+   * @throws FileNotFoundException
+   */
   @Test
   public void testDifferentContainers() throws FileNotFoundException {
     CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/not_mock_mini.csv");
@@ -58,6 +79,11 @@ public class LoadDataTest {
     assertNotEquals(container, loaded);
   }
 
+  /**
+   * Test the loading of a CSV file with no data in it.
+   *
+   * @throws FileNotFoundException
+   */
   @Test
   public void testEmpty() throws FileNotFoundException {
     CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/only_headers.csv");
@@ -69,6 +95,78 @@ public class LoadDataTest {
     assertEquals(c, loaded);
   }
 
-  // TODO test with big files
-  // TODO test flag Missing Value
+  /**
+   * Test if the data loader is creating the correct container by loading a dataset that represents the mock data by name.
+   *
+   * @throws FileNotFoundException
+   */
+  @Test
+  public void testLoadByNameMiniDataset() throws FileNotFoundException {
+    CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/mock_mini.csv");
+    List<Map<String, String>> data = csvReader.read();
+
+    container = (new MockContainer()).mockByNameMini();
+
+    // Area: name;  Item: name;  Element: name
+    Container loaded = LoadData.execute(data, AreaByName.class, ItemByName.class, ElementByName.class);
+
+    assertEquals(container, loaded);
+  }
+
+  /**
+   * Test if the data loader is actually inserting by name/code, where the trees will have a different format.
+   *
+   * @throws FileNotFoundException
+   */
+  @Test
+  public void testTreesWithDifferentFormats() throws FileNotFoundException {
+    CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/mock_mini.csv");
+    List<Map<String, String>> data = csvReader.read();
+
+    container = (new MockContainer()).mockByNameMini();
+
+    // Area: code;  Item: code;  Element: code
+    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    assertNotEquals(container, loaded);
+  }
+
+  /**
+   * Test if the data loader is ignoring lines which have the "missing value" flag.
+   *
+   * @throws FileNotFoundException
+   */
+  @Test
+  public void testLoadByNameMiniWithMissingValueFlags() throws FileNotFoundException {
+    CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/mock_mini_missing_value_flag.csv");
+    List<Map<String, String>> data = csvReader.read();
+
+    container = (new MockContainer()).mockByCodeMiniVersionMissingFlags();
+
+    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    assertEquals(container, loaded);
+  }
+
+  /**
+   * Test if the data loader is capable of loading a big dataset.
+   * ! WARNING: This test takes a long time to run.
+   *
+   * @throws FileNotFoundException
+   */
+  @Test
+  public void testLoadTonsOfData() throws FileNotFoundException {
+    Properties props = PropertiesUtils.getProperties();
+    String dataPath = props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH);
+
+    CSVReader csvReader = new CSVReader(dataPath + Constants.DATAFILE_WORLD_LARGE);
+    List<Map<String, String>> data = csvReader.read();
+
+    // Area: code;  Item: code;  Element: code
+    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    // file has 2807800 lines without the header
+    // 211 valid areas
+    assertEquals(211, loaded.getNOfAreas());
+  }
 }
