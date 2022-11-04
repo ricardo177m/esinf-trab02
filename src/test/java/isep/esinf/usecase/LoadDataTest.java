@@ -213,13 +213,13 @@ public class LoadDataTest {
     Instant start = Instant.now();
     List<Map<String, String>> data = csvReader.read();
     Instant end = Instant.now();
-    System.out.println("Time to read CSV file: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
+    System.out.println("Time to read CSV file: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
 
     // Area: code; Item: code; Element: code
     start = Instant.now();
     Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
     end = Instant.now();
-    System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
+    System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
 
     // file has 2807800 lines without the header
     // 211 valid areas

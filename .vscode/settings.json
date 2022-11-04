@@ -1,3 +1,6 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.test.config": {
+    "vmArgs": ["-Xms1G", "-Xmx4G"]
+  }
 }

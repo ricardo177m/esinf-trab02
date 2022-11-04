@@ -42,9 +42,9 @@ public class LoadGeographicalDataTest {
     geoData.add(Map.of("area", "Spain", "latitude", "40.4637", "longitude", "-3.7492"));
     geoData.add(Map.of("area", "Italy", "latitude", "41.8719", "longitude", "12.5674"));
 
-    tree.insert(italy, 41.8719, 12.5674);
-    tree.insert(portugal, 39.3999, -8.2245);
     tree.insert(spain, 40.4637, -3.7492);
+    tree.insert(portugal, 39.3999, -8.2245);
+    tree.insert(italy, 41.8719, 12.5674);
 
     TwoDTree<Area> result = loadGeographicalData.execute(c, geoData);
 
@@ -147,20 +147,21 @@ public class LoadGeographicalDataTest {
 
     TwoDTree<Area> result = loadGeographicalData.execute(c, geoData);
 
+    tree.insert(mozambique, -18.665695, 35.529562);
+    tree.insert(pitcairnIslands, -24.703615, -127.439308);
+    tree.insert(niue, -19.054445, -169.867233);
     tree.insert(burundi, -3.3731, 29.9189);
     tree.insert(faroeIslands, 61.892635, -6.911806);
     tree.insert(israel, 31.046051, 34.851612);
     tree.insert(eswatini, -26.522503, 31.465866);
-    tree.insert(niue, -19.054445, -169.867233);
-    tree.insert(mozambique, -18.665695, 35.529562);
-    tree.insert(pitcairnIslands, -24.703615, -127.439308);
 
     assertEquals(result.toString(), tree.toString());
 
   }
 
   /*
-   * Test loadGeographicalData with file TestLoadGeoData_Small.csv crossing data with mock container
+   * Test loadGeographicalData with file TestLoadGeoData_Small.csv crossing data
+   * with mock container
    */
   @Test
   public void testLoadGeographicalDataWithMockContainer() throws FileNotFoundException {
@@ -188,13 +189,11 @@ public class LoadGeographicalDataTest {
   public void testLoadGeographicalDataWithFilesTreeSize() throws FileNotFoundException {
     System.out.println("testLoadGeographicalDataWithFilesTreeSize");
 
-    CSVReader r =
-        new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+    CSVReader r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container =
-        LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
     r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
 
@@ -211,13 +210,11 @@ public class LoadGeographicalDataTest {
   @Test
   public void testLoadGeographicalDataWithFilesTreeHeight() throws FileNotFoundException {
     System.out.println("testLoadGeographicalDataWithFilesTreeHeight");
-    CSVReader r =
-        new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+    CSVReader r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container =
-        LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
     r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
 
@@ -225,7 +222,7 @@ public class LoadGeographicalDataTest {
 
     TwoDTree<Area> result = loadGeographicalData.execute(container, geoData);
 
-    assertEquals(3, result.height());
+    assertEquals(2, result.height());
   }
 
   /*
@@ -234,13 +231,11 @@ public class LoadGeographicalDataTest {
   @Test
   public void testLoadGeographicalDataWithFilesTree() throws FileNotFoundException {
     System.out.println("testLoadGeographicalDataWithFilesTree");
-    CSVReader r =
-        new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+    CSVReader r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container =
-        LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
     r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
 
@@ -250,11 +245,11 @@ public class LoadGeographicalDataTest {
 
     TwoDTree<Area> tree = new TwoDTree<>();
 
-    tree.insert(new AreaByCode(68, "'250", "France"), 46.227638, 2.213749);
-    tree.insert(new AreaByCode(79, "'276", "Germany"), 51.165691, 10.451526);
     tree.insert(new AreaByCode(106, "'380", "Italy"), 41.87194, 12.56738);
-    tree.insert(new AreaByCode(174, "'620", "Portugal"), 39.399872, -8.224454);
     tree.insert(new AreaByCode(203, "'724", "Spain"), 40.463667, -3.74922);
+    tree.insert(new AreaByCode(174, "'620", "Portugal"), 39.399872, -8.224454);
+    tree.insert(new AreaByCode(79, "'276", "Germany"), 51.165691, 10.451526);
+    tree.insert(new AreaByCode(68, "'250", "France"), 46.227638, 2.213749);
 
     assertEquals(result.toString(), tree.toString());
   }

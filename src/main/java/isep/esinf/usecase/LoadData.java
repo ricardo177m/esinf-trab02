@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import isep.esinf.exceptions.MissingValueException;
 import isep.esinf.model.Area;
@@ -110,7 +109,8 @@ public class LoadData {
         // add production data to the element
         foundElement.addProductionData(production);
       } catch (MissingValueException e) {
-        Logger.getLogger(LoadData.class.getName()).info("Missing value flag, ignoring line...");
+        // Logger.getLogger(LoadData.class.getName()).info("Missing value flag, ignoring
+        // line...");
       } catch (Exception e) {
         e.printStackTrace();
       }
