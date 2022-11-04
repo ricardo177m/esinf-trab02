@@ -1,11 +1,15 @@
 package isep.esinf.usecase;
 
-import javax.swing.text.AbstractDocument.Content;
+import java.util.AbstractMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import isep.esinf.exceptions.InvalidTimeIntervalException;
 import isep.esinf.exceptions.NullAreaException;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
+import isep.esinf.model.Element;
+import isep.esinf.model.Item;
 import isep.esinf.model.comparators.AreaByName;
 
 /**
@@ -43,7 +47,20 @@ public class AverageProductionForArea {
     }
   }
   
-  public void execute() {
-    throw new UnsupportedOperationException("Not supported yet.");
+  public TreeMap<Map.Entry<String,String>, Double> execute() {
+    TreeMap<Map.Entry<String,String>, Double> map = new TreeMap<>();
+
+    Iterable<Item> items = area.getItems();
+
+    for (Item item : items) {
+      Iterable<Element> elements = item.getElements();
+      for (Element element : elements) {
+        Map.Entry<String,String> entry = new AbstractMap.SimpleEntry<String, String>(item.getItem(), element.getElement());  
+        map.put(entry, element.valueSumTimeInterval(firstYear, lastYear));    
+      }
+    }
+
+    return map;
+
   }
 }
