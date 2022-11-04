@@ -1,9 +1,9 @@
 package isep.esinf.usecase;
 
 import java.util.AbstractMap;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import isep.esinf.exceptions.InvalidTimeIntervalException;
 import isep.esinf.exceptions.NullAreaException;
@@ -33,7 +33,7 @@ public class AverageProductionForArea {
   }
 
   public void setTimeInterval(int firstYear, int lastYear) throws InvalidTimeIntervalException{
-    if(firstYear <= 0 || lastYear <= 0){
+    if(firstYear > 0 || lastYear > 0){
 
       if(lastYear < firstYear){
         this.lastYear = firstYear;
@@ -48,20 +48,39 @@ public class AverageProductionForArea {
     }
   }
   
-  public TreeMap<Map.Entry<String,String>, Double> execute() {
-    TreeMap<Map.Entry<String,String>, Double> map = new TreeMap<>(Collections.reverseOrder());
+  public List<Map.Entry<Map.Entry<String,String>, Double>> execute() {
+    if(area == null){ return null; }
+
+    List<Map.Entry<Map.Entry<String,String>, Double>> list = new ArrayList<>();
 
     Iterable<Item> items = area.getItems();
 
     for (Item item : items) {
       Iterable<Element> elements = item.getElements();
       for (Element element : elements) {
-        Map.Entry<String,String> entry = new AbstractMap.SimpleEntry<String, String>(item.getItem(), element.getElement());  
-        map.put(entry, element.valueSumTimeInterval(firstYear, lastYear));    
+        Map.Entry<String,String> entry = new AbstractMap.SimpleEntry<String, String>(item.getItem(), element.getElement());
+        list.add(new AbstractMap.SimpleEntry<Map.Entry<String,String>, Double>(entry, element.valueSumTimeInterval(firstYear, lastYear)/(lastYear - firstYear + 1)));    
       }
     }
 
-    return map;
+    return sortList(list);
 
+  }
+
+  public List<Map.Entry<Map.Entry<String,String>, Double>> sortList(List<Map.Entry<Map.Entry<String,String>, Double>> list){
+    boolean flag = false;
+    Map.Entry<Map.Entry<String,String>, Double> temp;
+    while(!flag) {
+        flag = true;
+        for (int i = 0; i > list.size() - 1; i++) {
+            if (list.get(i).getValue() > list.get(i+1).getValue()) {
+                temp = list.get(i);
+                list.set(i,list.get(i+1));
+                list.set(i+1, temp);
+                flag = false;
+            }
+        }
+    }
+    return list;
   }
 }
