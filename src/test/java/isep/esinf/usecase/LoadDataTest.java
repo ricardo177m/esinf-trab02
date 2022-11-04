@@ -20,18 +20,30 @@ public class LoadDataTest {
   @BeforeEach
   public void setup() {
     // create a container with elements to sanitize
-    container = (new MockContainer()).mockByCodeExtraMini();
+    container = (new MockContainer()).mockByCodeMini();
   }
 
   @Test
-  public void testSimillarContainers() throws FileNotFoundException {
+  public void testSimillarContainersExtraMiniDataset() throws FileNotFoundException {
     CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/mock_extramini.csv");
+    List<Map<String, String>> data = csvReader.read();
+
+    container = (new MockContainer()).mockByCodeExtraMini();
+
+    // Area: code;  Item: code;  Element: code
+    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    assertEquals(container, loaded);
+  }
+
+  @Test
+  public void testSimillarContainersMiniDataset() throws FileNotFoundException {
+    CSVReader csvReader = new CSVReader("./src/test/java/isep/esinf/data/mock_mini.csv");
     List<Map<String, String>> data = csvReader.read();
 
     // Area: code;  Item: code;  Element: code
     Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
-    // TODO check equals for every class
     assertEquals(container, loaded);
   }
 
@@ -58,4 +70,5 @@ public class LoadDataTest {
   }
 
   // TODO test with big files
+  // TODO test flag Missing Value
 }
