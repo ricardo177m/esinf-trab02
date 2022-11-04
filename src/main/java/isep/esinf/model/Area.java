@@ -84,4 +84,8 @@ public abstract class Area implements Comparable<Area> {
   public String toString() {
     return "Area{" + "name=" + area + ", code=" + code + ", m49Code=" + m49Code + '}';
   }
+
+  public Iterable<Item> getItems(){
+    return items.inOrder();
+  }
 }
