@@ -1,6 +1,8 @@
 package isep.esinf.usecase;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.Element;
@@ -68,7 +70,8 @@ public class BestLastYear {
 
     if (topN.size() > N) {
       /* Remove the last N elements from the ArrayList */
-      for (int i = 0; i < topN.size() - N; i++) {
+      int size = topN.size();
+      for (int i = 0; i < size - N; i++) {
         topN.remove(topN.size() - 1);
       }
     }
@@ -149,6 +152,11 @@ public class BestLastYear {
     for (AreaValue areaValue : avl.inOrder()) {
       orderedAreas.add(areaValue.area);
     }
+
+    /*
+     * Reverse the ArrayList to get the areas ordered by value in descending order
+     */
+    Collections.reverse(orderedAreas);
 
     return orderedAreas;
   }
