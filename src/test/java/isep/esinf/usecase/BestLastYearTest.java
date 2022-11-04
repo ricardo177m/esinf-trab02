@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,9 @@ import isep.esinf.model.Item;
 import isep.esinf.model.comparators.AreaByCode;
 import isep.esinf.model.comparators.ElementByCode;
 import isep.esinf.model.comparators.ItemByCode;
+import isep.esinf.shared.Constants;
 import isep.esinf.utils.CSVReader;
+import isep.esinf.utils.PropertiesUtils;
 
 public class BestLastYearTest {
   BestLastYear bestLastYear;
@@ -28,8 +31,10 @@ public class BestLastYearTest {
 
   @BeforeAll
   public static void setup() throws FileNotFoundException {
+    Properties props = PropertiesUtils.getProperties();
+    String BASE_PATH = props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH);
     CSVReader csvReader = new CSVReader(
-        "./../faodata/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+        BASE_PATH + Constants.DATAFILE_FR_GER_IT_PT_SP_SMALL);
     List<Map<String, String>> dataList = csvReader.read();
 
     // Area: code; Item: code; Element: code

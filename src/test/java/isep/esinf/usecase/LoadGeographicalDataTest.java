@@ -1,12 +1,16 @@
 package isep.esinf.usecase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
 import org.junit.jupiter.api.Test;
+
 import isep.esinf.mock.MockContainer;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
@@ -252,5 +256,31 @@ public class LoadGeographicalDataTest {
     tree.insert(new AreaByCode(68, "'250", "France"), 46.227638, 2.213749);
 
     assertEquals(result.toString(), tree.toString());
+  }
+
+  @Test
+  public void testLoadGeographicalDataWithNullContainer() throws FileNotFoundException {
+    System.out.println("testLoadGeographicalDataWithNullContainer");
+    CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/TestLoadGeoData_Small.csv");
+
+    List<Map<String, String>> geoData = r.read();
+
+    TwoDTree<Area> result = loadGeographicalData.execute(null, geoData);
+
+    assertNull(result);
+  }
+
+  @Test
+  public void testLoadGeographicalDataWithNullGeoData() throws FileNotFoundException {
+    System.out.println("testLoadGeographicalDataWithNullGeoData");
+    CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/TestLoadGeoData_Small.csv");
+
+    List<Map<String, String>> containerData = r.read();
+
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    TwoDTree<Area> result = loadGeographicalData.execute(container, null);
+
+    assertNull(result);
   }
 }

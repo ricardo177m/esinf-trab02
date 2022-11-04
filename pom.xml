@@ -33,7 +33,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
         <configuration>
-          <argLine>-Xms1G -Xmx4G -XX:+HeapDumpOnOutOfMemoryError</argLine>
+          <argLine>${argLine} -Xms1G -Xmx4G -XX:+HeapDumpOnOutOfMemoryError</argLine>
         </configuration>
       </plugin>
       <plugin>
@@ -42,23 +42,16 @@
         <version>${jacoco-maven-plugin.version}</version>
         <executions>
           <execution>
-            <id>pre-unit-test</id>
             <goals>
               <goal>prepare-agent</goal>
             </goals>
           </execution>
+          <!-- attached to Maven test phase -->
           <execution>
-            <id>post-unit-test</id>
+            <id>report</id>
             <phase>test</phase>
             <goals>
               <goal>report</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>check-unit-test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>check</goal>
             </goals>
           </execution>
         </executions>
