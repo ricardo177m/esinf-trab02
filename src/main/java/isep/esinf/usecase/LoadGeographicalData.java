@@ -1,11 +1,14 @@
 package isep.esinf.usecase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
+import isep.esinf.utils.TwoDNode;
 import isep.esinf.utils.TwoDTree;
+import java.awt.geom.Point2D;
 
 /**
  * @author André Barros
@@ -33,14 +36,20 @@ public class LoadGeographicalData {
     Map<String, Map<String, String>> map = mapListToMap(geoData);
     TwoDTree<Area> tree = new TwoDTree<>();
 
+    List<TwoDNode<Area>> nodes = new ArrayList<>();
+
     for (Area area : container.getAreas()) {
       Map<String, String> data = map.get(area.getArea());
       if (data == null)
         continue;
 
-      tree.insert(area, Double.parseDouble(data.get("latitude")),
-          Double.parseDouble(data.get("longitude")));
+      nodes.add(
+          new TwoDNode<Area>(area, null, null, new Point2D.Double(Double.parseDouble(data.get("latitude")),
+              Double.parseDouble(data.get("longitude")))));
+
     }
+
+    tree.buildTree(nodes);
 
     return tree;
   }
