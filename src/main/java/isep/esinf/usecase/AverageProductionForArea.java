@@ -1,6 +1,7 @@
 package isep.esinf.usecase;
 
 import java.util.AbstractMap;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -48,7 +49,7 @@ public class AverageProductionForArea {
   }
   
   public TreeMap<Map.Entry<String,String>, Double> execute() {
-    TreeMap<Map.Entry<String,String>, Double> map = new TreeMap<>();
+    TreeMap<Map.Entry<String,String>, Double> map = new TreeMap<>(Collections.reverseOrder());
 
     Iterable<Item> items = area.getItems();
 
