@@ -47,8 +47,8 @@ public class Value {
     Value value = (Value) o;
 
     // compare 2 doubles
-    if (Math.abs(this.getValue() - value.getValue()) <= 0.000001)
-      return true;
+    if (Math.abs(this.getValue() - value.getValue()) > 0.000001)
+      return false;
 
     // different
     if (value.getUnit() == null ^ this.getUnit() == null)
