@@ -383,4 +383,25 @@ public class MockContainer {
 
     return container;
   }
+
+
+  public Container mockByNameExtraMini() {
+    Container container = new Container();
+
+    Area a1 = new AreaByName(100, "200", "Portugal");
+
+    Item i1 = new ItemByName(1, "2", "Item 1");
+
+    Element e1 = new ElementByName(1, "Element 1");
+
+    ProductionData p1 = new ProductionData(1980,
+        new Value(10, "testunit", "A", "Official figure"));
+
+    a1.addItem(i1);
+    i1.addElement(e1);
+    e1.addProductionData(p1);
+    container.addArea(a1);
+
+    return container;
+  }
 }
