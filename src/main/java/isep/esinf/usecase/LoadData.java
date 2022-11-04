@@ -32,7 +32,7 @@ public class LoadData {
     Properties props = PropertiesUtils.getProperties();
 
     // get flags
-    FlagReader flagReader = new FlagReader(props.getProperty(Constants.PARAMS_FLAGS_FILEPATH));
+    FlagReader flagReader = new FlagReader(props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH) + Constants.DATAFILE_FLAGS);
     flagReader.read();
 
     // Area > Item > Element > ProductionData
