@@ -1,21 +1,19 @@
 package isep.esinf.utils;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class CSVReader {
-  private Scanner scanner;
+  private CustomScanner scanner;
 
   private final String TEMP_SEPARATOR = ";";
 
   public CSVReader(String fileName) throws FileNotFoundException {
-    File file = new File(fileName);
-    scanner = new Scanner(file);
+    scanner = new CustomScanner(fileName);
+    System.out.printf("Reading %s...%n", fileName);
   }
 
   public String[] readHeader() {
@@ -37,23 +35,24 @@ public class CSVReader {
         boolean insideString = false;
         separator = TEMP_SEPARATOR;
         for (int i = 0; i < line.length(); i++) {
-          if (line.charAt(i) == '"') insideString = !insideString;
-          if (line.charAt(i) == ',' && !insideString) line = line.substring(0, i) + TEMP_SEPARATOR + line.substring(i + 1);
+          if (line.charAt(i) == '"')
+            insideString = !insideString;
+          if (line.charAt(i) == ',' && !insideString)
+            line = line.substring(0, i) + TEMP_SEPARATOR + line.substring(i + 1);
         }
         line = line.replaceAll("\"", ""); // removes double quotas
       }
 
       // if (line.charAt(0) == '"') {
-      //   line = line.replaceAll("\",\"", TEMP_SEPARATOR); // removes '","'
-      //   line = line.substring(1, line.length() - 1); // removes first and last '"'
-      //   separator = TEMP_SEPARATOR;
+      // line = line.replaceAll("\",\"", TEMP_SEPARATOR); // removes '","'
+      // line = line.substring(1, line.length() - 1); // removes first and last '"'
+      // separator = TEMP_SEPARATOR;
       // }
 
       String[] lineFields = line.split(separator);
 
-      for (int i = 0; i < header.length; i++) {
+      for (int i = 0; i < header.length; i++)
         map.put(header[i], lineFields[i]);
-      }
 
       list.add(map);
     }

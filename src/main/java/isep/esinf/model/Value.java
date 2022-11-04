@@ -7,34 +7,22 @@ public class Value {
   private String flagDescription;
 
   public Value(double value, String unit, String flag, String flagDescription) {
-    setFlag(flagDescription);
-    setFlagDescription(flagDescription);
-    setUnit(unit);
-    setValue(value);
+    this.value = value;
+    this.unit = unit;
+    this.flag = flag;
+    this.flagDescription = flagDescription;
   }
 
   public double getValue() {
     return this.value;
   }
 
-  public void setValue(double value) {
-    this.value = value;
-  }
-
   public String getUnit() {
     return this.unit;
   }
 
-  public void setUnit(String unit) {
-    this.unit = unit;
-  }
-
   public String getFlag() {
     return this.flag;
-  }
-
-  public void setFlag(String flag) {
-    this.flag = flag;
   }
 
   public String getFlagDescription() {
@@ -45,4 +33,53 @@ public class Value {
     this.flagDescription = flagDescription;
   }
 
+  public Value clone() {
+    return new Value(value, unit, flag, flagDescription);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof Value)) {
+      return false;
+    }
+    Value value = (Value) o;
+
+    // compare 2 doubles
+    if (Math.abs(this.getValue() - value.getValue()) > 0.000001)
+      return false;
+
+    // different
+    if (value.getUnit() == null ^ this.getUnit() == null)
+      return false;
+
+    // both null
+    if (value.getUnit() == null && this.getUnit() == null)
+      return true;
+
+    if (!value.getUnit().equals(this.getUnit()))
+      return false;
+
+    // different
+    if (value.getFlag() == null ^ this.getFlag() == null)
+      return false;
+
+    // both null
+    if (value.getFlag() == null && this.getFlag() == null)
+      return true;
+
+    if (!value.getFlag().equals(this.getFlag()))
+      return false;
+
+    // different
+    if (value.getFlagDescription() == null ^ this.getFlagDescription() == null)
+      return false;
+
+    // both null
+    if (value.getFlagDescription() == null && this.getFlagDescription() == null)
+      return true;
+
+    return value.getFlagDescription().equals(this.getFlagDescription());
+  }
 }
