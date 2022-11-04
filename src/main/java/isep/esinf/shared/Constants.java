@@ -4,6 +4,7 @@ public class Constants {
   // properties parameters
   public static final String PARAMS_FILENAME = "config.properties";
   public static final String PARAMS_DATA_FOLDER_PATH = "data.folder.path";
+  public static final String PARAMS_ENABLE_BIG_TEST = "test.big.enabled";
 
   // data files in data folder
   public static final String DATAFILE_AREA_COORDINATES = "Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv";
