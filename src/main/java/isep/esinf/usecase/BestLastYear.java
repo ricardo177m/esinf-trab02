@@ -31,14 +31,13 @@ public class BestLastYear {
     this.item = item;
     this.element = element;
     /* Get only the Areas with the given item and element */
-    this.data = data.getAreasWithConditions(item, element);
+    this.data = (data == null ? null : data.getAreasWithConditions(item, element));
   }
 
   /**
    * Get the top N areas with the biggest value in the last year registered
    * in the data file.
    * 
-   * @param N Number of areas to be returned
    * @return Top N areas with the biggest value in the last year registered or
    *         null if there are no areas
    * @throws IllegalArgumentException if N is less than 1
@@ -110,10 +109,6 @@ public class BestLastYear {
    * @return An ArrayList with areas ordered by the value of the given year
    */
   private ArrayList<Area> orderAreasByValueOfYear(Container areas, int year) {
-    /* Check if areas have any element */
-    if (areas == null || areas.isEmpty())
-      return null;
-
     /* Inner class to order areas by it's value */
     class AreaValue implements Comparable<AreaValue> {
       Area area;
