@@ -22,10 +22,10 @@ public class CSVReader {
 
   public List<Map<String, String>> read() {
     String[] header = readHeader();
-    List<Map<String, String>> list = new ArrayList<>();
+    List<Map<String, String>> list = new ArrayList<>(100000);
 
     while (scanner.hasNextLine()) {
-      HashMap<String, String> map = new HashMap<>();
+      HashMap<String, String> map = new HashMap<>(header.length * 3);
 
       String line = scanner.nextLine();
       String separator = ",";
@@ -34,7 +34,8 @@ public class CSVReader {
       if (line.contains("\"")) {
         boolean insideString = false;
         separator = TEMP_SEPARATOR;
-        for (int i = 0; i < line.length(); i++) {
+        int length = line.length();
+        for (int i = 0; i < length; i++) {
           if (line.charAt(i) == '"')
             insideString = !insideString;
           if (line.charAt(i) == ',' && !insideString)

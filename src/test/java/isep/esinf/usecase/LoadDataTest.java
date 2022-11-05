@@ -205,7 +205,7 @@ public class LoadDataTest {
    * @throws FileNotFoundException
    */
   @Test
-  public void testLoadTonsOfData() throws FileNotFoundException {
+  public void testLoadTonsOfDataByCode() throws FileNotFoundException {
     Properties props = PropertiesUtils.getProperties();
     String dataPath = props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH);
     String checkEnable = props.getProperty(Constants.PARAMS_ENABLE_BIG_TEST);
@@ -224,6 +224,40 @@ public class LoadDataTest {
     // Area: code; Item: code; Element: code
     start = Instant.now();
     Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    end = Instant.now();
+    System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
+
+    // file has 2807800 lines without the header
+    // 211 valid areas
+    assertEquals(211, loaded.getNOfAreas());
+  }
+
+  /**
+   * Test if the data loader is capable of loading a big dataset.
+   * ! WARNING: This test takes a long time to run.
+   *
+   * @throws FileNotFoundException
+   */
+  @Test
+  public void testLoadTonsOfDataByName() throws FileNotFoundException {
+    Properties props = PropertiesUtils.getProperties();
+    String dataPath = props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH);
+    String checkEnable = props.getProperty(Constants.PARAMS_ENABLE_BIG_TEST);
+
+    if (checkEnable == null || !checkEnable.toLowerCase().equals("yes")) {
+      System.out.println("Skipping big test.");
+      return;
+    }
+
+    CSVReader csvReader = new CSVReader(dataPath + Constants.DATAFILE_WORLD_LARGE);
+    Instant start = Instant.now();
+    List<Map<String, String>> data = csvReader.read();
+    Instant end = Instant.now();
+    System.out.println("Time to read CSV file: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
+
+    // Area: area; Item: item; Element: element
+    start = Instant.now();
+    Container loaded = LoadData.execute(data, AreaByName.class, ItemByName.class, ElementByName.class);
     end = Instant.now();
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
 
