@@ -46,8 +46,10 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
    * @param element the element to find
    * @return the Node that contains the Element, or null otherwise
    *
-   *         This method despite not being essential is very useful. It is written here in order to
-   *         be used by this class and its subclasses avoiding recoding. So its access level is
+   *         This method despite not being essential is very useful. It is written
+   *         here in order to
+   *         be used by this class and its subclasses avoiding recoding. So its
+   *         access level is
    *         protected
    */
   protected Node<E> find(Node<E> node, E element) {
@@ -109,7 +111,8 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   }
 
   /**
-   * Removes an element from the tree maintaining its consistency as a Binary Search Tree.
+   * Removes an element from the tree maintaining its consistency as a Binary
+   * Search Tree.
    */
   public void remove(E element) {
     root = remove(element, root());
@@ -231,10 +234,11 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   }
 
   /**
-   * Adds elements of the subtree rooted at Node node to the given snapshot using an in-order
+   * Adds elements of the subtree rooted at Node node to the given snapshot using
+   * an in-order
    * traversal
    *
-   * @param node Node serving as the root of a subtree
+   * @param node     Node serving as the root of a subtree
    * @param snapshot a list to which results are appended
    */
   private void inOrderSubtree(Node<E> node, List<E> snapshot) {
@@ -246,7 +250,8 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   }
 
   /**
-   * Returns an iterable collection of elements of the tree, reported in pre-order.
+   * Returns an iterable collection of elements of the tree, reported in
+   * pre-order.
    *
    * @return iterable collection of the tree's elements reported in pre-order
    */
@@ -258,10 +263,11 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   }
 
   /**
-   * Adds elements of the subtree rooted at Node node to the given snapshot using an pre-order
+   * Adds elements of the subtree rooted at Node node to the given snapshot using
+   * an pre-order
    * traversal
    *
-   * @param node Node serving as the root of a subtree
+   * @param node     Node serving as the root of a subtree
    * @param snapshot a list to which results are appended
    */
   private void preOrderSubtree(Node<E> node, List<E> snapshot) {
@@ -273,7 +279,8 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   }
 
   /**
-   * Returns an iterable collection of elements of the tree, reported in post-order.
+   * Returns an iterable collection of elements of the tree, reported in
+   * post-order.
    *
    * @return iterable collection of the tree's elements reported in post-order
    */
@@ -285,10 +292,11 @@ public class BST<E extends Comparable<E>> implements BSTInterface<E> {
   }
 
   /**
-   * Adds positions of the subtree rooted at Node node to the given snapshot using an post-order
+   * Adds positions of the subtree rooted at Node node to the given snapshot using
+   * an post-order
    * traversal
    *
-   * @param node Node serving as the root of a subtree
+   * @param node     Node serving as the root of a subtree
    * @param snapshot a list to which results are appended
    */
   private void posOrderSubtree(Node<E> node, List<E> snapshot) {

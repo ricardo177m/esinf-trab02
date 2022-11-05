@@ -37,7 +37,7 @@ public abstract class Element implements Comparable<Element> {
 
   public Element clone() {
     try {
-      Element clonedElement = getClass().getDeclaredConstructor().newInstance(code, element);
+      Element clonedElement = (Element) getClass().getConstructors()[0].newInstance(code, element);
       clonedElement.productionData = productionData.clone();
 
       return clonedElement;
@@ -79,24 +79,25 @@ public abstract class Element implements Comparable<Element> {
     return "Element{" + "code=" + code + ", element=" + element + '}';
   }
 
-
-  public double valueSumTimeInterval(int min, int max){
-    return valueSumTimeInterval(productionData.root(), min,  max);
+  public double valueSumTimeInterval(int min, int max) {
+    return valueSumTimeInterval(productionData.root(), min, max);
   }
 
-  public double valueSumTimeInterval(Node<ProductionData> node,int min, int max){
+  public double valueSumTimeInterval(Node<ProductionData> node, int min, int max) {
 
-    if(node == null){
+    if (node == null) {
       return 0;
     }
 
-    if(node.getElement().getYear() >= min && node.getElement().getYear() <= max){
-      return node.getElement().getValue() + 
-      valueSumTimeInterval(node.getLeft(), min,  max) +
-      valueSumTimeInterval(node.getRight(), min,  max);
+    if (node.getElement().getYear() >= min && node.getElement().getYear() <= max) {
+      return node.getElement().getValue() +
+          valueSumTimeInterval(node.getLeft(), min, max) +
+          valueSumTimeInterval(node.getRight(), min, max);
+    } else if (node.getElement().getYear() < min) {
+      return valueSumTimeInterval(node.getRight(), min, max);
+    } else {
+      return valueSumTimeInterval(node.getLeft(), min, max);
     }
-    else if(node.getElement().getYear() < min){ return valueSumTimeInterval(node.getRight(), min,  max); }
-    else { return valueSumTimeInterval(node.getLeft(), min,  max); }
   }
 
 }

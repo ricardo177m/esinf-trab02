@@ -40,7 +40,7 @@ public abstract class Item implements Comparable<Item> {
 
   public Item clone() {
     try {
-      Item clonedItem = getClass().getDeclaredConstructor().newInstance(code, cpc, item);
+      Item clonedItem = (Item) getClass().getConstructors()[0].newInstance(code, cpc, item);
       clonedItem.elements = elements.clone();
 
       return clonedItem;
@@ -83,7 +83,7 @@ public abstract class Item implements Comparable<Item> {
     return "Item{" + "code=" + code + ", cpc=" + cpc + ", item=" + item + '}';
   }
 
-  public Iterable<Element> getElements(){
+  public Iterable<Element> getElements() {
     return elements.inOrder();
   }
 
