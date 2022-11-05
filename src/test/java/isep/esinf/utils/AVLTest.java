@@ -21,6 +21,7 @@ public class AVLTest {
    */
   @Test
   public void testInsert() {
+    System.out.println("insertAVL");
     // test Simple right rotation
     AVL<Integer> instance = new AVL();
     int arr[] = { 8, 4, 10, 2, 6, 3 };
@@ -59,6 +60,7 @@ public class AVLTest {
    */
   @Test
   public void testRemove() {
+    System.out.println("removeAVL");
     List<Integer> lExpected;
     AVL<Integer> instance;
 
@@ -102,6 +104,7 @@ public class AVLTest {
 
   @Test
   public void testEquals() {
+    System.out.println("equalsAVL");
     AVL<Integer> instance = new AVL<>();
     int arr[] = { 1, 8 };
     for (int i = 0; i < arr.length; i++) {
@@ -119,6 +122,7 @@ public class AVLTest {
 
   @Test
   public void testBalanceFactorWithRootNull() {
+    System.out.println("balanceFactorWithRootNull");
     AVL<Integer> instance = new AVL<>();
     assertEquals(0, instance.balanceFactor(null));
 
@@ -126,6 +130,7 @@ public class AVLTest {
 
   @Test
   public void testRemoveElementNodeNull() {
+    System.out.println("removeElementNodeNull");
     AVL<Integer> instance = new AVL<>();
     instance.remove(1);
     assertEquals(0, instance.size());
@@ -134,6 +139,7 @@ public class AVLTest {
 
   @Test
   public void testRemoveElementAndNodeIsLeaf() {
+    System.out.println("removeElementAndNodeIsLeaf");
     AVL<Integer> instance = new AVL<>();
     instance.insert(1);
     instance.remove(1);
