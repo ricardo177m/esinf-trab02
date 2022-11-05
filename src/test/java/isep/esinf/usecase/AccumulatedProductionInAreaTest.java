@@ -16,6 +16,7 @@ import isep.esinf.model.comparators.ItemByCode;
 import isep.esinf.shared.Constants;
 import isep.esinf.utils.CSVReader;
 import isep.esinf.utils.PropertiesUtils;
+import isep.esinf.shared.Constants;
 
 public class AccumulatedProductionInAreaTest {
   private AccumulatedProductionInArea aInArea = new AccumulatedProductionInArea();
@@ -324,8 +325,8 @@ public class AccumulatedProductionInAreaTest {
    * Test the sum of production with data from file
    */
   @Test
-  public void testSumProductionWithFile() throws FileNotFoundException {
-    System.out.println("testSumProductionWithFile");
+  public void testSumProductionWithFileSmall() throws FileNotFoundException {
+    System.out.println("testSumProductionWithFileSmall");
 
     CSVReader r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
 
@@ -349,8 +350,8 @@ public class AccumulatedProductionInAreaTest {
    * Test the sum of production with data from file
    */
   @Test
-  public void testSumProductionWithFile2() throws FileNotFoundException {
-    System.out.println("testSumProductionWithFile2");
+  public void testSumProductionWithFileSmallDifferentArea() throws FileNotFoundException {
+    System.out.println("testSumProductionWithFileSmallDifferentArea");
 
     CSVReader r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
 
@@ -369,4 +370,30 @@ public class AccumulatedProductionInAreaTest {
 
     assertEquals(53000.0, sum);
   }
+
+  /*
+   * Test the sum of production with data from big file
+   */
+  @Test
+  public void testSumProductionWithFile2() throws FileNotFoundException {
+    System.out.println("testSumProductionWithFile2");
+
+    CSVReader r = new CSVReader(BASE_PATH + Constants.DATAFILE_WORLD_LARGE);
+
+    List<Map<String, String>> containerData = r.read();
+
+    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+
+    r = new CSVReader(BASE_PATH + Constants.DATAFILE_AREA_COORDINATES);
+
+    List<Map<String, String>> geoData = r.read();
+
+    int itemCode = 1062;
+    int elementCode = 5313;
+
+    Double sum = aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 1977, container, geoData);
+
+    assertEquals(2870292.0, sum);
+  }
+
 }

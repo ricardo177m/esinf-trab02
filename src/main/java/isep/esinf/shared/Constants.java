@@ -7,7 +7,7 @@ public class Constants {
   public static final String PARAMS_ENABLE_BIG_TEST = "test.big.enabled";
 
   // data files in data folder
-  public static final String DATAFILE_AREA_COORDINATES = "Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv";
+  public static final String DATAFILE_AREA_COORDINATES = "Production_Crops_Livestock_E_AreaCoordinates_shuffled_v2.csv";
   public static final String DATAFILE_FLAGS = "Production_Crops_Livestock_E_Flags.csv";
   public static final String DATAFILE_ITEM_CODES = "Production_Crops_Livestock_E_ItemCodes_shuffled.csv";
   public static final String DATAFILE_EUROPE_LARGE = "Production_Crops_Livestock_EU_shuffle_large.csv";
