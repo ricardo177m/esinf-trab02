@@ -4,10 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
 import isep.esinf.shared.Constants;
 
 public class PropertiesUtils {
-
   public static Properties getProperties() {
     Properties props = new Properties();
 

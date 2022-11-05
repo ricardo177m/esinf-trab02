@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
+import isep.esinf.shared.Constants;
+import isep.esinf.utils.PropertiesUtils;
 import isep.esinf.utils.TwoDNode;
 import isep.esinf.utils.TwoDTree;
 
@@ -24,19 +27,9 @@ public class LoadGeographicalData {
     return map;
   }
 
-  /**
-   * Helper method to load data from a csv file into a TwoDTree.
-   * This method gets an already loaded Container and adds the coordinates of
-   * countries to it.
-   */
-  public TwoDTree<Area> execute(Container container, List<Map<String, String>> geoData) {
-    if (container == null || geoData == null)
-      return null;
-
-    Map<String, Map<String, String>> map = mapListToMap(geoData);
-    TwoDTree<Area> tree = new TwoDTree<>();
-
+  public TwoDTree<Area> buildBalancedTwoDTree(Container container, Map<String, Map<String, String>> map) {
     List<TwoDNode<Area>> nodes = new ArrayList<>();
+    TwoDTree<Area> tree = new TwoDTree<>();
 
     for (Area area : container.getAreas()) {
       Map<String, String> data = map.get(area.getArea());
@@ -52,5 +45,38 @@ public class LoadGeographicalData {
     tree.buildTree(nodes);
 
     return tree;
+  }
+
+  public TwoDTree<Area> buildShuffledTwoDTree(Container container, Map<String, Map<String, String>> map) {
+    TwoDTree<Area> tree = new TwoDTree<>();
+
+    for (Area area : container.getAreas()) {
+      Map<String, String> data = map.get(area.getArea());
+      if (data == null)
+        continue;
+
+      tree.insert(area, Double.parseDouble(data.get("latitude")),
+          Double.parseDouble(data.get("longitude")));
+    }
+
+    return tree;
+  }
+
+  /**
+   * Helper method to load data from a csv file into a TwoDTree.
+   * This method gets an already loaded Container and adds the coordinates of
+   * countries to it.
+   */
+  public TwoDTree<Area> execute(Container container, List<Map<String, String>> geoData) {
+    if (container == null || geoData == null)
+      return null;
+
+    Map<String, Map<String, String>> map = mapListToMap(geoData);
+
+    Properties props = PropertiesUtils.getProperties();
+    if (props.getProperty(Constants.PARAMS_2D_TREE_BALANCE).equals("yes"))
+      return buildBalancedTwoDTree(container, map);
+
+    return buildShuffledTwoDTree(container, map);
   }
 }
