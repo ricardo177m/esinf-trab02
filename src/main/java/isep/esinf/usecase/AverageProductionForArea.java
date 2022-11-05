@@ -7,6 +7,7 @@ import java.util.Map;
 
 import isep.esinf.exceptions.InvalidTimeIntervalException;
 import isep.esinf.exceptions.NullAreaException;
+import isep.esinf.exceptions.NullContainerException;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.Element;
@@ -22,9 +23,12 @@ public class AverageProductionForArea {
   private int firstYear, lastYear;
   private Area area;
 
-  public AverageProductionForArea(String area, int firstYear, int lastYear, Container container) throws InvalidTimeIntervalException, NullAreaException{
+  public AverageProductionForArea(String area, int firstYear, int lastYear, Container container) throws InvalidTimeIntervalException, NullAreaException, NullContainerException{
     if(area == null || area.equals(""))
     throw new NullAreaException();
+
+    if(container == null)
+    throw new NullContainerException();
 
     Area a = new AreaByName(0, "", area);
     this.area = container.getArea(a);
@@ -59,7 +63,7 @@ public class AverageProductionForArea {
       Iterable<Element> elements = item.getElements();
       for (Element element : elements) {
         Map.Entry<String,String> entry = new AbstractMap.SimpleEntry<String, String>(item.getItem(), element.getElement());
-        list.add(new AbstractMap.SimpleEntry<Map.Entry<String,String>, Double>(entry, element.valueSumTimeInterval(firstYear, lastYear)/(lastYear - firstYear + 1)));    
+        list.add(new AbstractMap.SimpleEntry<Map.Entry<String,String>, Double>(entry, element.valueSumTimeInterval(firstYear, lastYear)/(lastYear - firstYear + 1))); // +1 because first and last year are included   
       }
     }
 
