@@ -414,4 +414,41 @@ public class TwoDTreeTest {
 
   }
 
+  /*
+   * Test fin min method (root in this case) with tree with nodes
+   */
+  @Test
+  public void testFindMinTwoDTreeRoot() {
+    System.out.println("findMinTwoDTreeRoot");
+    TwoDTree<Double> tree = new TwoDTree<>();
+    tree.insert(10.12, 10, 12);
+    tree.insert(11.12, 11, 12);
+    tree.insert(12.12, 12, 12);
+
+    TwoDNode<Double> expected = new TwoDNode<>(10.12, null,
+        new TwoDNode<>(11.12, null, new TwoDNode<>(12.12, null, null, new Point2D.Double(11, 12)),
+            new Point2D.Double(12, 12)),
+        new Point2D.Double(10, 12));
+
+    assertEquals(expected, tree.findMin());
+
+  }
+
+  /*
+   * Test insert method but return null
+   */
+  @Test
+  public void testInsertNull() {
+    System.out.println("insertNull");
+    tree = new TwoDTree<>();
+    tree.insert(10.12, 10, 12);
+    tree.insert(11.12, 11, 12);
+    tree.insert(12.12, 12, 12);
+
+    tree.insert(10.12, 10, 12);
+
+    assertEquals(null, tree.root.getLeft());
+
+  }
+
 }

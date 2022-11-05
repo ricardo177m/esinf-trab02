@@ -180,6 +180,16 @@ public class BSTTest {
   }
 
   /**
+   * Test of biggest element method, of class TREE with root Null.
+   */
+  @Test
+  public void testBiggestElementWithRootNull() {
+    System.out.println("biggestElementWithRootNull");
+    instance = new BST<>();
+    assertEquals(null, instance.biggestElement());
+  }
+
+  /**
    * Test of inOrder method, of class BST.
    */
   @Test
@@ -277,8 +287,7 @@ public class BSTTest {
   @Test
   public void testToStringBST() {
     System.out.println("toStringBST");
-    String expected = (
-        "|	|-------50\n" +
+    String expected = ("|	|-------50\n" +
         "|-------40\n" +
         "|	|-------30\n" +
         "20\n" +

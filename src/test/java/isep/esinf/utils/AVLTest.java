@@ -13,7 +13,8 @@ import org.junit.jupiter.api.Test;
  */
 public class AVLTest {
 
-  public AVLTest() {}
+  public AVLTest() {
+  }
 
   /**
    * Test of insert method, of class AVL.
@@ -22,8 +23,8 @@ public class AVLTest {
   public void testInsert() {
     // test Simple right rotation
     AVL<Integer> instance = new AVL();
-    int arr[] = {8, 4, 10, 2, 6, 3};
-    Integer[] inorder1 = {2, 3, 4, 6, 8, 10};
+    int arr[] = { 8, 4, 10, 2, 6, 3 };
+    Integer[] inorder1 = { 2, 3, 4, 6, 8, 10 };
     for (int i = 0; i < arr.length; i++) // new elements
       instance.insert(arr[i]);
 
@@ -32,8 +33,8 @@ public class AVLTest {
 
     // test Simple left rotation
     AVL<Integer> instance2 = new AVL();
-    int arr2[] = {8, 4, 10, 9, 15, 12};
-    Integer[] inorder2 = {4, 8, 9, 10, 12, 15};
+    int arr2[] = { 8, 4, 10, 9, 15, 12 };
+    Integer[] inorder2 = { 4, 8, 9, 10, 12, 15 };
     for (int i = 0; i < arr2.length; i++)
       instance2.insert(arr2[i]);
 
@@ -43,8 +44,8 @@ public class AVLTest {
 
     // test double rotation
     AVL<Integer> instance3 = new AVL();
-    int arr3[] = {8, 4, 10, 2, 6, 5};
-    Integer[] inorder3 = {2, 4, 5, 6, 8, 10};
+    int arr3[] = { 8, 4, 10, 2, 6, 5 };
+    Integer[] inorder3 = { 2, 4, 5, 6, 8, 10 };
     for (int i = 0; i < arr3.length; i++)
       instance3.insert(arr3[i]);
 
@@ -62,7 +63,7 @@ public class AVLTest {
     AVL<Integer> instance;
 
     instance = new AVL();
-    int arr[] = {8, 4, 10, 2, 6, 3};
+    int arr[] = { 8, 4, 10, 2, 6, 3 };
     for (int i = 0; i < arr.length; i++)
       instance.insert(arr[i]);
 
@@ -101,18 +102,42 @@ public class AVLTest {
 
   @Test
   public void testEquals() {
-    AVL<Integer> instance = new AVL();
-    int arr[] = {1, 8};
+    AVL<Integer> instance = new AVL<>();
+    int arr[] = { 1, 8 };
     for (int i = 0; i < arr.length; i++) {
       instance.insert(arr[i]);
     }
-    AVL<Integer> instance2 = new AVL();
-    int arr2[] = {1, 8};
+    AVL<Integer> instance2 = new AVL<>();
+    int arr2[] = { 1, 8 };
     for (int i = 0; i < arr2.length; i++) {
       instance2.insert(arr2[i]);
     }
     assertTrue(instance.equals(instance2));
     instance2.remove(8);
     assertFalse(instance.equals(instance2));
+  }
+
+  @Test
+  public void testBalanceFactorWithRootNull() {
+    AVL<Integer> instance = new AVL<>();
+    assertEquals(0, instance.balanceFactor(null));
+
+  }
+
+  @Test
+  public void testRemoveElementNodeNull() {
+    AVL<Integer> instance = new AVL<>();
+    instance.remove(1);
+    assertEquals(0, instance.size());
+
+  }
+
+  @Test
+  public void testRemoveElementAndNodeIsLeaf() {
+    AVL<Integer> instance = new AVL<>();
+    instance.insert(1);
+    instance.remove(1);
+    assertEquals(0, instance.size());
+
   }
 }
