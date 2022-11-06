@@ -199,7 +199,8 @@ public class LoadGeographicalDataTest {
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    LoadData ld = new LoadData();
+    Container container = ld.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
     r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
 
@@ -220,7 +221,8 @@ public class LoadGeographicalDataTest {
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    LoadData ld = new LoadData();
+    Container container = ld.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
     r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
 
@@ -241,7 +243,8 @@ public class LoadGeographicalDataTest {
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    LoadData ld = new LoadData();
+    Container container = ld.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
     r = new CSVReader(BASE_PATH + Constants.DATAFILE_AREA_COORDINATES);
 
@@ -279,7 +282,8 @@ public class LoadGeographicalDataTest {
 
     List<Map<String, String>> containerData = r.read();
 
-    Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    LoadData ld = new LoadData();
+    Container container = ld.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
     TwoDTree<Area> result = loadGeographicalData.execute(container, null);
 

@@ -26,11 +26,13 @@ import isep.esinf.utils.PropertiesUtils;
 
 public class LoadDataTest {
   Container container;
+  LoadData ld;
 
   @BeforeEach
   public void setup() {
     // create a container with elements to sanitize
     container = (new MockContainer()).mockByCodeMini();
+    ld = new LoadData();
   }
 
   /**
@@ -50,7 +52,7 @@ public class LoadDataTest {
 
     // Area: code; Item: code; Element: code
     start = Instant.now();
-    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container loaded = ld.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
     end = Instant.now();
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
 
@@ -73,7 +75,7 @@ public class LoadDataTest {
 
     // Area: code; Item: code; Element: code
     start = Instant.now();
-    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container loaded = ld.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
     end = Instant.now();
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
 
@@ -96,7 +98,7 @@ public class LoadDataTest {
 
     // Area: code; Item: code; Element: code
     start = Instant.now();
-    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container loaded = ld.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
     assertNotEquals(container, loaded);
   }
@@ -117,7 +119,7 @@ public class LoadDataTest {
     Container c = new Container();
 
     start = Instant.now();
-    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container loaded = ld.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
     end = Instant.now();
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
 
@@ -142,7 +144,7 @@ public class LoadDataTest {
 
     // Area: name; Item: name; Element: name
     start = Instant.now();
-    Container loaded = LoadData.execute(data, AreaByName.class, ItemByName.class, ElementByName.class);
+    Container loaded = ld.execute(data, AreaByName.class, ItemByName.class, ElementByName.class);
     end = Instant.now();
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
 
@@ -167,7 +169,7 @@ public class LoadDataTest {
 
     // Area: code; Item: code; Element: code
     start = Instant.now();
-    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container loaded = ld.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
     end = Instant.now();
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
 
@@ -191,7 +193,7 @@ public class LoadDataTest {
     container = (new MockContainer()).mockByCodeMiniVersionMissingFlags();
 
     start = Instant.now();
-    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container loaded = ld.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
     end = Instant.now();
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
 
@@ -223,7 +225,7 @@ public class LoadDataTest {
 
     // Area: code; Item: code; Element: code
     start = Instant.now();
-    Container loaded = LoadData.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    Container loaded = ld.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
     end = Instant.now();
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
 
@@ -257,7 +259,7 @@ public class LoadDataTest {
 
     // Area: area; Item: item; Element: element
     start = Instant.now();
-    Container loaded = LoadData.execute(data, AreaByName.class, ItemByName.class, ElementByName.class);
+    Container loaded = ld.execute(data, AreaByName.class, ItemByName.class, ElementByName.class);
     end = Instant.now();
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
 

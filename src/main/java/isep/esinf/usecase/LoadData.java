@@ -23,7 +23,7 @@ import isep.esinf.utils.PropertiesUtils;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class LoadData {
-  public static Container execute(List<Map<String, String>> data, Class<? extends Area> areaClass,
+  public Container execute(List<Map<String, String>> data, Class<? extends Area> areaClass,
       Class<? extends Item> itemClass, Class<? extends Element> elementClass)
       throws FileNotFoundException {
     Container container = new Container();

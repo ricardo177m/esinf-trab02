@@ -41,7 +41,8 @@ public class BestLastYearTest {
     List<Map<String, String>> dataList = csvReader.read();
 
     // Area: code; Item: code; Element: code
-    data = LoadData.execute(dataList, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    LoadData ld = new LoadData();
+    data = ld.execute(dataList, AreaByCode.class, ItemByCode.class, ElementByCode.class);
   }
 
   @Test

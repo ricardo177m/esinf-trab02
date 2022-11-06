@@ -98,7 +98,8 @@ public class ClosestProductionAreaTest {
 
     reader = new CSVReader(BASE_PATH + Constants.DATAFILE_WORLD_MEDIUM);
     Instant start = Instant.now();
-    Container container = LoadData.execute(reader.read(), AreaByName.class, ItemByName.class, ElementByName.class);
+    LoadData ld = new LoadData();
+    Container container = ld.execute(reader.read(), AreaByName.class, ItemByName.class, ElementByName.class);
     Instant end = Instant.now();
     System.out.println("Load Data took " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + " s");
 
@@ -127,7 +128,8 @@ public class ClosestProductionAreaTest {
     System.out.println("Time to read CSV file: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
 
     start = Instant.now();
-    Container container = LoadData.execute(data, AreaByName.class, ItemByName.class, ElementByName.class);
+    LoadData ld = new LoadData();
+    Container container = ld.execute(data, AreaByName.class, ItemByName.class, ElementByName.class);
     end = Instant.now();
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
 
