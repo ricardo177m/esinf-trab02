@@ -28,6 +28,10 @@ public class LoadGeographicalData {
   }
 
   public TwoDTree<Area> buildBalancedTwoDTree(Container container, Map<String, Map<String, String>> map) {
+
+    if (container == null || map == null)
+      return null;
+
     List<TwoDNode<Area>> nodes = new ArrayList<>();
     TwoDTree<Area> tree = new TwoDTree<>();
 
@@ -48,6 +52,9 @@ public class LoadGeographicalData {
   }
 
   public TwoDTree<Area> buildShuffledTwoDTree(Container container, Map<String, Map<String, String>> map) {
+    if (container == null || map == null)
+      return null;
+
     TwoDTree<Area> tree = new TwoDTree<>();
 
     for (Area area : container.getAreas()) {

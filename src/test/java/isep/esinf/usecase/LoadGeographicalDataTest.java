@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -12,6 +13,7 @@ import java.util.Properties;
 import org.junit.jupiter.api.Test;
 
 import isep.esinf.mock.MockContainer;
+import isep.esinf.mock.MockGeoData;
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.comparators.AreaByCode;
@@ -235,13 +237,13 @@ public class LoadGeographicalDataTest {
   @Test
   public void testLoadGeographicalDataWithFilesTree() throws FileNotFoundException {
     System.out.println("testLoadGeographicalDataWithFilesTree");
-    CSVReader r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+    CSVReader r = new CSVReader(BASE_PATH + Constants.DATAFILE_FR_GER_IT_PT_SP_SMALL);
 
     List<Map<String, String>> containerData = r.read();
 
     Container container = LoadData.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
 
-    r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_E_AreaCoordinates_shuffled.csv");
+    r = new CSVReader(BASE_PATH + Constants.DATAFILE_AREA_COORDINATES);
 
     List<Map<String, String>> geoData = r.read();
 
@@ -282,5 +284,55 @@ public class LoadGeographicalDataTest {
     TwoDTree<Area> result = loadGeographicalData.execute(container, null);
 
     assertNull(result);
+  }
+
+  @Test
+  public void testLoadGeographicalDataBuildShuffledTwoDTree() {
+    System.out.println("testLoadGeographicalDataBuildShuffledTwoDTree");
+    MockContainer mock = new MockContainer();
+    Container container = mock.mockByCode();
+
+    MockGeoData mockGeo = new MockGeoData();
+
+    List<Map<String, String>> geoData = mockGeo.mock();
+
+    Map<String, Map<String, String>> map = new HashMap<>();
+    for (Map<String, String> m : geoData) {
+      map.put(m.get("area"), m);
+
+    }
+
+    TwoDTree<Area> tree = loadGeographicalData.buildShuffledTwoDTree(container, map);
+
+    assertEquals(4, tree.size());
+  }
+
+  @Test
+  public void testLoadGeographicalDataBuildShuffledTwoDTreeWithNullContainer() {
+    System.out.println("testLoadGeographicalDataBuildShuffledTwoDTreeWithNullContainer");
+    MockGeoData mockGeo = new MockGeoData();
+
+    List<Map<String, String>> geoData = mockGeo.mock();
+
+    Map<String, Map<String, String>> map = new HashMap<>();
+    for (Map<String, String> m : geoData) {
+      map.put(m.get("area"), m);
+
+    }
+
+    TwoDTree<Area> tree = loadGeographicalData.buildShuffledTwoDTree(null, map);
+
+    assertNull(tree);
+  }
+
+  @Test
+  public void testLoadGeographicalDataBuildShuffledTwoDTreeWithNullGeoData() {
+    System.out.println("testLoadGeographicalDataBuildShuffledTwoDTreeWithNullGeoData");
+    MockContainer mock = new MockContainer();
+    Container container = mock.mockByCode();
+
+    TwoDTree<Area> tree = loadGeographicalData.buildShuffledTwoDTree(container, null);
+
+    assertNull(tree);
   }
 }
