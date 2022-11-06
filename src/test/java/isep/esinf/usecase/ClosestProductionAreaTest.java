@@ -28,6 +28,9 @@ public class ClosestProductionAreaTest {
   private static Container container;
   private static List<Map<String, String>> geoData;
 
+  private static Properties props = PropertiesUtils.getProperties();
+  private static final String BASE_PATH = props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH);
+
   @BeforeAll
   public static void setup() {
     container = (new MockContainer()).mockByName();
@@ -82,9 +85,7 @@ public class ClosestProductionAreaTest {
   }
 
   @Test
-  public void testClosestProductionAreaWithHugeFile() throws FileNotFoundException {
-    Properties props = PropertiesUtils.getProperties();
-    String dataPath = props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH);
+  public void testClosestProductionAreaWithMediumFile() throws FileNotFoundException {
     String checkEnable = props.getProperty(Constants.PARAMS_ENABLE_BIG_TEST);
 
     if (checkEnable == null || !checkEnable.toLowerCase().equals("yes")) {
@@ -92,7 +93,34 @@ public class ClosestProductionAreaTest {
       return;
     }
 
-    CSVReader csvReader = new CSVReader(dataPath + Constants.DATAFILE_WORLD_LARGE);
+    CSVReader reader = new CSVReader(BASE_PATH + Constants.DATAFILE_AREA_COORDINATES);
+    List<Map<String, String>> geoData = reader.read();
+
+    reader = new CSVReader(BASE_PATH + Constants.DATAFILE_WORLD_MEDIUM);
+    Instant start = Instant.now();
+    Container container = LoadData.execute(reader.read(), AreaByName.class, ItemByName.class, ElementByName.class);
+    Instant end = Instant.now();
+    System.out.println("Load Data took " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + " s");
+
+    ClosestProductionArea closestProductionArea = new ClosestProductionArea();
+    start = Instant.now();
+    Area actual = closestProductionArea.execute(0, 20, "Avocados", "Area harvested", 1997, container, geoData);
+    end = Instant.now();
+    System.out.println("ClosestProductionArea took " + (end.toEpochMilli() - start.toEpochMilli()) + " ms");
+
+    assertEquals("Congo", actual.getArea());
+  }
+
+  @Test
+  public void testClosestProductionAreaWithHugeFile() throws FileNotFoundException {
+    String checkEnable = props.getProperty(Constants.PARAMS_ENABLE_BIG_TEST);
+
+    if (checkEnable == null || !checkEnable.toLowerCase().equals("yes")) {
+      System.out.println("Skipping big test.");
+      return;
+    }
+
+    CSVReader csvReader = new CSVReader(BASE_PATH + Constants.DATAFILE_WORLD_LARGE);
     Instant start = Instant.now();
     List<Map<String, String>> data = csvReader.read();
     Instant end = Instant.now();
@@ -104,20 +132,16 @@ public class ClosestProductionAreaTest {
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
 
     start = Instant.now();
-    csvReader = new CSVReader(dataPath + Constants.DATAFILE_AREA_COORDINATES);
+    csvReader = new CSVReader(BASE_PATH + Constants.DATAFILE_AREA_COORDINATES);
     List<Map<String, String>> geoData = csvReader.read();
     end = Instant.now();
-    System.out
-        .println("Time to read coordinates CSV file: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
+    System.out.println("Time to read coordinates CSV file: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
 
-    // Area: code; Item: code; Element: code
     start = Instant.now();
     Area result = new ClosestProductionArea().execute(40, -8, "Olives", "Yield", 1985, container, geoData);
     end = Instant.now();
     System.out.println("Time to find closest area: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
 
-    // file has 2807800 lines without the header
-    // 211 valid areas
     assertEquals("Portugal", result.getArea());
   }
 }

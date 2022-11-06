@@ -216,7 +216,7 @@ public class LoadGeographicalDataTest {
   @Test
   public void testLoadGeographicalDataWithFilesTreeHeight() throws FileNotFoundException {
     System.out.println("testLoadGeographicalDataWithFilesTreeHeight");
-    CSVReader r = new CSVReader(BASE_PATH + "/Production_Crops_Livestock_FR_GER_IT_PT_SP_shuffle_small.csv");
+    CSVReader r = new CSVReader(BASE_PATH + Constants.DATAFILE_FR_GER_IT_PT_SP_SMALL);
 
     List<Map<String, String>> containerData = r.read();
 
