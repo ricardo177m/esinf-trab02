@@ -56,7 +56,6 @@ public class Container {
 
     Iterable<Area> a = areas.inOrder();
 
-    // TODO optimize this (is starting allways from the root)
     for (Area area : a) {
       Item i = area.getItem(item);
       if (i == null)
@@ -90,10 +89,5 @@ public class Container {
 
     boolean result = areas.equals(container.areas);
     return result;
-  }
-
-  @Override
-  public String toString() {
-    return String.format("Number of areas: %d", this.getNOfAreas());
   }
 }
