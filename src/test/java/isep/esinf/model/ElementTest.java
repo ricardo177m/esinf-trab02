@@ -4,15 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import isep.esinf.model.comparators.AreaByCode;
 import isep.esinf.model.comparators.ElementByCode;
-import isep.esinf.model.comparators.ElementByName;
 
 public class ElementTest {
   private static Element e;
 
   @Test
   public void testvalueSumTimeInterval() {
+    System.out.println("testvalueSumTimeInterval");
     e = new ElementByCode(0, "element");
     e.addProductionData(new ProductionData(1997, new Value(100, "unit", "flag", "flagDescription")));
     e.addProductionData(new ProductionData(2000, new Value(100, "unit", "flag", "flagDescription")));
@@ -26,12 +25,14 @@ public class ElementTest {
 
   @Test
   public void testvalueSumTimeIntervalWithNullElement() {
+    System.out.println("testvalueSumTimeIntervalWithNullElement");
     e = new ElementByCode(0, "element");
     assertEquals(0, e.valueSumTimeInterval(2001, 2007));
   }
 
   @Test
   public void testvalueSumTimeIntervalWhitoutData() {
+    System.out.println("testvalueSumTimeIntervalWhitoutData");
     e = new ElementByCode(0, "element");
     e.addProductionData(new ProductionData(1997, new Value(100, "unit", "flag", "flagDescription")));
     e.addProductionData(new ProductionData(2000, new Value(100, "unit", "flag", "flagDescription")));
@@ -41,6 +42,7 @@ public class ElementTest {
 
   @Test
   public void testvalueSumTimeIntervalWithNullData() {
+    System.out.println("testvalueSumTimeIntervalWithNullData");
     e = new ElementByCode(0, "element");
     e.addProductionData(new ProductionData(1997, new Value(100, "unit", "flag", "flagDescription")));
     e.addProductionData(new ProductionData(2000, new Value(100, "unit", "flag", "flagDescription")));
@@ -54,18 +56,21 @@ public class ElementTest {
 
   @Test
   public void testvalueSumTimeIntervalWithNullDataAndNullElement() {
+    System.out.println("testvalueSumTimeIntervalWithNullDataAndNullElement");
     e = new ElementByCode(0, "element");
     assertEquals(0, e.valueSumTimeInterval(2010, 2015));
   }
 
   @Test
   public void testvalueSumTimeIntervalWithNullDataAndNullElementAndNullInterval() {
+    System.out.println("testvalueSumTimeIntervalWithNullDataAndNullElementAndNullInterval");
     e = new ElementByCode(0, "element");
     assertEquals(0, e.valueSumTimeInterval(0, 0));
   }
 
   @Test
   public void testElementClassClone() {
+    System.out.println("testElementClassClone");
     e = new ElementByCode(0, "element");
     e.addProductionData(new ProductionData(1997, new Value(100, "unit", "flag", "flagDescription")));
     e.addProductionData(new ProductionData(2000, new Value(100, "unit", "flag", "flagDescription")));
@@ -81,6 +86,7 @@ public class ElementTest {
 
   @Test
   public void testElementClassCloneWithNullElement() {
+    System.out.println("testElementClassCloneWithNullElement");
     e = new ElementByCode(0, "element");
     Element e2 = e.clone();
 
@@ -89,6 +95,7 @@ public class ElementTest {
 
   @Test
   public void testElementEquals() {
+    System.out.println("testElementEquals");
     e = new ElementByCode(0, "element");
     e.addProductionData(new ProductionData(1997, new Value(100, "unit", "flag", "flagDescription")));
     e.addProductionData(new ProductionData(2000, new Value(100, "unit", "flag", "flagDescription")));
@@ -102,6 +109,7 @@ public class ElementTest {
 
   @Test
   public void testElementEqualsWithNullElement() {
+    System.out.println("testElementEqualsWithNullElement");
     e = new ElementByCode(0, "element");
     Element e2 = new ElementByCode(0, "element");
 
@@ -110,6 +118,7 @@ public class ElementTest {
 
   @Test
   public void testElementEqualsNullObj() {
+    System.out.println("testElementEqualsNullObj");
     e = new ElementByCode(0, "element");
     Element e2 = null;
 
@@ -118,6 +127,7 @@ public class ElementTest {
 
   @Test
   public void testElementEqualsWithDifferentCode() {
+    System.out.println("testElementEqualsWithDifferentCode");
     e = new ElementByCode(0, "element");
     Element e2 = new ElementByCode(1, "element");
 
@@ -126,6 +136,7 @@ public class ElementTest {
 
   @Test
   public void testElementEqualsWithDifferentName() {
+    System.out.println("testElementEqualsWithDifferentName");
     e = new ElementByCode(0, "element");
     Element e2 = new ElementByCode(0, "element2");
 
@@ -134,6 +145,7 @@ public class ElementTest {
 
   @Test
   public void testElementEqualsWithElementNull() {
+    System.out.println("testElementEqualsWithElementNull");
     e = new ElementByCode(0, null);
     Element e2 = new ElementByCode(0, "element");
 

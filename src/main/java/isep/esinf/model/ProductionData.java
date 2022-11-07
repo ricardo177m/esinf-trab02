@@ -29,6 +29,10 @@ public class ProductionData implements Comparable<ProductionData> {
     return value.getFlag();
   }
 
+  public String getFlagDescription() {
+    return value.getFlagDescription();
+  }
+
   public ProductionData clone() {
     return new ProductionData(year, value.clone());
   }
