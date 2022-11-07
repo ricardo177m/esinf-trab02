@@ -1,0 +1,150 @@
+@startuml CD
+skinparam classAttributeIconSize 0
+
+abstract Area {
+  - area: String
+  - code: int
+  - m49: String
+
+  + getArea(): String
+  + getCode(): int
+  + getM49(): String
+  + addItem(): void
+  + getItem(): Item
+  + clone(): Area
+  + toString(): String
+  + equals(): boolean
+  + getItems(): Iterable<Item>
+  <<abstract>> compareTo(): int
+
+}
+
+abstract Item {
+  - code: int
+  - cpc: String
+  - item: String
+
+  + getCode(): int
+  + getCpc(): String
+  + getItem(): String
+  + addElement(): void
+  + getElement(): Element
+  + clone(): Item
+  + toString(): String
+  + equals(): boolean
+  + getElements(): Iterable<Element>
+  <<abstract>> compareTo(): int
+
+
+
+}
+
+abstract Element {
+  - code: int
+  - element: String
+
+  + getCode(): int
+  + getElement(): String
+  + addProductionData(): void
+  + getProductionData(): ProductionData
+  + getMostRecentYear(): int
+  + clone(): Element
+  + toString(): String
+  + equals(): boolean
+  + valueSumTimeInterval(): double
+  <<abstract>> compareTo(): int
+
+}
+
+class ProductionData {
+  - year: int
+  - value: Value
+
+  + getYear(): int
+  + getValue(): double
+  + getUnit(): String
+  + getFlag(): String
+  + getFlagDescription(): String
+  + clone(): ProductionData
+  + toString(): String
+  + equals(): boolean
+  + compareTo(): int
+
+}
+
+class Value {
+  - value: double
+  - unit: String
+  - flag: String
+  - flagDescription: String
+
+  + getValue(): double
+  + getUnit(): String
+  + getFlag(): String
+  + getFlagDescription(): String
+  + setFlagDescription(): void
+  + clone(): Value
+  + toString(): String
+  + equals(): boolean
+
+
+}
+
+class Container {
+  + addArea(): void
+  + getArea(): Area
+  + getAreas(): Iterable<Area>
+  + getNOfAreas(): int
+  + isEmpty(): boolean
+  + getAreasWithConditions(): Container
+  + equals(): boolean
+
+
+}
+
+Container "1" o-- "1..*" Area
+Area "1" o-- "1..*" Item
+Item "1" o-- "1..*" Element
+Element "1" o-- "1..*" ProductionData
+ProductionData "1" o-- "1" Value
+
+class AreaByCode {
+  + compareTo(): int
+
+}
+class AreaByName {
+  + compareTo(): int
+}
+class AreaByM49 {
+  + compareTo(): int
+}
+
+class ItemByCode {
+  + compareTo(): int
+}
+class ItemByName {
+  + compareTo(): int
+}
+class ItemByCPC {
+  + compareTo(): int
+}
+
+class ElementByCode {
+  + compareTo(): int
+}
+class ElementByName {
+  + compareTo(): int
+}
+
+Area <|-- AreaByCode
+Area <|-- AreaByName
+Area <|-- AreaByM49
+
+Item <|-- ItemByCode
+Item <|-- ItemByName
+Item <|-- ItemByCPC
+
+Element <|-- ElementByCode
+Element <|-- ElementByName
+
+@enduml
