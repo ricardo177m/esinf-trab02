@@ -81,7 +81,11 @@ public class LoadGeographicalData {
     Map<String, Map<String, String>> map = mapListToMap(geoData);
 
     Properties props = PropertiesUtils.getProperties();
-    if (props.getProperty(Constants.PARAMS_2D_TREE_BALANCE).equals("yes"))
+    boolean balanceTree = props.getProperty(Constants.PARAMS_2D_TREE_BALANCE) != null
+        ? props.getProperty(Constants.PARAMS_2D_TREE_BALANCE).equals("yes")
+        : false;
+
+    if (balanceTree)
       return buildBalancedTwoDTree(container, map);
 
     return buildShuffledTwoDTree(container, map);
