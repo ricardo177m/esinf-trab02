@@ -72,12 +72,13 @@ public class AverageProductionForArea {
   }
 
   public List<Map.Entry<Map.Entry<String,String>, Double>> sortList(List<Map.Entry<Map.Entry<String,String>, Double>> list){
+    if(list == null || list.size() == 0) return null;
     boolean flag = false;
     Map.Entry<Map.Entry<String,String>, Double> temp;
     while(!flag) {
         flag = true;
-        for (int i = 0; i > list.size() - 1; i++) {
-            if (list.get(i).getValue() > list.get(i+1).getValue()) {
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i).getValue() < list.get(i+1).getValue()) {
                 temp = list.get(i);
                 list.set(i,list.get(i+1));
                 list.set(i+1, temp);
