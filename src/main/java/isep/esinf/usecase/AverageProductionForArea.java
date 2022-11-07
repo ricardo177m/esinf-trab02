@@ -72,7 +72,7 @@ public class AverageProductionForArea {
   }
 
   public List<Map.Entry<Map.Entry<String,String>, Double>> sortList(List<Map.Entry<Map.Entry<String,String>, Double>> list){
-    if(list == null || list.size() == 0) return null;
+    if(list == null) return null;
     boolean flag = false;
     Map.Entry<Map.Entry<String,String>, Double> temp;
     while(!flag) {

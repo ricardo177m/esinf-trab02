@@ -180,6 +180,6 @@ public class AverageProductionForAreaTest {
     public void testSortListWithEmptyList() throws InvalidTimeIntervalException, NullAreaException, NullContainerException {
         List<Map.Entry<Map.Entry<String,String>, Double>> actual = new ArrayList<>();
         test = new AverageProductionForArea("Burundi", 1980, 1983, new Container());
-        assertEquals(null, test.sortList(actual));
+        assertEquals(new ArrayList<>(), test.sortList(actual));
     }
 }
