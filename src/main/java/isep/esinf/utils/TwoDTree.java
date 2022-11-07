@@ -34,11 +34,10 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
    * Build twoDTree balanced
    */
   public void buildTree(List<TwoDNode<E>> nodes) {
-    if (!nodes.contains(null)) {
-      root = buildTree(true, nodes);
-    } else {
+    if (nodes == null || nodes.contains(null))
       return;
-    }
+
+    root = buildTree(true, nodes);
   }
 
   private TwoDNode<E> buildTree(boolean divX, List<TwoDNode<E>> nodes) {

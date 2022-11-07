@@ -320,7 +320,31 @@ public class TwoDTreeTest {
     List<Double> actual = tree.searchRangeArea(5, 5, 7, 7);
 
     assertEquals(expected, actual);
+  }
 
+  @Test
+  public void testBuildTreeWithNullPoints() {
+    tree = new TwoDTree<>();
+    tree.buildTree(null);
+
+    assertEquals(0, tree.size());
+  }
+
+  @Test
+  public void testBuildTreeWithNullPointSet() {
+    tree = new TwoDTree<>();
+
+    List<TwoDNode<Double>> points = new ArrayList<>();
+    points.add(new TwoDNode<>(3.1, null, null, new Point2D.Double(3, 9)));
+    points.add(new TwoDNode<>(1.1, null, null, new Point2D.Double(1, 7)));
+    points.add(null);
+    points.add(new TwoDNode<>(2.2, null, null, new Point2D.Double(2, 1)));
+    points.add(new TwoDNode<>(9.0, null, null, new Point2D.Double(9, 6)));
+    points.add(new TwoDNode<>(5.1, null, null, new Point2D.Double(5, 9)));
+
+    tree.buildTree(points);
+
+    assertEquals(0, tree.size());
   }
 
   /*
