@@ -267,7 +267,6 @@ public class TwoDTreeTest {
     List<Double> actual = tree.searchRangeArea(3, 3, 3, 3);
 
     assertEquals(expected, actual);
-
   }
 
   /*
@@ -293,7 +292,6 @@ public class TwoDTreeTest {
     List<Double> actual = tree.searchRangeArea(-1000, -2000, -500, -300);
 
     assertEquals(expected, actual);
-
   }
 
   /*
@@ -367,7 +365,6 @@ public class TwoDTreeTest {
     List<Double> expected = List.of(5.1, 1.1, 2.2, 3.1, 7.2, 9.0);
 
     assertEquals(expected, tree.preOrder());
-
   }
 
   /*
@@ -387,7 +384,6 @@ public class TwoDTreeTest {
     List<Double> expected = List.of();
 
     assertEquals(expected, tree.inOrder());
-
   }
 
   /*
@@ -410,7 +406,6 @@ public class TwoDTreeTest {
     List<Double> expected = List.of(4.4, 2.2, 1.1, 3.3, 6.6, 5.5);
 
     assertEquals(expected, tree.preOrder());
-
   }
 
   /*
@@ -423,7 +418,6 @@ public class TwoDTreeTest {
     TwoDNode<Double> expected = new TwoDNode<>(10.12, null, null, new Point2D.Double(10, 12));
 
     assertEquals(expected, tree.findMin());
-
   }
 
   /*
@@ -455,7 +449,6 @@ public class TwoDTreeTest {
         new Point2D.Double(10, 12));
 
     assertEquals(expected, tree.findMin());
-
   }
 
   /*
@@ -472,7 +465,5 @@ public class TwoDTreeTest {
     tree.insert(10.12, 10, 12);
 
     assertEquals(null, tree.root.getLeft());
-
   }
-
 }
