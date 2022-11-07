@@ -37,11 +37,11 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     if (nodes == null || nodes.contains(null))
       return;
 
-    root = buildTree(true, nodes);
+    // start comparing by X axis
+    root = buildTree(nodes, true);
   }
 
-  private TwoDNode<E> buildTree(boolean divX, List<TwoDNode<E>> nodes) {
-
+  private TwoDNode<E> buildTree(List<TwoDNode<E>> nodes, boolean divX) {
     if (nodes == null || nodes.isEmpty())
       return null;
 
@@ -49,14 +49,14 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
 
     int mid = nodes.size() / 2;
 
-    TwoDNode<E> node = new TwoDNode<E>(null, null, null, null);
-
-    node.setCoods(nodes.get(mid).getCoords());
-    node.setElement(nodes.get(mid).getElement());
-    node.setLeft(buildTree(!divX, nodes.subList(0, mid)));
+    TwoDNode<E> node = new TwoDNode<E>(
+        nodes.get(mid).getElement(),
+        buildTree(nodes.subList(0, mid), !divX),
+        null,
+        nodes.get(mid).getCoords());
 
     if (mid + 1 <= nodes.size() - 1)
-      node.setRight(buildTree(!divX, nodes.subList(mid + 1, nodes.size())));
+      node.setRight(buildTree(nodes.subList(mid + 1, nodes.size()), !divX));
 
     return node;
   }

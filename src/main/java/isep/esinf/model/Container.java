@@ -31,12 +31,9 @@ public class Container {
   }
 
   public Container getAreasWithConditions(Item item, Element element) {
-    Container areasWithItem = new Container();
+    Container filteredAreas = new Container();
 
-    Iterable<Area> a = areas.inOrder();
-
-    // TODO optimize this (is starting allways from the root)
-    for (Area area : a) {
+    for (Area area : areas.inOrder()) {
       Item i = area.getItem(item);
       if (i == null)
         continue;
@@ -45,18 +42,16 @@ public class Container {
       if (e == null)
         continue;
 
-      areasWithItem.addArea(area);
+      filteredAreas.addArea(area);
     }
 
-    return areasWithItem;
+    return filteredAreas;
   }
 
   public Container getAreasWithConditions(Item item, Element element, int year) {
-    Container areasWithItem = new Container();
+    Container filteredAreas = new Container();
 
-    Iterable<Area> a = areas.inOrder();
-
-    for (Area area : a) {
+    for (Area area : areas.inOrder()) {
       Item i = area.getItem(item);
       if (i == null)
         continue;
@@ -69,10 +64,10 @@ public class Container {
       if (p == null)
         continue;
 
-      areasWithItem.addArea(area);
+      filteredAreas.addArea(area);
     }
 
-    return areasWithItem;
+    return filteredAreas;
   }
 
   @Override

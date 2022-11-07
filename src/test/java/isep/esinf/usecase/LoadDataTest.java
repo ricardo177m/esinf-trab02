@@ -30,7 +30,6 @@ public class LoadDataTest {
 
   @BeforeEach
   public void setup() {
-    // create a container with elements to sanitize
     container = (new MockContainer()).mockByCodeMini();
     ld = new LoadData();
   }
@@ -84,7 +83,7 @@ public class LoadDataTest {
 
   /**
    * Test if the loaded data is different from the container with elements to
-   * sanitize.
+   * filter
    *
    * @throws FileNotFoundException
    */

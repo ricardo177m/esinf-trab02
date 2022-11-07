@@ -2,6 +2,7 @@ package isep.esinf.usecase;
 
 import java.util.List;
 import java.util.Map;
+
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
 import isep.esinf.model.comparators.ElementByCode;
@@ -38,10 +39,10 @@ public class AccumulatedProductionInArea {
     if (container == null)
       return -1.0;
 
-    Container sanitizedData = container.getAreasWithConditions(i, e, year);
+    Container filteredData = container.getAreasWithConditions(i, e, year);
 
     LoadGeographicalData loadGeographicalData = new LoadGeographicalData();
-    TwoDTree<Area> tree = loadGeographicalData.execute(sanitizedData, geoData);
+    TwoDTree<Area> tree = loadGeographicalData.execute(filteredData, geoData);
 
     if (tree == null)
       return -1.0;
