@@ -1,48 +1,52 @@
 package isep.esinf.utils;
 
-import java.util.ArrayList;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 public class MergeSort<E> {
-  public static <E> List<E> sort(List<E> original, Comparator<E> comparator) {
 
-    // copy original list to aux list
-    List<E> aux = new ArrayList<>(original);
+  public static <E> E[] sort(E[] original, Comparator<E> cmp) {
+    E[] array = Arrays.copyOf(original, original.length);
 
-    if (aux.size() <= 1) {
+    // if the array contains only one integer, it is already sorted
+    if (array.length <= 1)
       return original;
-    }
 
-    int mid = aux.size() / 2;
-    List<E> left = new ArrayList<E>(aux.subList(0, mid));
-    List<E> right = new ArrayList<E>(aux.subList(mid, aux.size()));
+    // divide the array into two halves
+    int mid = array.length / 2;
 
-    sort(left, comparator);
-    sort(right, comparator);
+    // keep dividing recursively until left + right = 1
+    E[] left = sort(Arrays.copyOfRange(array, 0, mid), cmp);
+    E[] right = sort(Arrays.copyOfRange(array, mid, array.length), cmp);
 
-    return merge(left, right, comparator);
+    // finally, merge both halves
+    return merge(left, right, cmp);
   }
 
-  private static <E> List<E> merge(List<E> left, List<E> right, Comparator<E> comparator) {
+  private static <E> E[] merge(E[] left, E[] right, Comparator<E> cmp) {
+    // merging the 2 sub arrays into a single array
+    int length = left.length + right.length;
+    E[] merged = (E[]) Array.newInstance(left.getClass().getComponentType(), length);
+    int i = 0, j = 0;
 
-    List<E> merged = new ArrayList<E>();
-
-    int i = 0, j = 0, k = 0;
-
-    while (i < left.size() && j < right.size()) {
-      if (comparator.compare(left.get(i), right.get(j)) <= 0) {
-        merged.add(k++, left.get(i++));
+    // reorder the greater integers into the correct position
+    while (i < left.length && j < right.length) {
+      if (cmp.compare(left[i], right[j]) <= 0) {
+        merged[i + j] = left[i++];
       } else {
-        merged.add(k++, right.get(j++));
+        merged[i + j] = right[j++];
       }
     }
-    while (i < left.size()) {
-      merged.add(k++, left.get(i++));
+
+    // finally, fill with the remainding integers
+    while (i < left.length) {
+      merged[i + j] = left[i++];
     }
-    while (j < right.size()) {
-      merged.add(k++, right.get(j++));
+    while (j < right.length) {
+      merged[i + j] = right[j++];
     }
+
     return merged;
   }
 }
