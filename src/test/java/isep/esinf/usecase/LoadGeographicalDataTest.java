@@ -278,12 +278,9 @@ public class LoadGeographicalDataTest {
   @Test
   public void testLoadGeographicalDataWithNullGeoData() throws FileNotFoundException {
     System.out.println("testLoadGeographicalDataWithNullGeoData");
-    CSVReader r = new CSVReader("./src/test/java/isep/esinf/data/TestLoadGeoData_Small.csv");
 
-    List<Map<String, String>> containerData = r.read();
-
-    LoadData ld = new LoadData();
-    Container container = ld.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
+    MockContainer mock = new MockContainer();
+    Container container = mock.mockByCode();
 
     TwoDTree<Area> result = loadGeographicalData.execute(container, null);
 
