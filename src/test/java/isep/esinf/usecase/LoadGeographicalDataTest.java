@@ -54,7 +54,7 @@ public class LoadGeographicalDataTest {
 
     TwoDTree<Area> result = loadGeographicalData.execute(c, geoData);
 
-    assertEquals(result.toString(), tree.toString());
+    assertEquals(result, tree);
   }
 
   /*
@@ -161,7 +161,7 @@ public class LoadGeographicalDataTest {
     tree.insert(israel, 31.046051, 34.851612);
     tree.insert(eswatini, -26.522503, 31.465866);
 
-    assertEquals(result.toString(), tree.toString());
+    assertEquals(result, tree);
 
   }
 
@@ -181,8 +181,8 @@ public class LoadGeographicalDataTest {
     List<Map<String, String>> geoData = r.read();
 
     TwoDTree<Area> result = loadGeographicalData.execute(container, geoData);
-
-    tree.insert(new AreaByCode(400, "500", "Burundi"), -3.3731, 29.9189);
+    AreaByCode area = new AreaByCode(400, "500", "Burundi");
+    tree.insert(area, -3.373056, 29.918886);
 
     assertEquals(result.toString(), tree.toString());
 

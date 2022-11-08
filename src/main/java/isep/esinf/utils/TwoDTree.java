@@ -45,18 +45,19 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     if (nodes == null || nodes.isEmpty())
       return null;
 
-    Collections.sort(nodes, divX ? cmpX : cmpY);
+    // Collections.sort(sortedNodes, divX ? cmpX : cmpY);
+    List<TwoDNode<E>> sortedNodes = MergeSort.sort(nodes, divX ? cmpX : cmpY);
 
-    int mid = nodes.size() / 2;
+    int mid = sortedNodes.size() / 2;
 
     TwoDNode<E> node = new TwoDNode<E>(
-        nodes.get(mid).getElement(),
-        buildTree(nodes.subList(0, mid), !divX),
+        sortedNodes.get(mid).getElement(),
+        buildTree(sortedNodes.subList(0, mid), !divX),
         null,
-        nodes.get(mid).getCoords());
+        sortedNodes.get(mid).getCoords());
 
-    if (mid + 1 <= nodes.size() - 1)
-      node.setRight(buildTree(nodes.subList(mid + 1, nodes.size()), !divX));
+    if (mid + 1 <= sortedNodes.size() - 1)
+      node.setRight(buildTree(sortedNodes.subList(mid + 1, sortedNodes.size()), !divX));
 
     return node;
   }
