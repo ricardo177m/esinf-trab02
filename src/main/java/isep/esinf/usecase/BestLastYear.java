@@ -57,7 +57,7 @@ public class BestLastYear {
      * Get the most recent year registered in the data file, for the given item and
      * element
      */
-    int lastYear = getMostRecentRegisteredYearForItemAndElement()
+    int lastYear = getMostRecentRegisteredYearForItemAndElement();
 
     /*
      * Get only Areas with the given Item and Element for the last registered year
