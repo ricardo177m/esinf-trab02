@@ -9,14 +9,16 @@ abstract Area {
   + getArea(): String
   + getCode(): int
   + getM49(): String
-  + addItem(): void
-  + getItem(): Item
+  + getItems(): Iterable<Item>
+
+  + addItem(item: Item): void
+  + getItem(item: Item): Item
+
   + clone(): Area
   + toString(): String
-  + equals(): boolean
-  + getItems(): Iterable<Item>
-  <<abstract>> compareTo(): int
+  + equals(o: Object): boolean
 
+  <<abstract>> compareTo(o: Area): int
 }
 
 abstract Item {
@@ -27,16 +29,16 @@ abstract Item {
   + getCode(): int
   + getCpc(): String
   + getItem(): String
-  + addElement(): void
-  + getElement(): Element
+  + getElements(): Iterable<Element>
+
+  + addElement(element: Element): void
+  + getElement(element: Element): Element
+
   + clone(): Item
   + toString(): String
-  + equals(): boolean
-  + getElements(): Iterable<Element>
-  <<abstract>> compareTo(): int
+  + equals(o: Object): boolean
 
-
-
+  <<abstract>> compareTo(o: Item): int
 }
 
 abstract Element {
@@ -45,15 +47,17 @@ abstract Element {
 
   + getCode(): int
   + getElement(): String
-  + addProductionData(): void
-  + getProductionData(): ProductionData
+  + addProductionData(productionData: ProductionData): void
+  + getProductionData(year: int): ProductionData
+
   + getMostRecentYear(): int
+  + valueSumTimeInterval(min: int, max: int): double
+
   + clone(): Element
   + toString(): String
-  + equals(): boolean
-  + valueSumTimeInterval(): double
-  <<abstract>> compareTo(): int
+  + equals(o: Object): boolean
 
+  <<abstract>> compareTo(element: Element): int
 }
 
 class ProductionData {
@@ -65,11 +69,11 @@ class ProductionData {
   + getUnit(): String
   + getFlag(): String
   + getFlagDescription(): String
+
   + clone(): ProductionData
   + toString(): String
-  + equals(): boolean
-  + compareTo(): int
-
+  + equals(o: Object): boolean
+  + compareTo(o: ProductionData): int
 }
 
 class Value {
@@ -82,24 +86,25 @@ class Value {
   + getUnit(): String
   + getFlag(): String
   + getFlagDescription(): String
-  + setFlagDescription(): void
+
+  + setFlagDescription(flagDescription: String): void
+
   + clone(): Value
   + toString(): String
-  + equals(): boolean
-
-
+  + equals(o: Object): boolean
 }
 
 class Container {
-  + addArea(): void
-  + getArea(): Area
+  + addArea(area: Area): void
+  + getArea(area: Area): Area
   + getAreas(): Iterable<Area>
+
   + getNOfAreas(): int
+  + getAreasWithConditions(item: Item, element: Element): Container
+  + getAreasWithConditions(item: Item, element: Element, year: int): Container
+
   + isEmpty(): boolean
-  + getAreasWithConditions(): Container
   + equals(): boolean
-
-
 }
 
 Container "1" o-- "1..*" Area
@@ -109,31 +114,31 @@ Element "1" o-- "1..*" ProductionData
 ProductionData "1" o-- "1" Value
 
 class AreaByCode {
-  + compareTo(): int
+  + compareTo(o: Area): int
 
 }
 class AreaByName {
-  + compareTo(): int
+  + compareTo(o: Area): int
 }
 class AreaByM49 {
-  + compareTo(): int
+  + compareTo(o: Area): int
 }
 
 class ItemByCode {
-  + compareTo(): int
+  + compareTo(o: Item): int
 }
 class ItemByName {
-  + compareTo(): int
+  + compareTo(o: Item): int
 }
 class ItemByCPC {
-  + compareTo(): int
+  + compareTo(o: Item): int
 }
 
 class ElementByCode {
-  + compareTo(): int
+  + compareTo(o: Element): int
 }
 class ElementByName {
-  + compareTo(): int
+  + compareTo(o: Element): int
 }
 
 Area <|-- AreaByCode

@@ -84,7 +84,6 @@ public abstract class Element implements Comparable<Element> {
   }
 
   private double valueSumTimeInterval(Node<ProductionData> node, int min, int max) {
-
     if (node == null) {
       return 0;
     }
