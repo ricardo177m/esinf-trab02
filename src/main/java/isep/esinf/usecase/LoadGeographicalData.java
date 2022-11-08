@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import isep.esinf.model.Area;
 import isep.esinf.model.Container;
-import isep.esinf.shared.Constants;
-import isep.esinf.utils.PropertiesUtils;
 import isep.esinf.utils.TwoDNode;
 import isep.esinf.utils.TwoDTree;
 
@@ -28,7 +25,6 @@ public class LoadGeographicalData {
   }
 
   public TwoDTree<Area> buildBalancedTwoDTree(Container container, Map<String, Map<String, String>> map) {
-
     if (container == null || map == null)
       return null;
 
@@ -51,6 +47,15 @@ public class LoadGeographicalData {
     return tree;
   }
 
+  /**
+   *
+   * @deprecated This method is no longer used due to performance reasons (it does
+   *             not balance the tree upon insertion)
+   *
+   * @param container The Container with the elements to build the 2d Tree
+   * @param map       The map with the geographical data of the countries
+   * @return A 2D tree with the data
+   */
   public TwoDTree<Area> buildShuffledTwoDTree(Container container, Map<String, Map<String, String>> map) {
     if (container == null || map == null)
       return null;
@@ -80,14 +85,6 @@ public class LoadGeographicalData {
 
     Map<String, Map<String, String>> map = mapListToMap(geoData);
 
-    Properties props = PropertiesUtils.getProperties();
-    boolean balanceTree = props.getProperty(Constants.PARAMS_2D_TREE_BALANCE) != null
-        ? props.getProperty(Constants.PARAMS_2D_TREE_BALANCE).equals("yes")
-        : false;
-
-    if (balanceTree)
-      return buildBalancedTwoDTree(container, map);
-
-    return buildShuffledTwoDTree(container, map);
+    return buildBalancedTwoDTree(container, map);
   }
 }
