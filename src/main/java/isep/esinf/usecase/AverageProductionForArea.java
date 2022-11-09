@@ -63,7 +63,9 @@ public class AverageProductionForArea {
       Iterable<Element> elements = item.getElements();
       for (Element element : elements) {
         Map.Entry<String,String> entry = new AbstractMap.SimpleEntry<String, String>(item.getItem(), element.getElement());
-        list.add(new AbstractMap.SimpleEntry<Map.Entry<String,String>, Double>(entry, element.valueSumTimeInterval(firstYear, lastYear)/(lastYear - firstYear + 1))); // +1 because first and last year are included   
+        double sum = element.valueSumTimeInterval(firstYear, lastYear);
+        double average = sum / (lastYear - firstYear + 1); // + 1 because first and last year are included
+        list.add(new AbstractMap.SimpleEntry<Map.Entry<String,String>, Double>(entry, average));   
       }
     }
 
