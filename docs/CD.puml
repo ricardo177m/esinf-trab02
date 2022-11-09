@@ -5,6 +5,7 @@ abstract Area {
   - area: String
   - code: int
   - m49: String
+  - items: AVL<Item>
 
   + getArea(): String
   + getCode(): int
@@ -25,6 +26,7 @@ abstract Item {
   - code: int
   - cpc: String
   - item: String
+  - elements : AVL<Element>
 
   + getCode(): int
   + getCpc(): String
@@ -44,6 +46,7 @@ abstract Item {
 abstract Element {
   - code: int
   - element: String
+  - productionData : AVL<ProductionData>
 
   + getCode(): int
   + getElement(): String
@@ -95,6 +98,8 @@ class Value {
 }
 
 class Container {
+  - areas: AVL<Area>
+
   + addArea(area: Area): void
   + getArea(area: Area): Area
   + getAreas(): Iterable<Area>
