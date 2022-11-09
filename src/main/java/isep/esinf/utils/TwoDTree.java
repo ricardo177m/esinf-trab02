@@ -143,7 +143,7 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     return findNearestNeighbor((TwoDNode<E>) root, x, y, 0);
   }
 
-  public E findNearestNeighbor(TwoDNode<E> node, double x, double y, int depth) {
+  private E findNearestNeighbor(TwoDNode<E> node, double x, double y, int depth) {
     if (node == null)
       return null;
 
@@ -197,7 +197,7 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
         && node.getCoords().getY() >= lowCoords.y && node.getCoords().getY() <= highCoords.y;
   }
 
-  public void searchRangeArea(TwoDNode<E> node, Point2D.Double lowCoords, Point2D.Double highCoords, int depth) {
+  private void searchRangeArea(TwoDNode<E> node, Point2D.Double lowCoords, Point2D.Double highCoords, int depth) {
     if (node == null)
       return;
 

@@ -1,6 +1,42 @@
 @startuml CD
 skinparam classAttributeIconSize 0
 
+class BST {
+  +root(): Node<E>
+  +isEmpty(): boolean
+  +size(): int
+  +height(): int
+  +find(): E
+  +isleaf(): boolean
+  +insert(E element): void
+  +remove(E element): void
+  +smallestElemenmt(): E
+  +biggestElement(): E
+  +inOrder(): Iterable<E>
+  +preOrder(): Iterable<E>
+  +posOrder(): Iterable<E>
+  +equals(o: object): boolean
+  +toString(): String
+}
+
+class AVL {
+  +balanceFactor(Node<E> node): int
+  +balanceNode(Node<E> node): Node<E>
+  +insert(E element): void
+  +remove(E element): void
+
+}
+
+class TwoDTree {
+  +buildTree(List<TwoDNode<E>> node): void
+  +insert(E element, double x, double y): void
+  +findMin(): TwoDNode<E>
+  +findNearestNeighbour(double x, double y): E
+  +searchRangeArea(TwoDNode<E> node, Point2D.Double lowCoords, Point2D.Double highCoords): List<E>
+
+
+}
+
 abstract Area {
   - area: String
   - code: int
@@ -156,5 +192,8 @@ Item <|-- ItemByCPC
 
 Element <|-- ElementByCode
 Element <|-- ElementByName
+
+BST <|-- AVL
+BST <|-- TwoDTree
 
 @enduml
