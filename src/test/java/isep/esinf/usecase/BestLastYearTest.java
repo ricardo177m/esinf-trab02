@@ -249,6 +249,29 @@ public class BestLastYearTest {
   }
 
   @Test
+  public void testWithLemonsAndLimesWithN3() {
+    item = new ItemByCode(497, "01322", "Lemons and limes");
+    element = new ElementByCode(5510, "Production");
+
+    bestLastYear = new BestLastYear(data, item, element);
+
+    ArrayList<Area> actual = bestLastYear.execute(3);
+
+    ArrayList<Area> expected = new ArrayList<>();
+    // Area france = new AreaByCode(68, "'250", "France");
+    // Area germany = new AreaByCode(79, "'276", "Germany");
+    Area italy = new AreaByCode(106, "'380", "Italy");
+    // Area spain = new AreaByCode(203, "'724", "Spain");
+    Area portugal = new AreaByCode(174, "'620", "Portugal");
+
+    expected.add(italy);
+    expected.add(portugal);
+
+    assertEquals(expected.toString(), actual.toString());
+    assertEquals(2, expected.size());
+  }
+
+  @Test
   public void testWithKiwiWithN1() {
     item = new ItemByCode(592, "01352", "Kiwi fruit");
     element = new ElementByCode(5510, "Production");
