@@ -45,6 +45,7 @@ public class LoadData {
 
     data.forEach(row -> {
       try {
+        boolean isNew = false;
         // * ProductionData
         int year = Integer.parseInt(row.get(Field.YEAR.name));
         double value = row.get(Field.VALUE.name).length() == 0 ? 0
@@ -75,6 +76,7 @@ public class LoadData {
         if (found == null) {
           container.addArea(newArea);
           found = newArea;
+          isNew = true;
         }
 
         // * Item
@@ -87,11 +89,14 @@ public class LoadData {
         Item newItem = itemClass.getDeclaredConstructor(int.class, String.class, String.class)
             .newInstance(itemCode, itemCpc, itemName);
 
-        Item foundItem = found.getItem(newItem);
+        Item foundItem = null;
+        if (!isNew)
+          foundItem = found.getItem(newItem);
 
         if (foundItem == null) {
           found.addItem(newItem);
           foundItem = newItem;
+          isNew = true;
         }
 
         // * Element
@@ -103,11 +108,14 @@ public class LoadData {
         Element newElement = (Element) elementClass.getDeclaredConstructor(int.class, String.class)
             .newInstance(elementCode, elementName);
 
-        Element foundElement = foundItem.getElement(newElement);
+        Element foundElement = null;
+        if (!isNew)
+          foundElement = foundItem.getElement(newElement);
 
         if (foundElement == null) {
           foundItem.addElement(newElement);
           foundElement = newElement;
+          isNew = true;
         }
 
         // add production data to the element
