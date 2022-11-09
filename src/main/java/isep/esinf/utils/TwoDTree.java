@@ -2,6 +2,7 @@ package isep.esinf.utils;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -45,18 +46,23 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     if (nodes == null || nodes.isEmpty())
       return null;
 
-    Collections.sort(nodes, divX ? cmpX : cmpY);
+    // Collections.sort(sortedNodes, divX ? cmpX : cmpY);
 
-    int mid = nodes.size() / 2;
+    // transform list to array
+    TwoDNode<E>[] sortedNodesArray = MergeSort.sort(nodes.toArray(new TwoDNode[nodes.size()]), divX ? cmpX : cmpY);
+    // transform array to list
+    List<TwoDNode<E>> sortedNodesList = Arrays.asList(sortedNodesArray);
+
+    int mid = sortedNodesList.size() / 2;
 
     TwoDNode<E> node = new TwoDNode<E>(
-        nodes.get(mid).getElement(),
-        buildTree(nodes.subList(0, mid), !divX),
+        sortedNodesList.get(mid).getElement(),
+        buildTree(sortedNodesList.subList(0, mid), !divX),
         null,
-        nodes.get(mid).getCoords());
+        sortedNodesList.get(mid).getCoords());
 
-    if (mid + 1 <= nodes.size() - 1)
-      node.setRight(buildTree(nodes.subList(mid + 1, nodes.size()), !divX));
+    if (mid + 1 <= sortedNodesList.size() - 1)
+      node.setRight(buildTree(sortedNodesList.subList(mid + 1, sortedNodesList.size()), !divX));
 
     return node;
   }
