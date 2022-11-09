@@ -45,8 +45,6 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
     if (nodes == null || nodes.isEmpty())
       return null;
 
-    // Collections.sort(sortedNodes, divX ? cmpX : cmpY);
-
     // sort list with merge sort
     List<TwoDNode<E>> sortedNodesList = (new MergeSort<TwoDNode<E>>()).sort(nodes, divX ? cmpX : cmpY);
 
