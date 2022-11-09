@@ -423,38 +423,4 @@ public class AccumulatedProductionInAreaTest {
 
     assertEquals(0, sum);
   }
-
-  /*
-   * Test the sum of production with data from big file
-   */
-  @Test
-  public void testSumProductionWithFileBigFile() throws FileNotFoundException {
-    System.out.println("testSumProductionWithBigFile");
-
-    String checkEnable = props.getProperty(Constants.PARAMS_ENABLE_BIG_TEST);
-
-    if (checkEnable == null || !checkEnable.toLowerCase().equals("yes")) {
-      System.out.println("Skipping big test.");
-      return;
-    }
-
-    CSVReader r = new CSVReader(BASE_PATH + Constants.DATAFILE_WORLD_LARGE);
-
-    List<Map<String, String>> containerData = r.read();
-
-    LoadData ld = new LoadData();
-    Container container = ld.execute(containerData, AreaByCode.class, ItemByCode.class, ElementByCode.class);
-
-    r = new CSVReader(BASE_PATH + Constants.DATAFILE_AREA_COORDINATES);
-
-    List<Map<String, String>> geoData = r.read();
-
-    int itemCode = 1062;
-    int elementCode = 5313;
-
-    Double sum = aInArea.execute(-1000, -1000, 1000, 1000, itemCode, elementCode, 1977, container, geoData);
-
-    assertEquals(2870292.0, sum);
-  }
-
 }

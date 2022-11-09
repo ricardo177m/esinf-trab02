@@ -13,7 +13,7 @@ public class CSVReader {
 
   public CSVReader(String fileName) throws FileNotFoundException {
     scanner = new CustomScanner(fileName);
-    System.out.printf("Reading %s...%n", fileName);
+    System.out.printf("  Reading %s...%n", fileName);
   }
 
   public String[] readHeader() {
