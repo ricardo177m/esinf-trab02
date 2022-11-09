@@ -71,11 +71,11 @@ public class AverageProductionForArea {
       }
     }
 
-    return (new MergeSort<Map.Entry<Map.Entry<String,String>, Double>>()).sort(list,cmp);
+    return (new MergeSort<Map.Entry<Map.Entry<String,String>, Double>>()).sort(list,descCmp);
 
   }
 
-  private final Comparator<Map.Entry<Map.Entry<String,String>, Double>> cmp = new Comparator<Map.Entry<Map.Entry<String,String>, Double>>(){
+  private final Comparator<Map.Entry<Map.Entry<String,String>, Double>> descCmp = new Comparator<Map.Entry<Map.Entry<String,String>, Double>>(){
     @Override
     public int compare(Map.Entry<Map.Entry<String,String>, Double> o1, Map.Entry<Map.Entry<String,String>, Double> o2) {
       return - Double.compare(o1.getValue(), o2.getValue());
