@@ -31,7 +31,7 @@ public class MergeSort<E> {
 
     // reorder the greater integers into the correct position
     while (i < left.size() && j < right.size()) {
-      if (cmp.compare(left.get(i), right.get(j)) < 0) {
+      if (cmp.compare(left.get(i), right.get(j)) <= 0) {
         result.add(left.get(i));
         i++;
       } else {
