@@ -48,10 +48,8 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
 
     // Collections.sort(sortedNodes, divX ? cmpX : cmpY);
 
-    // transform list to array
-    TwoDNode<E>[] sortedNodesArray = MergeSort.sort(nodes.toArray(new TwoDNode[nodes.size()]), divX ? cmpX : cmpY);
-    // transform array to list
-    List<TwoDNode<E>> sortedNodesList = Arrays.asList(sortedNodesArray);
+    // sort list with merge sort
+    List<TwoDNode<E>> sortedNodesList = (new MergeSort<TwoDNode<E>>()).sort(nodes, divX ? cmpX : cmpY);
 
     int mid = sortedNodesList.size() / 2;
 
