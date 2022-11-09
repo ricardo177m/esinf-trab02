@@ -23,21 +23,25 @@ import isep.esinf.utils.PropertiesUtils;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class LoadData {
+  FlagReader flagReader;
+
+  public LoadData() throws FileNotFoundException {
+    // get properties
+    Properties props = PropertiesUtils.getProperties();
+
+    // get flags
+    flagReader = new FlagReader(
+        props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH) + Constants.DATAFILE_FLAGS);
+    flagReader.read();
+  }
+
   public Container execute(List<Map<String, String>> data, Class<? extends Area> areaClass,
       Class<? extends Item> itemClass, Class<? extends Element> elementClass)
       throws FileNotFoundException {
     Container container = new Container();
 
-    // get properties
-    Properties props = PropertiesUtils.getProperties();
-
-    // get flags
-    FlagReader flagReader = new FlagReader(
-        props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH) + Constants.DATAFILE_FLAGS);
-    flagReader.read();
-
     // Area > Item > Element > ProductionData
-    System.out.printf("Loading %d lines of data...%n", data.size());
+    System.out.printf("  LoadData: Loading %d lines of data...%n", data.size());
 
     data.forEach(row -> {
       try {
@@ -53,8 +57,8 @@ public class LoadData {
           throw new MissingValueException();
 
         // create instance of production data
-        ProductionData production = new ProductionData(year,
-            new Value(value, unit, flag, flagReader.getFlagDesc(flag)));
+        ProductionData production =
+            new ProductionData(year, new Value(value, unit, flag, flagReader.getFlagDesc(flag)));
 
         // * Area
         int areaCode = row.get(Field.AREA_CODE.name).length() == 0 ? 0

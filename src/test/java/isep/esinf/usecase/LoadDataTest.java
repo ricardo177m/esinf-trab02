@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,16 +19,14 @@ import isep.esinf.model.comparators.ElementByCode;
 import isep.esinf.model.comparators.ElementByName;
 import isep.esinf.model.comparators.ItemByCode;
 import isep.esinf.model.comparators.ItemByName;
-import isep.esinf.shared.Constants;
 import isep.esinf.utils.CSVReader;
-import isep.esinf.utils.PropertiesUtils;
 
 public class LoadDataTest {
   Container container;
   LoadData ld;
 
   @BeforeEach
-  public void setup() {
+  public void setup() throws FileNotFoundException {
     container = (new MockContainer()).mockByCodeMini();
     ld = new LoadData();
   }
@@ -197,73 +194,5 @@ public class LoadDataTest {
     System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) + "ms");
 
     assertEquals(container, loaded);
-  }
-
-  /**
-   * Test if the data loader is capable of loading a big dataset.
-   * ! WARNING: This test takes a long time to run.
-   *
-   * @throws FileNotFoundException
-   */
-  @Test
-  public void testLoadTonsOfDataByCode() throws FileNotFoundException {
-    Properties props = PropertiesUtils.getProperties();
-    String dataPath = props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH);
-    String checkEnable = props.getProperty(Constants.PARAMS_ENABLE_BIG_TEST);
-
-    if (checkEnable == null || !checkEnable.toLowerCase().equals("yes")) {
-      System.out.println("Skipping big test.");
-      return;
-    }
-
-    CSVReader csvReader = new CSVReader(dataPath + Constants.DATAFILE_WORLD_LARGE);
-    Instant start = Instant.now();
-    List<Map<String, String>> data = csvReader.read();
-    Instant end = Instant.now();
-    System.out.println("Time to read CSV file: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
-
-    // Area: code; Item: code; Element: code
-    start = Instant.now();
-    Container loaded = ld.execute(data, AreaByCode.class, ItemByCode.class, ElementByCode.class);
-    end = Instant.now();
-    System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
-
-    // file has 2807800 lines without the header
-    // 211 valid areas
-    assertEquals(211, loaded.getNOfAreas());
-  }
-
-  /**
-   * Test if the data loader is capable of loading a big dataset.
-   * ! WARNING: This test takes a long time to run.
-   *
-   * @throws FileNotFoundException
-   */
-  @Test
-  public void testLoadTonsOfDataByName() throws FileNotFoundException {
-    Properties props = PropertiesUtils.getProperties();
-    String dataPath = props.getProperty(Constants.PARAMS_DATA_FOLDER_PATH);
-    String checkEnable = props.getProperty(Constants.PARAMS_ENABLE_BIG_TEST);
-
-    if (checkEnable == null || !checkEnable.toLowerCase().equals("yes")) {
-      System.out.println("Skipping big test.");
-      return;
-    }
-
-    CSVReader csvReader = new CSVReader(dataPath + Constants.DATAFILE_WORLD_LARGE);
-    Instant start = Instant.now();
-    List<Map<String, String>> data = csvReader.read();
-    Instant end = Instant.now();
-    System.out.println("Time to read CSV file: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
-
-    // Area: area; Item: item; Element: element
-    start = Instant.now();
-    Container loaded = ld.execute(data, AreaByName.class, ItemByName.class, ElementByName.class);
-    end = Instant.now();
-    System.out.println("Time to load data: " + (end.toEpochMilli() - start.toEpochMilli()) / 1000 + "s");
-
-    // file has 2807800 lines without the header
-    // 211 valid areas
-    assertEquals(211, loaded.getNOfAreas());
   }
 }
