@@ -154,6 +154,11 @@ Item "1" o-- "1..*" Element
 Element "1" o-- "1..*" ProductionData
 ProductionData "1" o-- "1" Value
 
+AVL "1" -- "1" Area
+AVL "1" -- "1" Item
+AVL "1" -- "1" Element
+AVL "1" -- "1" Container
+
 class AreaByCode {
   + compareTo(o: Area): int
 
