@@ -2,6 +2,7 @@ package isep.esinf.usecase;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import isep.esinf.model.Container;
 import isep.esinf.model.Element;
 import isep.esinf.model.Item;
 import isep.esinf.model.comparators.AreaByName;
+import isep.esinf.utils.MergeSort;
 
 /**
  * Alínea 2
@@ -69,25 +71,14 @@ public class AverageProductionForArea {
       }
     }
 
-    return sortList(list);
+    return (new MergeSort<Map.Entry<Map.Entry<String,String>, Double>>()).sort(list,cmp);
 
   }
 
-  public List<Map.Entry<Map.Entry<String,String>, Double>> sortList(List<Map.Entry<Map.Entry<String,String>, Double>> list){
-    if(list == null) return null;
-    boolean flag = false;
-    Map.Entry<Map.Entry<String,String>, Double> temp;
-    while(!flag) {
-        flag = true;
-        for (int i = 0; i < list.size() - 1; i++) {
-            if (list.get(i).getValue() < list.get(i+1).getValue()) {
-                temp = list.get(i);
-                list.set(i,list.get(i+1));
-                list.set(i+1, temp);
-                flag = false;
-            }
-        }
+  private final Comparator<Map.Entry<Map.Entry<String,String>, Double>> cmp = new Comparator<Map.Entry<Map.Entry<String,String>, Double>>(){
+    @Override
+    public int compare(Map.Entry<Map.Entry<String,String>, Double> o1, Map.Entry<Map.Entry<String,String>, Double> o2) {
+      return - Double.compare(o1.getValue(), o2.getValue());
     }
-    return list;
-  }
+  };
 }
