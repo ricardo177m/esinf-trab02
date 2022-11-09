@@ -2,7 +2,6 @@ package isep.esinf.utils;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -45,8 +44,6 @@ public class TwoDTree<E extends Comparable<E>> extends BST<E> {
   private TwoDNode<E> buildTree(List<TwoDNode<E>> nodes, boolean divX) {
     if (nodes == null || nodes.isEmpty())
       return null;
-
-    // Collections.sort(sortedNodes, divX ? cmpX : cmpY);
 
     // sort list with merge sort
     List<TwoDNode<E>> sortedNodesList = (new MergeSort<TwoDNode<E>>()).sort(nodes, divX ? cmpX : cmpY);

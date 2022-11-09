@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MergeSort<E> {
   public List<E> sort(List<E> original, Comparator<E> cmp) {
-    if (original == null || original.isEmpty() || original.size() == 1)
+    if (original == null || original.isEmpty() || original.size() == 1 || cmp == null)
       return original;
 
     // divide the array into two halves
